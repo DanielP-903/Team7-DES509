@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameObject m_camera;
+    private const float MouseSensitivity = 0.1f;
+    private float xRotation = 0f;
     private bool m_moveForward;
     private bool m_moveBackward;
     private bool m_moveLeft;
@@ -17,6 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_camera = transform.GetChild(0).gameObject;
         if (TryGetComponent(out CharacterController charController))
         {
             m_characterController = charController;
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("ERROR: Player has no CharacterController component!");
             Debug.DebugBreak();
         }
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -36,12 +41,6 @@ public class PlayerController : MonoBehaviour
 
     // Handle player's inputs
     private void HandleInput()
-    {
-
-    }
-
-    // Handle look movement
-    private void HandleMouseInput()
     {
         if (m_moveForward || m_moveBackward)
         {
@@ -54,6 +53,21 @@ public class PlayerController : MonoBehaviour
             m_characterController.Move(move);
         }
         HandleMouseInput();
+    }
+
+    // Handle look movement
+    private void HandleMouseInput()
+    {
+        var mouse = Mouse.current;
+        float mouseX = mouse.delta.x.ReadValue() * MouseSensitivity;
+        float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        transform.Rotate(Vector3.up * mouseX);
     }
 
 
