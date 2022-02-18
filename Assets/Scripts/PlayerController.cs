@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController m_characterController;
     [Tooltip("Base movement speed")]
     [SerializeField] private float m_speed;
-
+    private GameObject m_heldObject;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +68,22 @@ public class PlayerController : MonoBehaviour
         m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         transform.Rotate(Vector3.up * mouseX);
+
+        if (mouse.leftButton.IsActuated())
+        {
+            m_heldObject = GameObject.FindGameObjectWithTag("Debug");
+            if (!m_heldObject.GetComponent<Ingredient>().IsHeld)
+            {
+                m_heldObject.GetComponent<Ingredient>().IsHeld = true;
+            }
+            else
+            {
+                m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                m_heldObject = null;
+            }
+        }
+
+        Debug.Log(m_heldObject != null);
     }
 
 

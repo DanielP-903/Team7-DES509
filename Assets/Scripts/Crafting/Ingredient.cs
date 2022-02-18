@@ -17,8 +17,8 @@ public class Ingredient : MonoBehaviour
     [Header("Basic Setup")]
     [Tooltip("Select what ingredient this represents")]
     [SerializeField] private IngredientType m_type;
-    [Tooltip("Assign model of ingredient")]
-    [SerializeField] private GameObject m_model;
+    //[Tooltip("Assign model of ingredient")]
+    //[SerializeField] private GameObject m_model;
 
     [Header("Properties")]
     [Tooltip("Change bitterness rating")]
@@ -33,19 +33,30 @@ public class Ingredient : MonoBehaviour
     [Tooltip("Change earthiness rating")]
     [Range(0, 10)]
     [SerializeField] private int m_earthiness;
-    [Tooltip("Any special properties that occur when mixed")]
+    [Tooltip("Any special properties that occur when mixed (NOTE: this may only impact the output when mixed as part of a recipe)")]
     [SerializeField] private SpecialProperties m_specialProperties;
 
+    public bool IsHeld = false;
+    private GameObject m_heldLocationRef;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        m_heldLocationRef = GameObject.FindGameObjectWithTag("HoldLocation");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (IsHeld)
+        {
+            transform.position = m_heldLocationRef.transform.position;
+            transform.rotation = m_heldLocationRef.transform.rotation;
+            transform.parent = m_heldLocationRef.transform;
+            
+        }
+        else
+        {
+            transform.parent = null;
+        }
     }
 }
+
