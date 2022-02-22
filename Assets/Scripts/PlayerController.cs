@@ -17,9 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_speed;
     private GameObject m_heldObject;
 
+    private float m_inputDelay = 0.1f;
+    private float m_inputTimer;
+
     // Start is called before the first frame update
     void Start()
     {
+        m_inputTimer = 0.1f;
         m_camera = transform.GetChild(0).gameObject;
         if (TryGetComponent(out CharacterController charController))
         {
@@ -36,6 +40,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
+       // Debug.Log(m_inputTimer);
         HandleInput();
     }
 
@@ -69,21 +75,33 @@ public class PlayerController : MonoBehaviour
 
         transform.Rotate(Vector3.up * mouseX);
 
-        if (mouse.leftButton.IsActuated())
+        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0)
         {
-            m_heldObject = GameObject.FindGameObjectWithTag("Debug");
-            if (!m_heldObject.GetComponent<Ingredient>().IsHeld)
+            m_inputTimer = m_inputDelay;
+            RaycastHit hit;
+            Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out hit, 100.0f);
+            if (hit.transform != null)
             {
-                m_heldObject.GetComponent<Ingredient>().IsHeld = true;
+                Debug.Log("I HIT: " + hit.transform.name);
             }
-            else
+            //m_heldObject = GameObject.FindGameObjectWithTag("Debug");
+            if (hit.transform.gameObject.GetComponent<Ingredient>() )
+            {
+                if (m_heldObject == null)
+                {
+                    m_heldObject = hit.transform.gameObject;
+                    m_heldObject.GetComponent<Ingredient>().IsHeld = true;
+                }
+                return;
+            }
+            if (m_heldObject != null)
             {
                 m_heldObject.GetComponent<Ingredient>().IsHeld = false;
                 m_heldObject = null;
             }
+
         }
 
-        Debug.Log(m_heldObject != null);
     }
 
 

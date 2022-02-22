@@ -17,6 +17,10 @@ public class Ingredient : MonoBehaviour
     [Header("Basic Setup")]
     [Tooltip("Select what ingredient this represents")]
     [SerializeField] private IngredientType m_type;
+
+    /// <summary>
+    /// NO LONGER REQUIRED - MODEL AS PART OF INGREDIANT OBJECT
+    /// </summary>
     //[Tooltip("Assign model of ingredient")]
     //[SerializeField] private GameObject m_model;
 
