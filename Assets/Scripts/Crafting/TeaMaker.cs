@@ -24,6 +24,16 @@ public class TeaMaker : MonoBehaviour
         return false;
     }
 
+
+    public void RemoveIngredient()
+    {
+        if (m_addedIngredients.Count > 0)
+        {
+            m_addedIngredients.RemoveAt(m_addedIngredients.Count - 1);
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {

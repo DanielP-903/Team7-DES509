@@ -125,7 +125,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.transform != null && m_heldObject == null)
             {
-                // Remove item from 
+                // Remove item from teapot
+                m_teaMakerRef.RemoveIngredient();
             }
         }
         if (mouse.rightButton.IsActuated() && m_inputTimer <= 0)
