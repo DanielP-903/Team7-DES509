@@ -14,19 +14,20 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Base movement speed")]
     [SerializeField] private float m_speed;
     private GameObject m_heldObject;
-
+    private GameManager m_gameManagerRef;
     private float m_inputDelay = 0.1f;
     private float m_inputTimer;
 
     private TeaMaker m_teaMakerRef;
-
+    
     // Start is called before the first frame update
     void Start()
     {
+        m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         if (GameObject.FindGameObjectWithTag("Machine"))
         {
             m_teaMakerRef = GameObject.FindGameObjectWithTag("Machine").GetComponent<TeaMaker>();
-                    }
+        }
         else
         {
             Debug.LogError("ERROR: Tea making machine has no tag assigned!");
@@ -70,7 +71,21 @@ public class PlayerController : MonoBehaviour
         HandleMouseInput();
     }
 
-    // Handle look movement
+    private GameObject FindIngredient()
+    {
+        GameObject g = new GameObject();
+
+        foreach (var ingredient in m_gameManagerRef.m_ingredientList)
+        {
+            if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<Ingredient>().m_type)
+            {
+                g = ingredient;
+            }
+        }
+
+        return g;
+    }
+        // Handle look movement
     private void HandleMouseInput()
     {
         var mouse = Mouse.current;
@@ -98,7 +113,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.transform.tag == "Machine")
                 {
-                    if (m_teaMakerRef.AddIngredient(m_heldObject))
+                    if (m_teaMakerRef.AddIngredient(FindIngredient()))
                     {
                         m_heldObject.GetComponent<Ingredient>().IsHeld = false;
                         Destroy(m_heldObject.gameObject);

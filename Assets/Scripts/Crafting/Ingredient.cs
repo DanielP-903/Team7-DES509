@@ -1,6 +1,6 @@
 using UnityEngine;
 
-enum IngredientType
+public enum IngredientType
 {
     Basic, Peppermint, Lemon, Rooibos  // Needs to be updated
 }
@@ -14,8 +14,9 @@ public class Ingredient : MonoBehaviour
 {
     [Header("Basic Setup")]
     [Tooltip("Select what ingredient this represents")]
-    [SerializeField] private IngredientType m_type;
-
+    [SerializeField] public IngredientType m_type;
+    [Tooltip("Name of ingredient")]
+    [SerializeField] private string m_name;
     /// <summary>
     /// NO LONGER REQUIRED - MODEL AS PART OF INGREDIANT OBJECT
     /// </summary>

@@ -5,14 +5,14 @@ using UnityEngine;
 public class RecipeIngredients
 {
     [Tooltip("Name given to the recipe")]
-    [SerializeField] private string m_name;
+    [SerializeField] public string m_name;
     [Tooltip("Ingredients that make up the recipe")]
-    [SerializeField] private List<GameObject> m_ingredients = new List<GameObject>();
+    [SerializeField] public List<GameObject> m_ingredients = new List<GameObject>();
 }
 
 public class Recipe : MonoBehaviour
 {
-    [SerializeField] private List<RecipeIngredients> m_recipes = new List<RecipeIngredients>();
+    [SerializeField] public List<RecipeIngredients> m_recipes = new List<RecipeIngredients>();
 
     // Start is called before the first frame update
     void Start()
