@@ -9,6 +9,7 @@ TagManager:
   - Customer
   - HoldLocation
   - Debug
+  - Machine
   layers:
   - Default
   - TransparentFX

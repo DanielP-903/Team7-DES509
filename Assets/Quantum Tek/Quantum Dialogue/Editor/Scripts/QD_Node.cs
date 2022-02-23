@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace QuantumTek.QuantumDialogue.Editor
 {

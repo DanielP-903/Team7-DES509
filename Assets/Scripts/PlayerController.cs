@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,9 +18,20 @@ public class PlayerController : MonoBehaviour
     private float m_inputDelay = 0.1f;
     private float m_inputTimer;
 
+    private TeaMaker m_teaMakerRef;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.FindGameObjectWithTag("Machine"))
+        {
+            m_teaMakerRef = GameObject.FindGameObjectWithTag("Machine").GetComponent<TeaMaker>();
+                    }
+        else
+        {
+            Debug.LogError("ERROR: Tea making machine has no tag assigned!");
+            Debug.DebugBreak();
+        }
         m_inputTimer = 0.1f;
         m_camera = transform.GetChild(0).gameObject;
         if (TryGetComponent(out CharacterController charController))
@@ -41,7 +50,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
-       // Debug.Log(m_inputTimer);
+        // Debug.Log(m_inputTimer);
         HandleInput();
     }
 
@@ -84,24 +93,51 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("I HIT: " + hit.transform.name);
             }
+
+            if (m_heldObject != null)
+            {
+                if (hit.transform.tag == "Machine")
+                {
+                    if (m_teaMakerRef.AddIngredient(m_heldObject))
+                    {
+                        m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                        Destroy(m_heldObject.gameObject);
+                        m_heldObject = null;
+                        Debug.Log("Ingredient successfully added!");
+
+                    }
+                    else
+                    {
+                        Debug.Log("Ingredient adding failed!");
+                    }
+                }
+                return;
+            }
             //m_heldObject = GameObject.FindGameObjectWithTag("Debug");
-            if (hit.transform.gameObject.GetComponent<Ingredient>() )
+            if (hit.transform != null && hit.transform.gameObject.GetComponent<Ingredient>())
             {
                 if (m_heldObject == null)
                 {
-                    m_heldObject = hit.transform.gameObject;
+                    m_heldObject = Instantiate(hit.transform.gameObject);
                     m_heldObject.GetComponent<Ingredient>().IsHeld = true;
                 }
                 return;
             }
+            else if (hit.transform != null && m_heldObject == null)
+            {
+                // Remove item from 
+            }
+        }
+        if (mouse.rightButton.IsActuated() && m_inputTimer <= 0)
+        {
             if (m_heldObject != null)
             {
+                // Discard held object
                 m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                Destroy(m_heldObject.gameObject);
                 m_heldObject = null;
             }
-
         }
-
     }
 
 

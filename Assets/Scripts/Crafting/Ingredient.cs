@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 enum IngredientType
@@ -55,7 +53,7 @@ public class Ingredient : MonoBehaviour
             transform.position = m_heldLocationRef.transform.position;
             transform.rotation = m_heldLocationRef.transform.rotation;
             transform.parent = m_heldLocationRef.transform;
-            
+
         }
         else
         {

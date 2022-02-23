@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace QuantumTek.QuantumDialogue
+﻿namespace QuantumTek.QuantumDialogue
 {
     /// <summary>
     /// QD_Conversation represents a conversation between different speakers, or just one.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace QuantumTek.QuantumDialogue.Editor
 {
@@ -378,7 +378,7 @@ namespace QuantumTek.QuantumDialogue.Editor
         public void DetachNodes(int knobID, QD_KnobType type)
         {
             QD_Knob knob = selectedNode.GetKnob(type, knobID);
-            
+
             List<int> keys = new List<int>();
             if (knob.Connections.Count > 0)
             {

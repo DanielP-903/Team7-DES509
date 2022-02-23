@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 namespace QuantumTek.QuantumDialogue.Demo
 {
@@ -115,7 +114,7 @@ namespace QuantumTek.QuantumDialogue.Demo
         {
             if (ended)
                 return;
-            
+
             // Go to the next message
             handler.NextMessage(choice);
             // Set the new text

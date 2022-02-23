@@ -122,11 +122,11 @@ namespace QuantumTek.QuantumDialogue
             QD_NodeType type = GetMessageType(currentMessageInfo.NextID);
             int id = -1;
             int nextID = -1;
-            
+
             if (currentMessageInfo.Type == QD_NodeType.Message)
             {
                 id = currentMessageInfo.NextID;
-                
+
                 if (type == QD_NodeType.Message && id >= 0)
                 {
                     QD_Message m = dialogue.GetMessage(id);

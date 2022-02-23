@@ -2,8 +2,6 @@
 using UnityEngine.InputSystem;
 #endif
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    
+
 
     Vector3 velocity;
     bool isGrounded;
@@ -39,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
             .With("Left", "<Keyboard>/leftArrow")
             .With("Right", "<Keyboard>/d")
             .With("Right", "<Keyboard>/rightArrow");
-        
+
         jump = new InputAction("PlayerJump", binding: "<Gamepad>/a");
         jump.AddBinding("<Keyboard>/space");
 
@@ -77,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        if(jumpPressed && isGrounded)
+        if (jumpPressed && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
