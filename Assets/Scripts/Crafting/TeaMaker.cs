@@ -10,7 +10,7 @@ public class TeaMaker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_Text;
     [SerializeField] private TextMeshProUGUI m_recipeText;
     private Recipe m_recipeListRef;
-
+    List<string> names = new List<string>();
     // Start is called before the first frame update
     void Start()
     {
@@ -46,33 +46,84 @@ public class TeaMaker : MonoBehaviour
         m_Text.text = m_addedIngredients.Count + " / " + m_capacity;
     }
 
-
     void SearchForNewRecipes()
     {
-        string recipeFound = "";
-        int recipeScore = 0;
-        int recipeHighScore = 0;
+        CountOccurences();
+
+        //string recipeFound = "";
+        //int recipeScore = 0;
+        //int recipeHighScore = 0;
+        //List<IngredientTracking> occurences = new List<IngredientTracking>();
+        //List<string> names = new List<string>();
+        //foreach (var recipe in m_recipeListRef.m_recipes)
+        //{
+        //    recipeScore = 0;
+        //    foreach (var ingredient in recipe.m_ingredients)
+        //    {
+        //        string testName = ingredient.GetComponent<Ingredient>().m_type.ToString();
+        //        int occurs = 0;
+        //        if (names.Contains(testName))
+        //        {
+        //            break;
+        //        }
+        //        names.Add(testName);
+        //        foreach (var i in recipe.m_ingredients)
+        //        {
+        //            if (i.GetComponent<Ingredient>().m_type.ToString() == testName)
+        //            {
+        //                occurs++;
+        //            }
+        //        }
+        //        occurences.Add(new IngredientTracking(testName, occurs));
+
+        //        // Check how many times this ingredient appears in recipe
+
+                
+        //        //for (int i = recipeScore; i < m_addedIngredients.Count; i++)
+        //        //{
+        //        //    if (ingredient.GetComponent<Ingredient>().m_type == m_addedIngredients[i].GetComponent<Ingredient>().m_type)
+        //        //    {
+        //        //        recipeScore++;
+        //        //        break;
+        //        //    }
+        //        //}
+        //    }
+        //    if (recipeScore > recipeHighScore && recipeScore == recipe.m_ingredients.Count)
+        //    {
+        //        recipeHighScore = recipeScore;
+        //        recipeFound = recipe.m_name;
+        //    }
+        //}
+
+        //m_recipeText.text = recipeFound;
+    }
+
+    private void CountOccurences()
+    {
         foreach (var recipe in m_recipeListRef.m_recipes)
         {
-            recipeScore = 0;
+            names.Clear();
             foreach (var ingredient in recipe.m_ingredients)
             {
-                for (int i = recipeScore; i < m_addedIngredients.Count; i++)
+                string detectedName = ingredient.GetComponent<Ingredient>().m_type.ToString();
+                int occurs = 0;
+                if (names.Contains(detectedName))
                 {
-                    if (ingredient.GetComponent<Ingredient>().m_type == m_addedIngredients[i].GetComponent<Ingredient>().m_type)
+                    continue;
+                }
+                // Continues only if new ingredient detected
+
+                names.Add(detectedName);
+                foreach (var i in recipe.m_ingredients)
+                {
+                    if (i.GetComponent<Ingredient>().m_type.ToString() == detectedName)
                     {
-                        recipeScore++;
-                        break;
+                        occurs++;
                     }
                 }
-            }
-            if (recipeScore > recipeHighScore && recipeScore == recipe.m_ingredients.Count)
-            {
-                recipeHighScore = recipeScore;
-                recipeFound = recipe.m_name;
+                ingredient.GetComponent<Ingredient>().occurences = occurs;
             }
         }
-
-        m_recipeText.text = recipeFound;
+        Debug.Log("Finished");
     }
 }

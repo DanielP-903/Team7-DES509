@@ -42,6 +42,9 @@ public class Ingredient : MonoBehaviour
     public bool IsHeld = false;
     private GameObject m_heldLocationRef;
 
+    public int occurences = 0;
+
+
     void Start()
     {
         m_heldLocationRef = GameObject.FindGameObjectWithTag("HoldLocation");

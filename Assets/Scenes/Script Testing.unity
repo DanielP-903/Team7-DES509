@@ -783,6 +783,7 @@ MonoBehaviour:
   m_earthiness: 7
   m_specialProperties: 3
   IsHeld: 0
+  occurences: 0
 --- !u!65 &940160061
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1003,6 +1004,7 @@ MonoBehaviour:
   m_earthiness: 2
   m_specialProperties: 0
   IsHeld: 0
+  occurences: 0
 --- !u!65 &1239677557
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1664,14 +1666,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_recipes:
-  - m_name: AB
+  - m_name: Test
     m_ingredients:
     - {fileID: 940160059}
     - {fileID: 1239677555}
-  - m_name: BB
+    - {fileID: 1239677555}
+    - {fileID: 940160059}
+    - {fileID: 1239677555}
+  - m_name: Test2
     m_ingredients:
     - {fileID: 1239677555}
     - {fileID: 1239677555}
+    - {fileID: 940160059}
+    - {fileID: 940160059}
+    - {fileID: 940160059}
 --- !u!4 &1618950813
 Transform:
   m_ObjectHideFlags: 0
