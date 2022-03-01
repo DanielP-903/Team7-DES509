@@ -2,7 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+using System.Runtime.Serialization;
 
+//[Serializable]
+//public class MyDictionary
+//{
+//    public Ingredient ingredient;
+//    public int quantity;
+//}
+//[Serializable]
+//public class StringStringDictionary : SerializableDictionary<string, string> { }
 public class TeaMaker : MonoBehaviour
 {
     private List<GameObject> m_addedIngredients = new List<GameObject>();
@@ -12,7 +22,12 @@ public class TeaMaker : MonoBehaviour
     private Recipe m_recipeListRef;
     List<string> names = new List<string>();
 
+    
+
+    //[Serializable]
     private Dictionary<Ingredient, int> m_dictionary = new Dictionary<Ingredient, int>();
+    
+
 
 
     // Start is called before the first frame update
@@ -74,6 +89,7 @@ public class TeaMaker : MonoBehaviour
 
     void SearchForNewRecipes()
     {
+        CountOccurences();
 
         foreach (var recipe in m_recipeListRef.m_recipes)
         {
@@ -82,13 +98,17 @@ public class TeaMaker : MonoBehaviour
             {
                 if (m_dictionary.ContainsKey(item.GetComponent<Ingredient>()))
                 {
+
+
+                    //TODO
+
+
                     //m_dictionary[item.GetComponent<Ingredient>()];
                 }
             }
         }
         
 
-        //CountOccurences();
 
         //string recipeFound = "";
         //int recipeScore = 0;
