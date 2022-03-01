@@ -11,6 +11,10 @@ public class TeaMaker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_recipeText;
     private Recipe m_recipeListRef;
     List<string> names = new List<string>();
+
+    private Dictionary<Ingredient, int> m_dictionary = new Dictionary<Ingredient, int>();
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,27 +22,49 @@ public class TeaMaker : MonoBehaviour
         m_recipeText.text = "";
     }
 
-    public bool AddIngredient(GameObject ingredient)
+    //public bool AddIngredient(GameObject ingredient)
+    //{
+    //    if (ingredient.GetComponent<Ingredient>() && m_addedIngredients.Count < m_capacity)
+    //    {
+    //        m_addedIngredients.Add(ingredient);
+    //        SearchForNewRecipes();
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
+
+    //public void RemoveIngredient()
+    //{
+    //    if (m_addedIngredients.Count > 0)
+    //    {
+    //        m_addedIngredients.RemoveAt(m_addedIngredients.Count - 1);
+    //        SearchForNewRecipes();
+    //    }
+    //}
+
+
+    public void AddIngredient(Ingredient ingredient)
     {
-        if (ingredient.GetComponent<Ingredient>() && m_addedIngredients.Count < m_capacity)
-        {
-            m_addedIngredients.Add(ingredient);
+        if (!m_dictionary.ContainsKey(ingredient)){
+            m_dictionary.Add(ingredient, 1);
             SearchForNewRecipes();
-            return true;
         }
-        return false;
+        else{
+            m_dictionary[ingredient]++;
+        }
     }
-
-
-    public void RemoveIngredient()
+    public void RemoveIngredient(Ingredient ingredient)
     {
-        if (m_addedIngredients.Count > 0)
+        if (!m_dictionary.ContainsKey(ingredient))
         {
-            m_addedIngredients.RemoveAt(m_addedIngredients.Count - 1);
-            SearchForNewRecipes();
+            Debug.LogError("Cannot remove an ingredient that isn't in the dictionary");
+        }
+        else
+        {
+            m_dictionary.Remove(ingredient);
         }
     }
-
 
     // Update is called once per frame
     void Update()
@@ -48,7 +74,21 @@ public class TeaMaker : MonoBehaviour
 
     void SearchForNewRecipes()
     {
-        CountOccurences();
+
+        foreach (var recipe in m_recipeListRef.m_recipes)
+        {
+            bool validRecipe = true;
+            foreach (var item in recipe.m_ingredients)
+            {
+                if (m_dictionary.ContainsKey(item.GetComponent<Ingredient>()))
+                {
+                    //m_dictionary[item.GetComponent<Ingredient>()];
+                }
+            }
+        }
+        
+
+        //CountOccurences();
 
         //string recipeFound = "";
         //int recipeScore = 0;

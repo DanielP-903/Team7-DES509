@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 1239677557}
   - component: {fileID: 1239677556}
   m_Layer: 0
-  m_Name: B
+  m_Name: Lavender
   m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1448,7 +1448,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21508
+  m_Name: pb_Mesh21660
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1672,13 +1672,10 @@ MonoBehaviour:
     - {fileID: 1239677555}
     - {fileID: 1239677555}
     - {fileID: 940160059}
-    - {fileID: 1239677555}
   - m_name: Test2
     m_ingredients:
     - {fileID: 1239677555}
     - {fileID: 1239677555}
-    - {fileID: 940160059}
-    - {fileID: 940160059}
     - {fileID: 940160059}
 --- !u!4 &1618950813
 Transform:

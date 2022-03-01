@@ -113,18 +113,21 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.transform.tag == "Machine")
                 {
-                    if (m_teaMakerRef.AddIngredient(FindIngredient()))
-                    {
-                        m_heldObject.GetComponent<Ingredient>().IsHeld = false;
-                        Destroy(m_heldObject.gameObject);
-                        m_heldObject = null;
-                        Debug.Log("Ingredient successfully added!");
-
-                    }
-                    else
-                    {
-                        Debug.Log("Ingredient adding failed!");
-                    }
+                    m_teaMakerRef.AddIngredient(FindIngredient().GetComponent<Ingredient>());
+                    m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                    Destroy(m_heldObject.gameObject);
+                    m_heldObject = null;
+                    //if ()
+                    //{
+                    //    m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                    //    Destroy(m_heldObject.gameObject);
+                    //    m_heldObject = null;
+                    //    Debug.Log("Ingredient successfully added!");
+                    //}
+                    //else
+                    //{
+                    //    Debug.Log("Ingredient adding failed!");
+                    //}
                 }
                 return;
             }
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour
             else if (hit.transform != null && m_heldObject == null)
             {
                 // Remove item from teapot
-                m_teaMakerRef.RemoveIngredient();
+                //m_teaMakerRef.RemoveIngredient();
             }
         }
         if (mouse.rightButton.IsActuated() && m_inputTimer <= 0)
