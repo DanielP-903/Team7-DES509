@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversations:
   - ID: 1
-    Name: Meeting with Bob
+    Name: The Test
     FirstMessage: 2
   Speakers:
   - ID: 0

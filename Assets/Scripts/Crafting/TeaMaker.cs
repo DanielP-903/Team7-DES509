@@ -81,18 +81,11 @@ public class TeaMaker : MonoBehaviour
         foreach (var recipe in m_recipeListRef.m_recipes)
         {
             int occurs = 0;
-            bool validRecipe = true;
             foreach (var item in m_container)
             {
                 if (recipe.m_ingredients.ContainsKey(item.Key))
                 {
-                    if (recipe.m_ingredients[item.Key] != item.Value)
-                    {
-                        Debug.Log("We don't got it bois");
-                        validRecipe = false;
-
-                    }
-                    else
+                    if (recipe.m_ingredients[item.Key] == item.Value)
                     {
                         occurs++;
                     }
