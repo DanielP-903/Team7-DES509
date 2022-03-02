@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.transform.tag == "Machine")
                 {
-                    m_teaMakerRef.AddIngredient(FindIngredient().GetComponent<Ingredient>());
+                    m_teaMakerRef.AddIngredient(FindIngredient());
                     m_heldObject.GetComponent<Ingredient>().IsHeld = false;
                     Destroy(m_heldObject.gameObject);
                     m_heldObject = null;
