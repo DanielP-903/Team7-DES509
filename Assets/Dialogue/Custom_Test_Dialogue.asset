@@ -10,41 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fc788fe28a1947c5906bf24c0472406, type: 3}
-  m_Name: Demo Dialogue
+  m_Name: Custom_Test_Dialogue
   m_EditorClassIdentifier: 
   Conversations:
-  - ID: 2
-    Name: Meeting with Mama
-    FirstMessage: 1
+  - ID: 1
+    Name: Meeting with Bob
+    FirstMessage: 2
   Speakers:
   - ID: 0
-    Name: Mama Demo
+    Name: Nanny Testworth
     Icon: {fileID: 0}
   Messages:
-  - ID: 1
+  - ID: 2
     Speaker: 0
-    SpeakerName: Mama Demo
+    SpeakerName: Nanny Testworth
     PreviousMessage: -1
-    NextMessage: 4
-    MessageText: Hi, I'm Mama Demo! How are you?
+    NextMessage: 3
+    MessageText: Clean your dialogue you dusty cretin
     Clip: {fileID: 0}
-  - ID: 6
+  - ID: 4
     Speaker: 0
-    SpeakerName: Bob
+    SpeakerName: Nanny Testworth
     PreviousMessage: -1
     NextMessage: -1
-    MessageText: Good to hear.
+    MessageText: Good kiddo
     Clip: {fileID: 0}
-  - ID: 7
+  - ID: 5
     Speaker: 0
-    SpeakerName: Bob
-    PreviousMessage: 4
+    SpeakerName: Nanny Testworth
+    PreviousMessage: 3
     NextMessage: -1
-    MessageText: I am sorry to hear that.
+    MessageText: You're clapped
     Clip: {fileID: 0}
   Choices:
-  - ID: 4
+  - ID: 3
     Choices:
-    - Pretty good, thanks.
-    - Not so good.
-    NextMessages: 0600000007000000
+    - Yes ma'am UwU
+    - Nah m8 eeeee
+    NextMessages: 0400000005000000

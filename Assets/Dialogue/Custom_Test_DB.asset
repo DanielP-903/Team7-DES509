@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a74e3a65cc4b487bb14b164cb3ec0e7, type: 3}
-  m_Name: Demo Node Database
+  m_Name: Custom_Test_DB
   m_EditorClassIdentifier: 
-  DataDB: {fileID: 11400000, guid: 094e042eaa27946b383320a39f4ca1b0, type: 2}
-  NextID: 10
+  DataDB: {fileID: 11400000, guid: a97e30e53ebd7774c884c2d3cf109efa, type: 2}
+  NextID: 6
   Nodes:
   - ID: 0
     Type: 2
     Window:
       serializedVersion: 2
-      x: 40.47238
-      y: 45
+      x: 17
+      y: 71
       width: 200
       height: 110
     Inputs: []
@@ -31,7 +31,7 @@ MonoBehaviour:
       Y: 40
       AllowMultipleConnections: 1
       Connections:
-        keys: 01000000
+        keys: 02000000
         values:
         - Array: 00000000
     AllowedInputs: []
@@ -41,11 +41,36 @@ MonoBehaviour:
       OutputType: 2
       OutputID: 0
   - ID: 1
+    Type: 1
+    Window:
+      serializedVersion: 2
+      x: 19
+      y: 204
+      width: 200
+      height: 65
+    Inputs: []
+    Outputs:
+    - ID: 0
+      Name: First Message
+      Type: 1
+      Y: 40
+      AllowMultipleConnections: 0
+      Connections:
+        keys: 02000000
+        values:
+        - Array: 01000000
+    AllowedInputs: []
+    AllowedOutputs:
+    - InputType: 3
+      InputID: 1
+      OutputType: 1
+      OutputID: 0
+  - ID: 2
     Type: 3
     Window:
       serializedVersion: 2
-      x: 319
-      y: 185
+      x: 291
+      y: 172
       width: 200
       height: 175
     Inputs:
@@ -64,7 +89,7 @@ MonoBehaviour:
       Y: 35
       AllowMultipleConnections: 0
       Connections:
-        keys: 02000000
+        keys: 01000000
         values:
         - Array: 00000000
     Outputs:
@@ -74,7 +99,7 @@ MonoBehaviour:
       Y: 7.5
       AllowMultipleConnections: 1
       Connections:
-        keys: 0600000007000000
+        keys: 0500000004000000
         values:
         - Array: 00000000
         - Array: 00000000
@@ -84,7 +109,7 @@ MonoBehaviour:
       Y: 35
       AllowMultipleConnections: 0
       Connections:
-        keys: 04000000
+        keys: 03000000
         values:
         - Array: 00000000
     AllowedInputs:
@@ -137,37 +162,12 @@ MonoBehaviour:
       InputID: 5
       OutputType: 3
       OutputID: 1
-  - ID: 2
-    Type: 1
-    Window:
-      serializedVersion: 2
-      x: 36
-      y: 252
-      width: 200
-      height: 65
-    Inputs: []
-    Outputs:
-    - ID: 0
-      Name: First Message
-      Type: 1
-      Y: 40
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 01000000
-        values:
-        - Array: 01000000
-    AllowedInputs: []
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 1
-      OutputID: 0
-  - ID: 4
+  - ID: 3
     Type: 4
     Window:
       serializedVersion: 2
-      x: 644.19165
-      y: 138
+      x: 578
+      y: 201
       width: 300
       height: 125
     Inputs:
@@ -177,7 +177,7 @@ MonoBehaviour:
       Y: 7.5
       AllowMultipleConnections: 0
       Connections:
-        keys: 01000000
+        keys: 02000000
         values:
         - Array: 01000000
     Outputs:
@@ -187,7 +187,7 @@ MonoBehaviour:
       Y: 45
       AllowMultipleConnections: 0
       Connections:
-        keys: 06000000
+        keys: 04000000
         values:
         - Array: 01000000
     - ID: 1
@@ -196,7 +196,7 @@ MonoBehaviour:
       Y: 75
       AllowMultipleConnections: 0
       Connections:
-        keys: 07000000
+        keys: 05000000
         values:
         - Array: 01000000
     AllowedInputs:
@@ -213,12 +213,12 @@ MonoBehaviour:
       InputID: 1
       OutputType: 4
       OutputID: 1
-  - ID: 6
+  - ID: 4
     Type: 3
     Window:
       serializedVersion: 2
-      x: 1069.0542
-      y: 192
+      x: 979
+      y: 39
       width: 200
       height: 175
     Inputs:
@@ -228,7 +228,7 @@ MonoBehaviour:
       Y: 7.5
       AllowMultipleConnections: 0
       Connections:
-        keys: 01000000
+        keys: 02000000
         values:
         - Array: 00000000
     - ID: 1
@@ -237,7 +237,7 @@ MonoBehaviour:
       Y: 35
       AllowMultipleConnections: 0
       Connections:
-        keys: 04000000
+        keys: 03000000
         values:
         - Array: 00000000
     Outputs:
@@ -307,12 +307,12 @@ MonoBehaviour:
       InputID: 5
       OutputType: 3
       OutputID: 1
-  - ID: 7
+  - ID: 5
     Type: 3
     Window:
       serializedVersion: 2
-      x: 815.05414
-      y: 350
+      x: 1015
+      y: 334
       width: 200
       height: 175
     Inputs:
@@ -322,7 +322,7 @@ MonoBehaviour:
       Y: 7.5
       AllowMultipleConnections: 0
       Connections:
-        keys: 01000000
+        keys: 02000000
         values:
         - Array: 00000000
     - ID: 1
@@ -331,7 +331,7 @@ MonoBehaviour:
       Y: 35
       AllowMultipleConnections: 0
       Connections:
-        keys: 04000000
+        keys: 03000000
         values:
         - Array: 01000000
     Outputs:
@@ -403,35 +403,23 @@ MonoBehaviour:
       OutputID: 1
   SpeakerNodes:
   - ID: 0
-    Type: 2
+    Type: 0
     Window:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 200
-      height: 110
+      width: 0
+      height: 0
     Inputs: []
-    Outputs:
-    - ID: 0
-      Name: Messages
-      Type: 1
-      Y: 40
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
+    Outputs: []
     AllowedInputs: []
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
+    AllowedOutputs: []
     Data:
       ID: 0
-      Name: Bob
+      Name: Nanny Testworth
       Icon: {fileID: 0}
   MessageNodes:
-  - ID: 1
+  - ID: 2
     Type: 3
     Window:
       serializedVersion: 2
@@ -524,14 +512,14 @@ MonoBehaviour:
       OutputType: 3
       OutputID: 1
     Data:
-      ID: 1
+      ID: 2
       Speaker: 0
-      SpeakerName: Bob
+      SpeakerName: Nanny Testworth
       PreviousMessage: -1
-      NextMessage: 4
-      MessageText: Hi, I'm Bob! How are you?
+      NextMessage: 3
+      MessageText: Clean your dialogue you dusty cretin
       Clip: {fileID: 0}
-  - ID: 6
+  - ID: 4
     Type: 3
     Window:
       serializedVersion: 2
@@ -624,14 +612,14 @@ MonoBehaviour:
       OutputType: 3
       OutputID: 1
     Data:
-      ID: 6
+      ID: 4
       Speaker: 0
-      SpeakerName: Bob
+      SpeakerName: Nanny Testworth
       PreviousMessage: -1
       NextMessage: -1
-      MessageText: Good to hear.
+      MessageText: Good kiddo
       Clip: {fileID: 0}
-  - ID: 7
+  - ID: 5
     Type: 3
     Window:
       serializedVersion: 2
@@ -724,15 +712,15 @@ MonoBehaviour:
       OutputType: 3
       OutputID: 1
     Data:
-      ID: 7
+      ID: 5
       Speaker: 0
-      SpeakerName: Bob
-      PreviousMessage: 4
+      SpeakerName: Nanny Testworth
+      PreviousMessage: 3
       NextMessage: -1
-      MessageText: I am sorry to hear that.
+      MessageText: You're clapped
       Clip: {fileID: 0}
   ConversationNodes:
-  - ID: 2
+  - ID: 1
     Type: 1
     Window:
       serializedVersion: 2
@@ -757,11 +745,11 @@ MonoBehaviour:
       OutputType: 1
       OutputID: 0
     Data:
-      ID: 2
-      Name: Meeting with Bob
-      FirstMessage: 1
+      ID: 1
+      Name: The Test
+      FirstMessage: 2
   ChoiceNodes:
-  - ID: 4
+  - ID: 3
     Type: 2
     Window:
       serializedVersion: 2
@@ -789,9 +777,13 @@ MonoBehaviour:
       InputID: 1
       OutputType: 4
       OutputID: 0
+    - InputType: 3
+      InputID: 1
+      OutputType: 4
+      OutputID: 1
     Data:
-      ID: 4
+      ID: 3
       Choices:
-      - Pretty good, thanks.
-      - Not so good.
-      NextMessages: 0600000007000000
+      - Yes ma'am UwU
+      - Nah m8 eeeee
+      NextMessages: 0400000005000000

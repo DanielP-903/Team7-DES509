@@ -14,24 +14,180 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversations:
   - ID: 7
-    Name: Initial Meeting
+    Name: ShyloMeeting_1
     FirstMessage: 2
   Speakers:
   - ID: 3
     Name: Shylo
+    Icon: {fileID: 0}
+  - ID: 17
+    Name: Ms. Exposition
+    Icon: {fileID: 0}
+  - ID: 41
+    Name: YEw
     Icon: {fileID: 0}
   Messages:
   - ID: 2
     Speaker: 3
     SpeakerName: Shylo
     PreviousMessage: -1
+    NextMessage: 8
+    MessageText: H-Hi, I'm Shylo.
+    Clip: {fileID: 0}
+  - ID: 8
+    Speaker: 3
+    SpeakerName: Shylo
+    PreviousMessage: 2
+    NextMessage: 9
+    MessageText: I'd like a tea please, if that's ok.
+    Clip: {fileID: 0}
+  - ID: 9
+    Speaker: 3
+    SpeakerName: Shylo
+    PreviousMessage: 8
+    NextMessage: 10
+    MessageText: Sorry if that's vague! This is new for me.
+    Clip: {fileID: 0}
+  - ID: 10
+    Speaker: 3
+    SpeakerName: Shylo
+    PreviousMessage: 9
+    NextMessage: 16
+    MessageText: A good new! A great new! S-Sorry...
+    Clip: {fileID: 0}
+  - ID: 14
+    Speaker: 17
+    SpeakerName: Ms. Exposition
+    PreviousMessage: -1
+    NextMessage: 24
+    MessageText: The tea begins to emit a sweeter aroma. Would you like to add another
+      ingredient?
+    Clip: {fileID: 0}
+  - ID: 16
+    Speaker: 17
+    SpeakerName: Ms. Exposition
+    PreviousMessage: 10
     NextMessage: 6
-    MessageText: TEST
+    MessageText: You have a selection of 5 different ingredients to choose from.
+      What should we make for Shylo?
+    Clip: {fileID: 0}
+  - ID: 20
+    Speaker: 17
+    SpeakerName: Ms. Exposition
+    PreviousMessage: 6
+    NextMessage: 27
+    MessageText: The tea begins to steam a bit. It looks hotter than before. Would
+      you like to add another ingredient?
+    Clip: {fileID: 0}
+  - ID: 21
+    Speaker: 17
+    SpeakerName: Ms. Exposition
+    PreviousMessage: -1
+    NextMessage: 28
+    MessageText: The tea darkens in colour and seems to have a punch to it. Would
+      you like to add another ingredient?
+    Clip: {fileID: 0}
+  - ID: 22
+    Speaker: 17
+    SpeakerName: Ms. Exposition
+    PreviousMessage: -1
+    NextMessage: 29
+    MessageText: The tea begins to pale and you feel your sinuses start to clear.
+      Would you like to add another ingredient?
+    Clip: {fileID: 0}
+  - ID: 23
+    Speaker: 17
+    SpeakerName: Ms. Exposition
+    PreviousMessage: -1
+    NextMessage: 30
+    MessageText: The tea takes a more saturated colour looking far more vibrant.
+      Would you like to add another ingredient?
+    Clip: {fileID: 0}
+  - ID: 35
+    Speaker: 3
+    SpeakerName: Shylo
+    PreviousMessage: 24
+    NextMessage: -1
+    MessageText: 
+    Clip: {fileID: 0}
+  - ID: 36
+    Speaker: 3
+    SpeakerName: Shylo
+    PreviousMessage: 27
+    NextMessage: -1
+    MessageText: 
+    Clip: {fileID: 0}
+  - ID: 39
+    Speaker: -1
+    SpeakerName: 
+    PreviousMessage: 28
+    NextMessage: -1
+    MessageText: 
+    Clip: {fileID: 0}
+  - ID: 40
+    Speaker: -1
+    SpeakerName: 
+    PreviousMessage: -1
+    NextMessage: -1
+    MessageText: 
+    Clip: {fileID: 0}
+  - ID: 43
+    Speaker: 41
+    SpeakerName: YEw
+    PreviousMessage: -1
+    NextMessage: 44
+    MessageText: Oii what do you want to eat
+    Clip: {fileID: 0}
+  - ID: 45
+    Speaker: 41
+    SpeakerName: YEw
+    PreviousMessage: 44
+    NextMessage: -1
+    MessageText: Fuckin beaaaaans m8
+    Clip: {fileID: 0}
+  - ID: 46
+    Speaker: 41
+    SpeakerName: YEw
+    PreviousMessage: -1
+    NextMessage: -1
+    MessageText: Sizzle me timbers
     Clip: {fileID: 0}
   Choices:
   - ID: 6
     Choices:
     - Sweet
-    - Calming
-    - Neutral
-    NextMessages: 02000000ffffffffffffffff
+    - Spiced
+    - Strong
+    - Minty
+    - Fruity
+    NextMessages: 1000000014000000150000001600000017000000
+  - ID: 24
+    Choices:
+    - Yes
+    - No
+    NextMessages: ffffffff23000000
+  - ID: 27
+    Choices:
+    - Yes
+    - No
+    NextMessages: 1400000024000000
+  - ID: 28
+    Choices:
+    - Yes
+    - No
+    NextMessages: 1500000027000000
+  - ID: 29
+    Choices:
+    - Yes
+    - No
+    NextMessages: 16000000ffffffff
+  - ID: 30
+    Choices:
+    - Yes
+    - No
+    NextMessages: 17000000ffffffff
+  - ID: 44
+    Choices:
+    - 
+    - body your boss
+    NextMessages: 2b0000002d000000
