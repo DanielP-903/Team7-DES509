@@ -8,9 +8,11 @@ using System.Runtime.Serialization;
 
 [Serializable]
 public class CustomIntDictionary : SerializableDictionary<UnityEngine.Object, int> { }
-
+[Serializable]
+public class StringBoolDictionary : SerializableDictionary<string, bool> { }
 public class TeaMaker : MonoBehaviour
 {
+
     private List<GameObject> m_addedIngredients = new List<GameObject>();
     [SerializeField] private int m_capacity = 4;
     [SerializeField] private TextMeshProUGUI m_Text;
@@ -27,14 +29,26 @@ public class TeaMaker : MonoBehaviour
     }
 
     [SerializeField]
-    private CustomIntDictionary m_FoundRecipes;
-
+    public StringBoolDictionary m_discoveredRecipes;
+    public IDictionary<string, bool> StringBoolDictionary
+    {
+        get { return m_discoveredRecipes; }
+        set { m_discoveredRecipes.CopyFrom(value); }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         m_recipeListRef = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<Recipe>();
         m_recipeText.text = "";
+
+        foreach (var item in m_recipeListRef.m_recipes)
+        {
+            if (!m_discoveredRecipes.ContainsKey(item.m_name))
+            {
+                m_discoveredRecipes.Add(item.m_name, false);
+            }
+        }
     }
 
     public void AddIngredient(UnityEngine.Object ingredient)
@@ -94,9 +108,21 @@ public class TeaMaker : MonoBehaviour
             if (occurs == recipe.m_ingredients.Count)
             {
                 m_recipeText.text = "FOUND: " + recipe.m_name;
+                if (m_discoveredRecipes.ContainsKey(recipe.m_name))
+                {
+                    if (m_discoveredRecipes[recipe.m_name] == false)
+                    {
+                        m_discoveredRecipes[recipe.m_name] = true;
+                        Debug.Log("Recipe Discovered: " + recipe.m_name);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("OOPS! THIS RECIPE DOESN'T EXIST IN m_discoveredRecipes!");
+                }
             }
-            Debug.Log("occurs: " + occurs);
-            Debug.Log("recipe.m_ingredients.Count: " + recipe.m_ingredients.Count);
+            //Debug.Log("occurs: " + occurs);
+            //Debug.Log("recipe.m_ingredients.Count: " + recipe.m_ingredients.Count);
         }
     }
 }

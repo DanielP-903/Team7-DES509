@@ -104,10 +104,10 @@ public class PlayerController : MonoBehaviour
             m_inputTimer = m_inputDelay;
             RaycastHit hit;
             Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out hit, 100.0f);
-            if (hit.transform != null)
-            {
-                Debug.Log("I HIT: " + hit.transform.name);
-            }
+            //if (hit.transform != null)
+            //{
+            //    Debug.Log("I HIT: " + hit.transform.name);
+            //}
 
             if (m_heldObject != null)
             {
@@ -166,27 +166,27 @@ public class PlayerController : MonoBehaviour
     {
         float value = context.ReadValue<float>();
         m_moveForward = value > 0;
-        Debug.Log("Forward detected");
+        //Debug.Log("Forward detected");
     }
     // S
     public void Backward(InputAction.CallbackContext context)
     {
         float value = context.ReadValue<float>();
         m_moveBackward = value > 0;
-        Debug.Log("Backward detected");
+        //Debug.Log("Backward detected");
     }
     // A
     public void Left(InputAction.CallbackContext context)
     {
         float value = context.ReadValue<float>();
         m_moveLeft = value > 0;
-        Debug.Log("Left detected");
+        //Debug.Log("Left detected");
     }
     // D
     public void Right(InputAction.CallbackContext context)
     {
         float value = context.ReadValue<float>();
         m_moveRight = value > 0;
-        Debug.Log("Right detected");
+        //Debug.Log("Right detected");
     }
 }
