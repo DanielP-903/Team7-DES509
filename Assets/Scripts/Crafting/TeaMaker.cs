@@ -1,7 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using TMPro;
+using System;
+using System.Runtime.Serialization;
+
+[Serializable]
+public class CustomIntDictionary : SerializableDictionary<UnityEngine.Object, int> { }
 
 public class TeaMaker : MonoBehaviour
 {
@@ -10,7 +16,20 @@ public class TeaMaker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_Text;
     [SerializeField] private TextMeshProUGUI m_recipeText;
     private Recipe m_recipeListRef;
+    private int m_total = 0;
     List<string> names = new List<string>();
+    [SerializeField]
+    CustomIntDictionary m_container;
+    public IDictionary<UnityEngine.Object, int> CustomIntDictionary
+    {
+        get { return m_container; }
+        set { m_container.CopyFrom(value); }
+    }
+
+    [SerializeField]
+    private CustomIntDictionary m_FoundRecipes;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,112 +37,73 @@ public class TeaMaker : MonoBehaviour
         m_recipeText.text = "";
     }
 
-    public bool AddIngredient(GameObject ingredient)
+    public void AddIngredient(UnityEngine.Object ingredient)
     {
-        if (ingredient.GetComponent<Ingredient>() && m_addedIngredients.Count < m_capacity)
+        if (m_total + 1 <= m_capacity)
         {
-            m_addedIngredients.Add(ingredient);
-            SearchForNewRecipes();
-            return true;
-        }
-        return false;
-    }
-
-
-    public void RemoveIngredient()
-    {
-        if (m_addedIngredients.Count > 0)
-        {
-            m_addedIngredients.RemoveAt(m_addedIngredients.Count - 1);
+            if (!m_container.ContainsKey(ingredient))
+            {
+                m_container.Add(ingredient, 1);
+            }
+            else
+            {
+                m_container[ingredient]++;
+            }
             SearchForNewRecipes();
         }
     }
-
+    public void RemoveIngredient(UnityEngine.Object ingredient)
+    {
+        if (!m_container.ContainsKey(ingredient))
+        {
+            Debug.LogError("Cannot remove an ingredient that isn't in the dictionary");
+        }
+        else
+        {
+            m_container.Remove(ingredient);
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        m_Text.text = m_addedIngredients.Count + " / " + m_capacity;
+        m_total = 0;
+        foreach (var item in m_container)
+        {
+            m_total += item.Value;
+        }
+        m_Text.text = m_total + " / " + m_capacity;
     }
 
     void SearchForNewRecipes()
     {
-        CountOccurences();
-
-        //string recipeFound = "";
-        //int recipeScore = 0;
-        //int recipeHighScore = 0;
-        //List<IngredientTracking> occurences = new List<IngredientTracking>();
-        //List<string> names = new List<string>();
-        //foreach (var recipe in m_recipeListRef.m_recipes)
-        //{
-        //    recipeScore = 0;
-        //    foreach (var ingredient in recipe.m_ingredients)
-        //    {
-        //        string testName = ingredient.GetComponent<Ingredient>().m_type.ToString();
-        //        int occurs = 0;
-        //        if (names.Contains(testName))
-        //        {
-        //            break;
-        //        }
-        //        names.Add(testName);
-        //        foreach (var i in recipe.m_ingredients)
-        //        {
-        //            if (i.GetComponent<Ingredient>().m_type.ToString() == testName)
-        //            {
-        //                occurs++;
-        //            }
-        //        }
-        //        occurences.Add(new IngredientTracking(testName, occurs));
-
-        //        // Check how many times this ingredient appears in recipe
-
-                
-        //        //for (int i = recipeScore; i < m_addedIngredients.Count; i++)
-        //        //{
-        //        //    if (ingredient.GetComponent<Ingredient>().m_type == m_addedIngredients[i].GetComponent<Ingredient>().m_type)
-        //        //    {
-        //        //        recipeScore++;
-        //        //        break;
-        //        //    }
-        //        //}
-        //    }
-        //    if (recipeScore > recipeHighScore && recipeScore == recipe.m_ingredients.Count)
-        //    {
-        //        recipeHighScore = recipeScore;
-        //        recipeFound = recipe.m_name;
-        //    }
-        //}
-
-        //m_recipeText.text = recipeFound;
-    }
-
-    private void CountOccurences()
-    {
+        m_recipeText.text = "";
         foreach (var recipe in m_recipeListRef.m_recipes)
         {
-            names.Clear();
-            foreach (var ingredient in recipe.m_ingredients)
+            int occurs = 0;
+            bool validRecipe = true;
+            foreach (var item in m_container)
             {
-                string detectedName = ingredient.GetComponent<Ingredient>().m_type.ToString();
-                int occurs = 0;
-                if (names.Contains(detectedName))
+                if (recipe.m_ingredients.ContainsKey(item.Key))
                 {
-                    continue;
-                }
-                // Continues only if new ingredient detected
+                    if (recipe.m_ingredients[item.Key] != item.Value)
+                    {
+                        Debug.Log("We don't got it bois");
+                        validRecipe = false;
 
-                names.Add(detectedName);
-                foreach (var i in recipe.m_ingredients)
-                {
-                    if (i.GetComponent<Ingredient>().m_type.ToString() == detectedName)
+                    }
+                    else
                     {
                         occurs++;
                     }
                 }
-                ingredient.GetComponent<Ingredient>().occurences = occurs;
             }
+            if (occurs == recipe.m_ingredients.Count)
+            {
+                m_recipeText.text = "FOUND: " + recipe.m_name;
+            }
+            Debug.Log("occurs: " + occurs);
+            Debug.Log("recipe.m_ingredients.Count: " + recipe.m_ingredients.Count);
         }
-        Debug.Log("Finished");
     }
 }
