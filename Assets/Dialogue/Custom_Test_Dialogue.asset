@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversations:
   - ID: 1
-    Name: The Test
+    Name: Meeting with Bob
     FirstMessage: 2
   - ID: 6
     Name: The Part 2
@@ -31,20 +31,13 @@ MonoBehaviour:
     Speaker: 0
     SpeakerName: Nanny Testworth
     PreviousMessage: -1
-    NextMessage: 3
+    NextMessage: 5
     MessageText: Clean your dialogue you dusty cretin
-    Clip: {fileID: 0}
-  - ID: 4
-    Speaker: 0
-    SpeakerName: Nanny Testworth
-    PreviousMessage: -1
-    NextMessage: -1
-    MessageText: Good kiddo
     Clip: {fileID: 0}
   - ID: 5
     Speaker: 0
     SpeakerName: Nanny Testworth
-    PreviousMessage: 3
+    PreviousMessage: 2
     NextMessage: -1
     MessageText: You're clapped
     Clip: {fileID: 0}
@@ -52,27 +45,13 @@ MonoBehaviour:
     Speaker: 7
     SpeakerName: Grandpa Proto
     PreviousMessage: -1
-    NextMessage: 9
+    NextMessage: 14
     MessageText: I heard that you met Nanny Testworth. How did you find her company?
-    Clip: {fileID: 0}
-  - ID: 11
-    Speaker: 0
-    SpeakerName: Nanny Testworth
-    PreviousMessage: -1
-    NextMessage: 12
-    MessageText: Damn straight!
-    Clip: {fileID: 0}
-  - ID: 12
-    Speaker: 7
-    SpeakerName: Grandpa Proto
-    PreviousMessage: 11
-    NextMessage: -1
-    MessageText: NANNY?!
     Clip: {fileID: 0}
   - ID: 14
     Speaker: 0
     SpeakerName: Nanny Testworth
-    PreviousMessage: 9
+    PreviousMessage: 8
     NextMessage: 15
     MessageText: Oiiii! I heard that you sketty bumhole!
     Clip: {fileID: 0}
@@ -83,14 +62,4 @@ MonoBehaviour:
     NextMessage: -1
     MessageText: NANNY?!
     Clip: {fileID: 0}
-  Choices:
-  - ID: 3
-    Choices:
-    - Yes ma'am UwU
-    - Nah m8 eeeee
-    NextMessages: 0400000005000000
-  - ID: 9
-    Choices:
-    - I liked her
-    - She was butters eeee
-    NextMessages: 0b0000000e000000
+  Choices: []

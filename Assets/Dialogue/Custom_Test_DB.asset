@@ -31,9 +31,8 @@ MonoBehaviour:
       Y: 40
       AllowMultipleConnections: 1
       Connections:
-        keys: 020000000b0000000e000000
+        keys: 020000000e000000
         values:
-        - Array: 00000000
         - Array: 00000000
         - Array: 00000000
     AllowedInputs: []
@@ -71,8 +70,8 @@ MonoBehaviour:
     Type: 3
     Window:
       serializedVersion: 2
-      x: 291
-      y: 172
+      x: 554
+      y: 153
       width: 200
       height: 175
     Inputs:
@@ -101,164 +100,18 @@ MonoBehaviour:
       Y: 7.5
       AllowMultipleConnections: 1
       Connections:
-        keys: 0500000004000000
+        keys: 05000000
         values:
-        - Array: 00000000
         - Array: 00000000
     - ID: 1
       Name: Next
       Type: 1
       Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 03000000
-        values:
-        - Array: 00000000
-    AllowedInputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 3
-      InputID: 1
-      OutputType: 1
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 3
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 0
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 2
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 3
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 4
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 5
-      OutputType: 3
-      OutputID: 1
-  - ID: 3
-    Type: 4
-    Window:
-      serializedVersion: 2
-      x: 578
-      y: 201
-      width: 300
-      height: 125
-    Inputs:
-    - ID: 0
-      Name: Previous Messages
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 02000000
-        values:
-        - Array: 01000000
-    Outputs:
-    - ID: 0
-      Name: Choice 1
-      Type: 1
-      Y: 45
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 04000000
-        values:
-        - Array: 01000000
-    - ID: 1
-      Name: Choice 2
-      Type: 1
-      Y: 75
       AllowMultipleConnections: 0
       Connections:
         keys: 05000000
         values:
         - Array: 01000000
-    AllowedInputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 1
-  - ID: 4
-    Type: 3
-    Window:
-      serializedVersion: 2
-      x: 968
-      y: 64
-      width: 200
-      height: 175
-    Inputs:
-    - ID: 0
-      Name: Speaker
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 02000000
-        values:
-        - Array: 00000000
-    - ID: 1
-      Name: Previous
-      Type: 0
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 03000000
-        values:
-        - Array: 00000000
-    Outputs:
-    - ID: 0
-      Name: Speaker
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Next
-      Type: 1
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
     AllowedInputs:
     - InputType: 3
       InputID: 0
@@ -313,8 +166,8 @@ MonoBehaviour:
     Type: 3
     Window:
       serializedVersion: 2
-      x: 968
-      y: 287
+      x: 973
+      y: 182
       width: 200
       height: 175
     Inputs:
@@ -333,7 +186,7 @@ MonoBehaviour:
       Y: 35
       AllowMultipleConnections: 0
       Connections:
-        keys: 03000000
+        keys: 02000000
         values:
         - Array: 01000000
     Outputs:
@@ -407,8 +260,8 @@ MonoBehaviour:
     Type: 1
     Window:
       serializedVersion: 2
-      x: 12
-      y: 629
+      x: 11
+      y: 635
       width: 200
       height: 65
     Inputs: []
@@ -457,8 +310,8 @@ MonoBehaviour:
     Type: 3
     Window:
       serializedVersion: 2
-      x: 301
-      y: 577.05194
+      x: 345
+      y: 574.05194
       width: 200
       height: 175
     Inputs:
@@ -487,259 +340,18 @@ MonoBehaviour:
       Y: 7.5
       AllowMultipleConnections: 1
       Connections:
-        keys: 0c0000000f000000
+        keys: 0f000000
         values:
-        - Array: 00000000
         - Array: 00000000
     - ID: 1
       Name: Next
       Type: 1
       Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 09000000
-        values:
-        - Array: 00000000
-    AllowedInputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 3
-      InputID: 1
-      OutputType: 1
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 3
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 0
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 2
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 3
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 4
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 5
-      OutputType: 3
-      OutputID: 1
-  - ID: 9
-    Type: 4
-    Window:
-      serializedVersion: 2
-      x: 577
-      y: 585.05194
-      width: 300
-      height: 125
-    Inputs:
-    - ID: 0
-      Name: Previous Messages
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 08000000
-        values:
-        - Array: 01000000
-    Outputs:
-    - ID: 0
-      Name: Choice 1
-      Type: 1
-      Y: 45
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 0b000000
-        values:
-        - Array: 01000000
-    - ID: 1
-      Name: Choice 2
-      Type: 1
-      Y: 75
       AllowMultipleConnections: 0
       Connections:
         keys: 0e000000
         values:
         - Array: 01000000
-    AllowedInputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 1
-  - ID: 11
-    Type: 3
-    Window:
-      serializedVersion: 2
-      x: 1089.9043
-      y: 500.05194
-      width: 200
-      height: 175
-    Inputs:
-    - ID: 0
-      Name: Speaker
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 00000000
-        values:
-        - Array: 00000000
-    - ID: 1
-      Name: Previous
-      Type: 0
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 09000000
-        values:
-        - Array: 00000000
-    Outputs:
-    - ID: 0
-      Name: Speaker
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Next
-      Type: 1
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 0c000000
-        values:
-        - Array: 01000000
-    AllowedInputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 3
-      InputID: 1
-      OutputType: 1
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 3
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 0
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 2
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 3
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 4
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 5
-      OutputType: 3
-      OutputID: 1
-  - ID: 12
-    Type: 3
-    Window:
-      serializedVersion: 2
-      x: 1395.1947
-      y: 501.74023
-      width: 200
-      height: 175
-    Inputs:
-    - ID: 0
-      Name: Speaker
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 08000000
-        values:
-        - Array: 00000000
-    - ID: 1
-      Name: Previous
-      Type: 0
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 0b000000
-        values:
-        - Array: 01000000
-    Outputs:
-    - ID: 0
-      Name: Speaker
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Next
-      Type: 1
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
     AllowedInputs:
     - InputType: 3
       InputID: 0
@@ -794,8 +406,8 @@ MonoBehaviour:
     Type: 3
     Window:
       serializedVersion: 2
-      x: 1092.3036
-      y: 698.74023
+      x: 760.3036
+      y: 576.74023
       width: 200
       height: 175
     Inputs:
@@ -814,7 +426,7 @@ MonoBehaviour:
       Y: 35
       AllowMultipleConnections: 0
       Connections:
-        keys: 09000000
+        keys: 08000000
         values:
         - Array: 01000000
     Outputs:
@@ -889,8 +501,8 @@ MonoBehaviour:
     Type: 3
     Window:
       serializedVersion: 2
-      x: 1397.9208
-      y: 697.37665
+      x: 1362.9208
+      y: 577.37665
       width: 200
       height: 175
     Inputs:
@@ -1122,108 +734,8 @@ MonoBehaviour:
       Speaker: 0
       SpeakerName: Nanny Testworth
       PreviousMessage: -1
-      NextMessage: 3
+      NextMessage: 5
       MessageText: Clean your dialogue you dusty cretin
-      Clip: {fileID: 0}
-  - ID: 4
-    Type: 3
-    Window:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 200
-      height: 175
-    Inputs:
-    - ID: 0
-      Name: Speaker
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Previous
-      Type: 0
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    Outputs:
-    - ID: 0
-      Name: Speaker
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Next
-      Type: 1
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    AllowedInputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 3
-      InputID: 1
-      OutputType: 1
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 3
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 0
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 2
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 3
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 4
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 5
-      OutputType: 3
-      OutputID: 1
-    Data:
-      ID: 4
-      Speaker: 0
-      SpeakerName: Nanny Testworth
-      PreviousMessage: -1
-      NextMessage: -1
-      MessageText: Good kiddo
       Clip: {fileID: 0}
   - ID: 5
     Type: 3
@@ -1321,7 +833,7 @@ MonoBehaviour:
       ID: 5
       Speaker: 0
       SpeakerName: Nanny Testworth
-      PreviousMessage: 3
+      PreviousMessage: 2
       NextMessage: -1
       MessageText: You're clapped
       Clip: {fileID: 0}
@@ -1422,208 +934,8 @@ MonoBehaviour:
       Speaker: 7
       SpeakerName: Grandpa Proto
       PreviousMessage: -1
-      NextMessage: 9
+      NextMessage: 14
       MessageText: I heard that you met Nanny Testworth. How did you find her company?
-      Clip: {fileID: 0}
-  - ID: 11
-    Type: 3
-    Window:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 200
-      height: 175
-    Inputs:
-    - ID: 0
-      Name: Speaker
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Previous
-      Type: 0
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    Outputs:
-    - ID: 0
-      Name: Speaker
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Next
-      Type: 1
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    AllowedInputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 3
-      InputID: 1
-      OutputType: 1
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 3
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 0
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 2
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 3
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 4
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 5
-      OutputType: 3
-      OutputID: 1
-    Data:
-      ID: 11
-      Speaker: 0
-      SpeakerName: Nanny Testworth
-      PreviousMessage: -1
-      NextMessage: 12
-      MessageText: Damn straight!
-      Clip: {fileID: 0}
-  - ID: 12
-    Type: 3
-    Window:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 200
-      height: 175
-    Inputs:
-    - ID: 0
-      Name: Speaker
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Previous
-      Type: 0
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    Outputs:
-    - ID: 0
-      Name: Speaker
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    - ID: 1
-      Name: Next
-      Type: 1
-      Y: 35
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    AllowedInputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 3
-      InputID: 1
-      OutputType: 1
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 0
-      OutputType: 3
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 0
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 1
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 2
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 3
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 4
-      OutputType: 3
-      OutputID: 1
-    - InputType: 4
-      InputID: 5
-      OutputType: 3
-      OutputID: 1
-    Data:
-      ID: 12
-      Speaker: 7
-      SpeakerName: Grandpa Proto
-      PreviousMessage: 11
-      NextMessage: -1
-      MessageText: NANNY?!
       Clip: {fileID: 0}
   - ID: 14
     Type: 3
@@ -1721,7 +1033,7 @@ MonoBehaviour:
       ID: 14
       Speaker: 0
       SpeakerName: Nanny Testworth
-      PreviousMessage: 9
+      PreviousMessage: 8
       NextMessage: 15
       MessageText: Oiiii! I heard that you sketty bumhole!
       Clip: {fileID: 0}
@@ -1882,80 +1194,4 @@ MonoBehaviour:
       ID: 6
       Name: The Part 2
       FirstMessage: 8
-  ChoiceNodes:
-  - ID: 3
-    Type: 2
-    Window:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 300
-      height: 65
-    Inputs:
-    - ID: 0
-      Name: Previous Messages
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    Outputs: []
-    AllowedInputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 1
-    Data:
-      ID: 3
-      Choices:
-      - Yes ma'am UwU
-      - Nah m8 eeeee
-      NextMessages: 0400000005000000
-  - ID: 9
-    Type: 2
-    Window:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 300
-      height: 65
-    Inputs:
-    - ID: 0
-      Name: Previous Messages
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 0
-      Connections:
-        keys: 
-        values: []
-    Outputs: []
-    AllowedInputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 0
-    - InputType: 3
-      InputID: 1
-      OutputType: 4
-      OutputID: 1
-    Data:
-      ID: 9
-      Choices:
-      - I liked her
-      - She was butters eeee
-      NextMessages: 0b0000000e000000
+  ChoiceNodes: []
