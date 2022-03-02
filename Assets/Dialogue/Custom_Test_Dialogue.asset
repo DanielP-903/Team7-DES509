@@ -14,52 +14,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversations:
   - ID: 1
-    Name: Meeting with Bob
+    Name: Ordering
     FirstMessage: 2
   - ID: 6
-    Name: The Part 2
-    FirstMessage: 8
+    Name: Served
+    FirstMessage: 21
   Speakers:
   - ID: 0
-    Name: Nanny Testworth
-    Icon: {fileID: 0}
-  - ID: 7
-    Name: Grandpa Proto
+    Name: Shylo
     Icon: {fileID: 0}
   Messages:
   - ID: 2
     Speaker: 0
-    SpeakerName: Nanny Testworth
+    SpeakerName: Shylo
     PreviousMessage: -1
-    NextMessage: 5
-    MessageText: Clean your dialogue you dusty cretin
+    NextMessage: 16
+    MessageText: H-Hi, my name is Shylo, uhm...
     Clip: {fileID: 0}
-  - ID: 5
+  - ID: 16
     Speaker: 0
-    SpeakerName: Nanny Testworth
+    SpeakerName: Shylo
     PreviousMessage: 2
-    NextMessage: -1
-    MessageText: You're clapped
+    NextMessage: 17
+    MessageText: I'd like a tea please...
     Clip: {fileID: 0}
-  - ID: 8
-    Speaker: 7
-    SpeakerName: Grandpa Proto
-    PreviousMessage: -1
-    NextMessage: 14
-    MessageText: I heard that you met Nanny Testworth. How did you find her company?
-    Clip: {fileID: 0}
-  - ID: 14
+  - ID: 17
     Speaker: 0
-    SpeakerName: Nanny Testworth
-    PreviousMessage: 8
-    NextMessage: 15
-    MessageText: Oiiii! I heard that you sketty bumhole!
+    SpeakerName: Shylo
+    PreviousMessage: 16
+    NextMessage: 18
+    MessageText: Sorry if that's vague! J-Just you know uhm.
     Clip: {fileID: 0}
-  - ID: 15
-    Speaker: 7
-    SpeakerName: Grandpa Proto
-    PreviousMessage: 14
+  - ID: 18
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 17
+    NextMessage: 19
+    MessageText: This is new for me... A good new! A great new even! Uhm.
+    Clip: {fileID: 0}
+  - ID: 19
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 18
     NextMessage: -1
-    MessageText: NANNY?!
+    MessageText: S-Sorry...
+    Clip: {fileID: 0}
+  - ID: 21
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: -1
+    NextMessage: 23
+    MessageText: O-Oh thank you!
+    Clip: {fileID: 0}
+  - ID: 23
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 21
+    NextMessage: -1
+    MessageText: It's nice, I hope I didn't put too much pressure on you.
     Clip: {fileID: 0}
   Choices: []
