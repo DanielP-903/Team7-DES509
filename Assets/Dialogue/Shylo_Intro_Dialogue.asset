@@ -16,7 +16,7 @@ MonoBehaviour:
   - ID: 1
     Name: Ordering
     FirstMessage: 2
-  - ID: 6
+  - ID: 2
     Name: Served
     FirstMessage: 21
   Speakers:

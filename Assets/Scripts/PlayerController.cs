@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private float m_inputTimer;
     private TeaMaker m_teaMakerRef;
     [SerializeField] private Mode m_mode = Mode.Freeroam;
-
+    public int lastFrame = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -173,6 +173,11 @@ public class PlayerController : MonoBehaviour
 
     private void TalkingActions()
     {
+        if (lastFrame != handler.currentMessageInfo.ID)
+        {
+            Debug.Log("GOTCHA!!");
+        }
+        Debug.Log("Before: " + handler.currentMessageInfo.ID);
         var mouse = Mouse.current;
         if (mouse.leftButton.IsActuated() && m_inputTimer <= 0)
         {
@@ -181,25 +186,37 @@ public class PlayerController : MonoBehaviour
             // Don't do anything if the conversation is over
             if (m_dialogueFinished)
             {
-               // dialogueBox.SetActive(false);
+                // dialogueBox.SetActive(false);
 
-                //Go to next conversation
-                handler.SetConversation(handler.dialogue.GetConversation(handler.currentConversationIndex+1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0).Name);
+                //Go to next conversation (via index)
+                int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
+
+                handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex+1).Name);
+                //handler.NextMessage
+
+                // FIRST MESSAGE IS NOT READ
+                m_dialogueFinished = false;
+                SetText();
+               // Next();
                 return;
             }
             // Check if the space key is pressed and the current message is not a choice
-            if (handler.currentMessageInfo.Type == QD_NodeType.Message && Mouse.current.leftButton.IsActuated())
+            if (handler.currentMessageInfo.Type == QD_NodeType.Message)
             {
-                if (handler.NextMessage().ID == -1)
+                if (handler.currentMessageInfo.NextID == -1)
                 {
                     m_dialogueFinished = true;
                 }
                 else
                 {
+                    //QD_Message msg = handler.dialogue.GetMessage(handler.GetNextID(handler.currentMessageInfo.ID));
+                    //handler.currentMessageInfo = new QD_MessageInfo(msg.ID, msg.NextMessage, QD_NodeType.Message);
                     Next();
                 }
             }
         }
+        Debug.Log("After: " + handler.currentMessageInfo.ID);
+        lastFrame = handler.currentMessageInfo.ID;
     }
 
     // Taken from Quantum Dialogue START -------------------
