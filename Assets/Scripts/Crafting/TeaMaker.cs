@@ -10,16 +10,19 @@ using System.Runtime.Serialization;
 public class CustomIntDictionary : SerializableDictionary<UnityEngine.Object, int> { }
 [Serializable]
 public class StringBoolDictionary : SerializableDictionary<string, bool> { }
+
 public class TeaMaker : MonoBehaviour
 {
 
-    private List<GameObject> m_addedIngredients = new List<GameObject>();
     [SerializeField] private int m_capacity = 4;
     [SerializeField] private TextMeshProUGUI m_Text;
     [SerializeField] private TextMeshProUGUI m_recipeText;
+
+    private string m_currentlyCalculatedRecipe;
+
     private Recipe m_recipeListRef;
     private int m_total = 0;
-    List<string> names = new List<string>();
+    private readonly Stack<UnityEngine.Object> AddedOrder = new Stack<UnityEngine.Object>();
     [SerializeField]
     CustomIntDictionary m_container;
     public IDictionary<UnityEngine.Object, int> CustomIntDictionary
@@ -29,7 +32,7 @@ public class TeaMaker : MonoBehaviour
     }
 
     [SerializeField]
-    public StringBoolDictionary m_discoveredRecipes;
+    StringBoolDictionary m_discoveredRecipes;
     public IDictionary<string, bool> StringBoolDictionary
     {
         get { return m_discoveredRecipes; }
@@ -63,18 +66,29 @@ public class TeaMaker : MonoBehaviour
             {
                 m_container[ingredient]++;
             }
+            AddedOrder.Push(ingredient);
             SearchForNewRecipes();
         }
     }
-    public void RemoveIngredient(UnityEngine.Object ingredient)
+    public void RemoveIngredient()
     {
-        if (!m_container.ContainsKey(ingredient))
+        if (AddedOrder.Count > 0)
         {
-            Debug.LogError("Cannot remove an ingredient that isn't in the dictionary");
+            UnityEngine.Object toBeRemoved = AddedOrder.Pop();
+            if (!m_container.ContainsKey(toBeRemoved))
+            {
+                Debug.LogError("Cannot remove an ingredient that isn't in the dictionary, re-adding to stack");
+                AddedOrder.Push(toBeRemoved);
+            }
+            else
+            {
+                m_container.Remove(toBeRemoved);
+            }
+            SearchForNewRecipes();
         }
         else
         {
-            m_container.Remove(ingredient);
+            Debug.LogWarning("Stack is empty!");        
         }
     }
 
@@ -92,6 +106,7 @@ public class TeaMaker : MonoBehaviour
     void SearchForNewRecipes()
     {
         m_recipeText.text = "";
+        m_currentlyCalculatedRecipe = null;
         foreach (var recipe in m_recipeListRef.m_recipes)
         {
             int occurs = 0;
@@ -108,6 +123,7 @@ public class TeaMaker : MonoBehaviour
             if (occurs == recipe.m_ingredients.Count)
             {
                 m_recipeText.text = "FOUND: " + recipe.m_name;
+                m_currentlyCalculatedRecipe = recipe.m_name;
                 if (m_discoveredRecipes.ContainsKey(recipe.m_name))
                 {
                     if (m_discoveredRecipes[recipe.m_name] == false)
