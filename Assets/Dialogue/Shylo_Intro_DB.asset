@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a74e3a65cc4b487bb14b164cb3ec0e7, type: 3}
-  m_Name: Custom_Test_DB
+  m_Name: Shylo_Intro_DB
   m_EditorClassIdentifier: 
   DataDB: {fileID: 11400000, guid: a97e30e53ebd7774c884c2d3cf109efa, type: 2}
   NextID: 24
