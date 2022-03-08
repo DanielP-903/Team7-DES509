@@ -295,6 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c76f56dddd403c4dbf6bbeff1f693f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterName: 
+  m_stage: 0
 --- !u!1 &272149028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,36 +1102,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1195620229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1195620230}
-  m_Layer: 5
-  m_Name: Held Item Location
-  m_TagString: HoldLocation
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1195620230
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195620229}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4000001, y: -0.20000005, z: 0.5}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_Children: []
-  m_Father: {fileID: 2008446041}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239677555
 GameObject:
@@ -2195,7 +2167,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639499420}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 2.8, y: 2, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2627,11 +2599,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979506393}
   m_CullTransparentMesh: 1
---- !u!4 &2008446041 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8210468165090623394, guid: d00b86e9d6c4cb143b6a8e23fd5d8490, type: 3}
-  m_PrefabInstance: {fileID: 8210468165934089384}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8210468165934089384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2639,21 +2606,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8210468165090623393, guid: d00b86e9d6c4cb143b6a8e23fd5d8490, type: 3}
-      propertyPath: near clip plane
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 8210468165845274953, guid: d00b86e9d6c4cb143b6a8e23fd5d8490, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8210468165845274953, guid: d00b86e9d6c4cb143b6a8e23fd5d8490, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8210468165845274954, guid: d00b86e9d6c4cb143b6a8e23fd5d8490, type: 3}
-      propertyPath: m_mode
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8210468165845274954, guid: d00b86e9d6c4cb143b6a8e23fd5d8490, type: 3}
       propertyPath: handler

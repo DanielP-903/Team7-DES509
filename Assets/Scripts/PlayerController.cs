@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private GameObject m_camera;
     private const float MouseSensitivity = 0.1f;
     private float xRotation = 0f;
+    private float yRotation = 0f;
     private bool m_moveForward;
     private bool m_moveBackward;
     private bool m_moveLeft;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private readonly float m_inputDelay = 0.1f;
     private readonly float m_inputDelayTalking = 0.5f;
     private float m_inputTimer;
+    private bool m_walkToLock = false;
     private TeaMaker m_teaMakerRef;
     [SerializeField] private Mode m_mode = Mode.Freeroam;
     [SerializeField] private Transform m_lockedTransform;
@@ -86,12 +88,35 @@ public class PlayerController : MonoBehaviour
     {
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
         HandleInput();
+
+        if (m_walkToLock)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, m_lockedTransform.rotation, Time.deltaTime * 4.0f);
+            transform.position = Vector3.Lerp(transform.position, m_lockedTransform.position, Time.deltaTime * 3.0f);
+            float distance = Vector3.Distance(transform.position, m_lockedTransform.position);
+            if (distance < 0.1f)
+            {
+                dialogueBox.SetActive(true);
+            }
+
+            if (distance < 0.01f)
+            {
+                m_mode = Mode.Talking;
+                m_walkToLock = false;
+            }
+        }
+
+        if (m_mode == Mode.Talking)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, m_lockedTransform.rotation, Time.deltaTime * 4.0f);
+            //m_camera.transform.rotation = Quaternion.Lerp(m_camera.transform.rotation, m_lockedTransform.rotation, Time.deltaTime * 4.0f);
+        }
     }
 
     // Handle player's inputs
     private void HandleInput()
     {
-        if (m_mode == Mode.Freeroam)
+        if (m_mode == Mode.Freeroam && !m_walkToLock)
         {
             if (m_moveForward || m_moveBackward)
             {
@@ -104,6 +129,7 @@ public class PlayerController : MonoBehaviour
                 m_characterController.Move(move);
             }
         }
+
         HandleMouseInput();
     }
 
@@ -133,11 +159,11 @@ public class PlayerController : MonoBehaviour
                 if (hit.transform.CompareTag("Character"))
                 {
                     //hit.transform.gameObject.GetComponent<Character>().m_characterName; // ACTIVATE CHARACTER DIALOGUE
-                    transform.position = m_lockedTransform.position;
-                    transform.rotation = m_lockedTransform.rotation;
-                    m_mode = Mode.Talking;
-                    dialogueBox.SetActive(true);
-                   // handler.SetConversation(handler.dialogue.GetConversation(handler.currentConversationIndex).Name);
+                    //transform.position = m_lockedTransform.position;
+                    //transform.rotation = m_lockedTransform.rotation;
+                    //dialogueBox.SetActive(true);
+                    m_walkToLock = true;
+
                     m_dialogueFinished = false;
                     SetText();
                 }
@@ -158,13 +184,13 @@ public class PlayerController : MonoBehaviour
                 // dialogueBox.SetActive(false);
 
                 //Go to next conversation (via index)
-                int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
+                //int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
 
-                handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex+1).Name);
+                //handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex+1).Name);
 
                 // FIRST MESSAGE IS NOT READ
-                dialogueBox.SetActive(false);
-                m_dialogueFinished = false;
+                //dialogueBox.SetActive(false);
+                //m_dialogueFinished = false;
                 SetText();
                 return;
             }
@@ -173,6 +199,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (handler.currentMessageInfo.NextID == -1)
                 {
+                    int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
+                    handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex + 1).Name);
                     m_dialogueFinished = true;
                     dialogueBox.SetActive(false);
                     m_mode = Mode.Freeroam;
@@ -282,11 +310,9 @@ public class PlayerController : MonoBehaviour
         float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
 
         xRotation -= mouseY;
+        yRotation += mouseX;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-        transform.Rotate(Vector3.up * mouseX);
 
 
         switch (m_mode)
@@ -294,22 +320,30 @@ public class PlayerController : MonoBehaviour
             case Mode.Freeroam:
                 {
                     FreeroamActions();
+                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
                     break;
                 }
             case Mode.Talking:
                 {
                     TalkingActions();
+                    xRotation = Mathf.Clamp(xRotation, -15f, 15f);
+                    //yRotation = Mathf.Clamp(yRotation, -60f, 60f);
+                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                    //transform.localRotation = Quaternion.Euler(0f, yRotation + 90.0f, 0f);
                     break;
                 }
             case Mode.TeaMaking:
                 {
                     TeaMakingActions();
+                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
                     break;
                 }
             default:
                 break;
         }
 
+
+        transform.Rotate(Vector3.up * mouseX);
     }
 
 
