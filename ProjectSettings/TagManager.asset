@@ -6,11 +6,11 @@ TagManager:
   tags:
   - RecipeList
   - Ingredient
-  - Customer
   - HoldLocation
   - Debug
   - Machine
   - GameManager
+  - Character
   layers:
   - Default
   - TransparentFX

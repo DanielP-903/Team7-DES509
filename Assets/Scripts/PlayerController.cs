@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private float m_inputTimer;
     private TeaMaker m_teaMakerRef;
     [SerializeField] private Mode m_mode = Mode.Freeroam;
-    public int lastFrame = 0;
+    [SerializeField] private Transform m_lockedTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         handler.SetConversation("Ordering");
         SetText();
-        dialogueBox.SetActive(true);
+        dialogueBox.SetActive(false);
     }
 
     // Update is called once per frame
@@ -128,6 +128,69 @@ public class PlayerController : MonoBehaviour
         if (mouse.leftButton.IsActuated() && m_inputTimer <= 0)
         {
             m_inputTimer = m_inputDelay;
+            if (Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f))
+            {
+                if (hit.transform.CompareTag("Character"))
+                {
+                    //hit.transform.gameObject.GetComponent<Character>().m_characterName; // ACTIVATE CHARACTER DIALOGUE
+                    transform.position = m_lockedTransform.position;
+                    transform.rotation = m_lockedTransform.rotation;
+                    m_mode = Mode.Talking;
+                    dialogueBox.SetActive(true);
+                   // handler.SetConversation(handler.dialogue.GetConversation(handler.currentConversationIndex).Name);
+                    m_dialogueFinished = false;
+                    SetText();
+                }
+            }
+        }
+    }
+
+    private void TalkingActions()
+    {
+        var mouse = Mouse.current;
+        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0)
+        {
+            m_inputTimer = m_inputDelayTalking;
+            // GO TO NEXT DIALOGUE OPTION
+            // Don't do anything if the conversation is over
+            if (m_dialogueFinished)
+            {
+                // dialogueBox.SetActive(false);
+
+                //Go to next conversation (via index)
+                int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
+
+                handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex+1).Name);
+
+                // FIRST MESSAGE IS NOT READ
+                dialogueBox.SetActive(false);
+                m_dialogueFinished = false;
+                SetText();
+                return;
+            }
+            // Check if the space key is pressed and the current message is not a choice
+            if (handler.currentMessageInfo.Type == QD_NodeType.Message)
+            {
+                if (handler.currentMessageInfo.NextID == -1)
+                {
+                    m_dialogueFinished = true;
+                    dialogueBox.SetActive(false);
+                    m_mode = Mode.Freeroam;
+                }
+                else
+                {
+                    Next();
+                }
+            }
+        }
+    }
+
+    private void TeaMakingActions()
+    {
+        var mouse = Mouse.current;
+        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0)
+        {
+            m_inputTimer = m_inputDelay;
             Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f);
 
             if (m_heldObject != null)
@@ -169,54 +232,6 @@ public class PlayerController : MonoBehaviour
                 m_teaMakerRef.RemoveIngredient();
             }
         }
-    }
-
-    private void TalkingActions()
-    {
-        if (lastFrame != handler.currentMessageInfo.ID)
-        {
-            Debug.Log("GOTCHA!!");
-        }
-        Debug.Log("Before: " + handler.currentMessageInfo.ID);
-        var mouse = Mouse.current;
-        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0)
-        {
-            m_inputTimer = m_inputDelayTalking;
-            // GO TO NEXT DIALOGUE OPTION
-            // Don't do anything if the conversation is over
-            if (m_dialogueFinished)
-            {
-                // dialogueBox.SetActive(false);
-
-                //Go to next conversation (via index)
-                int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
-
-                handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex+1).Name);
-                //handler.NextMessage
-
-                // FIRST MESSAGE IS NOT READ
-                m_dialogueFinished = false;
-                SetText();
-               // Next();
-                return;
-            }
-            // Check if the space key is pressed and the current message is not a choice
-            if (handler.currentMessageInfo.Type == QD_NodeType.Message)
-            {
-                if (handler.currentMessageInfo.NextID == -1)
-                {
-                    m_dialogueFinished = true;
-                }
-                else
-                {
-                    //QD_Message msg = handler.dialogue.GetMessage(handler.GetNextID(handler.currentMessageInfo.ID));
-                    //handler.currentMessageInfo = new QD_MessageInfo(msg.ID, msg.NextMessage, QD_NodeType.Message);
-                    Next();
-                }
-            }
-        }
-        Debug.Log("After: " + handler.currentMessageInfo.ID);
-        lastFrame = handler.currentMessageInfo.ID;
     }
 
     // Taken from Quantum Dialogue START -------------------
@@ -288,6 +303,7 @@ public class PlayerController : MonoBehaviour
                 }
             case Mode.TeaMaking:
                 {
+                    TeaMakingActions();
                     break;
                 }
             default:
