@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &715892237909171793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715892237909171799}
+  - component: {fileID: 715892237909171798}
+  m_Layer: 0
+  m_Name: Recipe List
+  m_TagString: RecipeList
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &715892237909171799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715892237909171793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.541053, y: 8.617645, z: -1.1731884}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715892237909171798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715892237909171793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ff00138248e044b8df48cae6c38b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_recipes:
+  - m_name: Apples to Oranges
+    m_ingredients:
+      m_keys:
+      - {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
+      - {fileID: 8649589245914461875, guid: bdc0b686829b3184a9e8074210aefe4f, type: 3}
+      - {fileID: 8659158908394372723, guid: 6319d60732f4b774c846c698a3200e59, type: 3}
+      m_values: 010000000200000001000000
+  - m_name: Lavender Lullaby
+    m_ingredients:
+      m_keys:
+      - {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
+      - {fileID: 8649589245914461875, guid: bdc0b686829b3184a9e8074210aefe4f, type: 3}
+      m_values: 0200000001000000
+  - m_name: Lavender Mint
+    m_ingredients:
+      m_keys:
+      - {fileID: 1316446528056111833, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      - {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
+      m_values: 0100000001000000
+  - m_name: Raspberry Lemonade
+    m_ingredients:
+      m_keys:
+      - {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
+      - {fileID: 8649589245914461875, guid: bdc0b686829b3184a9e8074210aefe4f, type: 3}
+      - {fileID: 8659158908394372723, guid: 6319d60732f4b774c846c698a3200e59, type: 3}
+      - {fileID: 3653523247350044869, guid: d5d42a92555b8ab4c86855fee71b7b5c, type: 3}
+      m_values: 01000000010000000100000001000000
+  - m_name: Sing Your Song
+    m_ingredients:
+      m_keys:
+      - {fileID: 4262978996960852449, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
+      - {fileID: 1316446528056111833, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      - {fileID: 3653523247350044869, guid: d5d42a92555b8ab4c86855fee71b7b5c, type: 3}
+      m_values: 010000000100000002000000
