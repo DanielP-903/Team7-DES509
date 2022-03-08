@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum IngredientType
 {
-    Basic, Peppermint, Lemon, Rooibos  // Needs to be updated
+    Peppermint, FruitSlice, Rosehip, Ginger, Blossoms, Licorice  // Needs to be updated
 }
 
 enum SpecialProperties
