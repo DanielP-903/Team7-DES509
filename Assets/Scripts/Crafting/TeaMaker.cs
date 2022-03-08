@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using TMPro;
 using System;
-using System.Runtime.Serialization;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 [Serializable]
 public class CustomIntDictionary : SerializableDictionary<UnityEngine.Object, int> { }
@@ -82,7 +79,14 @@ public class TeaMaker : MonoBehaviour
             }
             else
             {
-                m_container.Remove(toBeRemoved);
+                if (m_container[toBeRemoved] > 0)
+                {
+                    m_container[toBeRemoved]--;
+                }
+                else
+                {
+                    m_container.Remove(toBeRemoved);
+                }
             }
             SearchForNewRecipes();
         }
