@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5688606901432396813
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f034cba68ab55e046ae1445a42f18c0e, type: 3}
+  m_Name: IndirectLightingController
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  indirectDiffuseLightingMultiplier:
+    m_OverrideState: 1
+    m_Value: 13.13
+    min: 0
+  indirectDiffuseLightingLayers:
+    m_OverrideState: 0
+    m_Value: 255
+  reflectionLightingMultiplier:
+    m_OverrideState: 1
+    m_Value: 3.47
+    min: 0
+  reflectionLightingLayers:
+    m_OverrideState: 0
+    m_Value: 255
+  reflectionProbeIntensityMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
 --- !u!114 &-3969488579639410846
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -239,6 +271,40 @@ MonoBehaviour:
   rectLightShadow:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &-993610580854663550
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5cd33cffa7c604db16593924b30097, type: 3}
+  m_Name: CustomOutlinePP
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0
+    min: 0
+    max: 1
+  Thickness:
+    m_OverrideState: 1
+    m_Value: 2
+  Edge:
+    m_OverrideState: 1
+    m_Value: 0.1
+  Transition:
+    m_OverrideState: 1
+    m_Value: 0.1
+  Colour:
+    m_OverrideState: 1
+    m_Value: {r: 0.054957304, g: 0.8962264, b: 0.58781993, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +330,7 @@ MonoBehaviour:
   - {fileID: -3969488579639410846}
   - {fileID: 747098994415714109}
   - {fileID: 4566301752631259820}
+  - {fileID: -5688606901432396813}
 --- !u!114 &747098994415714109
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -311,9 +378,6 @@ MonoBehaviour:
   skyType:
     m_OverrideState: 1
     m_Value: 1
-  cloudType:
-    m_OverrideState: 0
-    m_Value: 0
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 1
@@ -504,6 +568,26 @@ MonoBehaviour:
     max: 1
   directionalLightsOnly:
     m_OverrideState: 0
+    m_Value: 0
+  filter:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &2912404195462515189
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8ce239f822ee140bf2d420d83b4177, type: 3}
+  m_Name: CustomCelPP
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  intensity:
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &4566301752631259820
 MonoBehaviour:
@@ -775,6 +859,38 @@ MonoBehaviour:
     m_Value: 30
   proceduralSoftness:
     m_OverrideState: 1
+    m_Value: 1
+    min: 0
+--- !u!114 &7219705446065008990
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f034cba68ab55e046ae1445a42f18c0e, type: 3}
+  m_Name: IndirectLightingController
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  indirectDiffuseLightingMultiplier:
+    m_OverrideState: 1
+    m_Value: 11
+    min: 0
+  indirectDiffuseLightingLayers:
+    m_OverrideState: 0
+    m_Value: 255
+  reflectionLightingMultiplier:
+    m_OverrideState: 1
+    m_Value: 1.2
+    min: 0
+  reflectionLightingLayers:
+    m_OverrideState: 0
+    m_Value: 255
+  reflectionProbeIntensityMultiplier:
+    m_OverrideState: 0
     m_Value: 1
     min: 0
 --- !u!114 &8049981929359091865
