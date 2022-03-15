@@ -139,6 +139,10 @@ public class TeaMaker : MonoBehaviour
                         listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(listTheRecipe.GetComponent<RectTransform>().rect.position.x,- m_discoveredRecipesNo*12);
                         listTheRecipe.SetActive(true);
                         listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = recipe.m_name;
+                        foreach (var item in recipe.m_ingredients)
+                        {
+                            listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text +=  "\n" + item.Key.name + " x " + item.Value;
+                        }
                         Debug.Log("Recipe Discovered: " + recipe.m_name);
                     }
                 }
