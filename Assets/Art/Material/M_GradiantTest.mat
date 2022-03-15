@@ -42,6 +42,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 9f35b1a7874ccfb4f8daf612e52271d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a0835977b62f444fab271683cc99b1d9_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 6b5685075086c9747b6239ac34507b87, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Triplanar_90689b51957840338e431a2427dcc63d_Texture_1:
         m_Texture: {fileID: 2800000, guid: cdb74cedb8ae8da4f94e49f7458de436, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -63,8 +67,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_8f2eb0ca1229441e850e5f1719995144: 0
+    - Vector1_068d582cedb04e39b1da473874b9749a: 0.5
     - Vector1_2589da5919d0478abd47c6455ab6eebe: 0.051
-    - Vector1_5bf88f157c4b4d3caddc0d00e5c035d4: 0.2
+    - Vector1_5bf88f157c4b4d3caddc0d00e5c035d4: 1
     - Vector1_d508fe049b2c46cdac33a36d4b7d523b: 0.05
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
