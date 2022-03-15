@@ -1,3 +1,4 @@
+using System;
 using QuantumTek.QuantumDialogue;
 using TMPro;
 using UnityEngine;
@@ -220,10 +221,16 @@ public class PlayerController : MonoBehaviour
         {
             m_inputTimer = m_inputDelay;
             Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f);
+            if (hit.transform != null && hit.transform.CompareTag("BrewTea"))
+            {
+                // Brew tea
+                m_teaMakerRef.BrewTea();
+                return;;
+            }
 
             if (m_heldObject != null)
             {
-                if (hit.transform.CompareTag("Machine"))
+                if (hit.transform != null && hit.transform.CompareTag("Machine"))
                 {
                     // Add held object to tea machine
                     m_teaMakerRef.AddIngredient(FindIngredient());
@@ -247,6 +254,16 @@ public class PlayerController : MonoBehaviour
         if (mouse.rightButton.IsActuated() && m_inputTimer <= 0)
         {
             m_inputTimer = m_inputDelay;
+            Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f);
+            if (hit.transform != null && hit.transform.gameObject.GetComponent<Tea>())
+            {
+                // Scrap tea
+                m_teaMakerRef.m_teaModel.SetActive(false);
+                m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
+                //m_teaMakerRef.m_teaModel.GetComponent<Tea>().SetColour(new Color(0, 0, 0, .5f));
+                //m_teaMakerRef.m_teaModel.GetComponent<Tea>().SetColour(new Color(0, 0, 0, .5f));
+                return;
+            }
             if (m_heldObject != null)
             {
                 // Discard held object
@@ -313,8 +330,6 @@ public class PlayerController : MonoBehaviour
         yRotation += mouseX;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-
-
         switch (m_mode)
         {
             case Mode.Freeroam:
@@ -341,8 +356,6 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
-
-
         transform.Rotate(Vector3.up * mouseX);
     }
 

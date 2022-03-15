@@ -15,9 +15,10 @@ public class TeaMaker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_Text;
     [SerializeField] private TextMeshProUGUI m_recipeText;
     [SerializeField] private GameObject m_recipeBase;
+    [SerializeField] public GameObject m_teaModel;
     private int m_discoveredRecipesNo = 0;
     private string m_currentlyCalculatedRecipe;
-
+    
     private Recipe m_recipeListRef;
     private int m_total = 0;
     private readonly Stack<UnityEngine.Object> AddedOrder = new Stack<UnityEngine.Object>();
@@ -51,6 +52,35 @@ public class TeaMaker : MonoBehaviour
             }
         }
     }
+
+    public void BrewTea()
+    {
+        m_teaModel.SetActive(true);
+        if (m_currentlyCalculatedRecipe != null)
+        {
+            m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe + " tea";
+        }
+
+        m_teaModel.GetComponent<Tea>().SetColour(Color.blue); // Default to magenta for now...
+        //m_teaModel.GetComponent<Tea>().m_colour = new Color(0,0,0,.5f);
+        m_container.Clear();
+        AddedOrder.Clear();
+        SearchForNewRecipes();
+    }
+
+    public void GiveTea()
+    {
+        if (m_teaModel.activeInHierarchy)
+        {
+            // Slide tea to character
+            // Do dialogue response
+            // 
+            m_teaModel.SetActive(false);
+            m_teaModel.GetComponent<Tea>().m_name = String.Empty;
+
+        }
+    }
+
 
     public void AddIngredient(UnityEngine.Object ingredient)
     {
@@ -136,7 +166,7 @@ public class TeaMaker : MonoBehaviour
                         m_discoveredRecipes[recipe.m_name] = true;
                         m_discoveredRecipesNo++;
                         GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
-                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(listTheRecipe.GetComponent<RectTransform>().rect.position.x,- m_discoveredRecipesNo*12);
+                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(- m_discoveredRecipesNo*50, listTheRecipe.GetComponent<RectTransform>().rect.position.y);
                         listTheRecipe.SetActive(true);
                         listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = recipe.m_name;
                         foreach (var item in recipe.m_ingredients)
@@ -151,8 +181,6 @@ public class TeaMaker : MonoBehaviour
                     Debug.LogError("OOPS! THIS RECIPE DOESN'T EXIST IN m_discoveredRecipes!");
                 }
             }
-            //Debug.Log("occurs: " + occurs);
-            //Debug.Log("recipe.m_ingredients.Count: " + recipe.m_ingredients.Count);
         }
     }
 }
