@@ -14,7 +14,8 @@ public class TeaMaker : MonoBehaviour
     [SerializeField] private int m_capacity = 4;
     [SerializeField] private TextMeshProUGUI m_Text;
     [SerializeField] private TextMeshProUGUI m_recipeText;
-
+    [SerializeField] private GameObject m_recipeBase;
+    private int m_discoveredRecipesNo = 0;
     private string m_currentlyCalculatedRecipe;
 
     private Recipe m_recipeListRef;
@@ -133,6 +134,11 @@ public class TeaMaker : MonoBehaviour
                     if (m_discoveredRecipes[recipe.m_name] == false)
                     {
                         m_discoveredRecipes[recipe.m_name] = true;
+                        m_discoveredRecipesNo++;
+                        GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
+                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(listTheRecipe.GetComponent<RectTransform>().rect.position.x,- m_discoveredRecipesNo*12);
+                        listTheRecipe.SetActive(true);
+                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = recipe.m_name;
                         Debug.Log("Recipe Discovered: " + recipe.m_name);
                     }
                 }
