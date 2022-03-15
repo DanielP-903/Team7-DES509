@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: 508415acc1ef7254683a4ee3aeee7d8c
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 6206517947901237340
+    second: Cube.056|Cube.056Action
   externalObjects:
   - first:
       type: UnityEngine:Material
