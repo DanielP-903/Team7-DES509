@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Emissive
+  m_Name: M_WallScroll
   m_Shader: {fileID: -6465566751694194690, guid: b38b0fd6145b0db4d91d6249044a9764, type: 3}
   m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
@@ -39,7 +39,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_a252364ca8f8471b80ba6d6fc4bd656b:
-        m_Texture: {fileID: 2800000, guid: 9f35b1a7874ccfb4f8daf612e52271d2, type: 3}
+        m_Texture: {fileID: 2800000, guid: f02213e0a038dde4f8e4943c1ec35182, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_a0835977b62f444fab271683cc99b1d9_Texture_1:
@@ -69,11 +69,11 @@ Material:
     m_Floats:
     - Boolean_05ff23b909d8404fa309a44a2d4d6632: 0
     - Boolean_8f2eb0ca1229441e850e5f1719995144: 0
-    - Boolean_9506ad9686f34be1a8423b54055d2524: 1
+    - Boolean_9506ad9686f34be1a8423b54055d2524: 0
     - Vector1_068d582cedb04e39b1da473874b9749a: 0.5
     - Vector1_2589da5919d0478abd47c6455ab6eebe: 0.051
     - Vector1_5bf88f157c4b4d3caddc0d00e5c035d4: 1
-    - Vector1_a5ffe21747c04bfbb6a330f191614d28: 10
+    - Vector1_a5ffe21747c04bfbb6a330f191614d28: 4
     - Vector1_d508fe049b2c46cdac33a36d4b7d523b: 0.05
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
