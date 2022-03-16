@@ -39,8 +39,12 @@ public class PlayerController : MonoBehaviour
     private float m_inputTimer;
     private bool m_walkToLock = false;
     private TeaMaker m_teaMakerRef;
-    private Transform m_lockedTalkingTransform;
-    private Transform m_lockedTeaMakingTransform;
+
+    private Vector3 m_lockTalkPos;
+    private Quaternion m_lockTalkRot;
+    private Vector3 m_lockTeaMakePos;
+    private Quaternion m_lockTeaMakeRot;
+
     Vector3 offset = new Vector3(0, -20, 0);
 
     int a = 0;
@@ -57,38 +61,46 @@ public class PlayerController : MonoBehaviour
         messageTextbox = dialogueBox.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
 
      
-       if (GameObject.FindGameObjectWithTag("LockTalking"))
-        {
-            m_lockedTalkingTransform = GameObject.FindGameObjectWithTag("LockTalking").transform;
-        }
-        else
-        {
-            Debug.LogError("ERROR: No talking lock position with tag 'LockTalking' is in the scene!");
-            Debug.DebugBreak();
-        }
+       //if (GameObject.FindGameObjectWithTag("LockTalking"))
+       // {
+       //     m_lockedTalkingTransform = GameObject.FindGameObjectWithTag("LockTalking").transform;
+       // }
+       // else
+       // {
+       //     Debug.LogError("ERROR: No talking lock position with tag 'LockTalking' is in the scene!");
+       //     Debug.DebugBreak();
+       // }
 
-        if (GameObject.FindGameObjectWithTag("LockTeaMaking"))
-        {
-            m_lockedTeaMakingTransform = GameObject.FindGameObjectWithTag("LockTeaMaking").transform;
-        }
-        else
-        {
-            Debug.LogError("ERROR: No tea making lock position with tag 'LockTeaMaking' is in the scene!");
-            Debug.DebugBreak();
-        }
+       // if (GameObject.FindGameObjectWithTag("LockTeaMaking"))
+       // {
+       //     m_lockedTeaMakingTransform = GameObject.FindGameObjectWithTag("LockTeaMaking").transform;
+       // }
+       // else
+       // {
+       //     Debug.LogError("ERROR: No tea making lock position with tag 'LockTeaMaking' is in the scene!");
+       //     Debug.DebugBreak();
+       // }
+
+        //Vector3 offset = new Vector3(-2, 0, 0);
+        //float defaultY = transform.position.y;
+        //m_lockedTalkingTransform = new GameObject().transform;
+        //m_lockedTalkingTransform.position = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
+        //m_lockedTalkingTransform.position = new Vector3(m_lockedTalkingTransform.position.x, transform.position.y, m_lockedTalkingTransform.position.z);
+        //m_lockedTalkingTransform.rotation = transform.rotation;
+        //m_lockedTeaMakingTransform = new GameObject().transform;
+        //m_lockedTeaMakingTransform.position = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
+        //m_lockedTeaMakingTransform.position = new Vector3(m_lockedTeaMakingTransform.position.x, transform.position.y, m_lockedTeaMakingTransform.position.z);
+        //m_lockedTeaMakingTransform.rotation = transform.rotation;
 
         Vector3 offset = new Vector3(-2, 0, 0);
         float defaultY = transform.position.y;
-        m_lockedTalkingTransform = new GameObject().transform;
-        m_lockedTalkingTransform.position = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
-        m_lockedTalkingTransform.position = new Vector3(m_lockedTalkingTransform.position.x, transform.position.y, m_lockedTalkingTransform.position.z);
-        m_lockedTalkingTransform.rotation = transform.rotation;
+        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
+        m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
+        m_lockTalkRot = transform.rotation;
 
-        m_lockedTeaMakingTransform = new GameObject().transform;
-        m_lockedTeaMakingTransform.position = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
-        m_lockedTeaMakingTransform.position = new Vector3(m_lockedTeaMakingTransform.position.x, transform.position.y, m_lockedTeaMakingTransform.position.z);
-        m_lockedTeaMakingTransform.rotation = transform.rotation;
-
+        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
+        m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
+        m_lockTeaMakeRot = transform.rotation;
 
         if (GameObject.FindGameObjectWithTag("GameManager"))
         {
@@ -128,23 +140,17 @@ public class PlayerController : MonoBehaviour
         var color = Color.cyan;
         color.a = 0.5f;
         Gizmos.color = color;
-        if (m_lockedTalkingTransform == null) {
-            m_lockedTalkingTransform = new GameObject().transform;
- 
-        }
-        m_lockedTalkingTransform.position = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
-        m_lockedTalkingTransform.position = new Vector3(m_lockedTalkingTransform.position.x, transform.position.y, m_lockedTalkingTransform.position.z);
-        m_lockedTalkingTransform.rotation = transform.rotation;
-        Gizmos.DrawSphere(m_lockedTalkingTransform.transform.position, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
+        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
+        m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
+        m_lockTalkRot = transform.rotation;
 
-        if (m_lockedTeaMakingTransform == null) {
-            m_lockedTeaMakingTransform = new GameObject().transform;
-        }
-        m_lockedTeaMakingTransform.position = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
-        m_lockedTeaMakingTransform.position = new Vector3(m_lockedTeaMakingTransform.position.x, transform.position.y, m_lockedTeaMakingTransform.position.z);
-        m_lockedTeaMakingTransform.rotation = transform.rotation;
+        Gizmos.DrawSphere(m_lockTalkPos, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
 
-        Gizmos.DrawSphere(m_lockedTeaMakingTransform.transform.position, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
+        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
+        m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
+        m_lockTeaMakeRot = transform.rotation;
+
+        Gizmos.DrawSphere(m_lockTeaMakePos, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
     }
 
     private void TalkingStart()
@@ -162,7 +168,8 @@ public class PlayerController : MonoBehaviour
 
         if (m_walkToLock)
         {
-            Transform lockingTransform = m_lockedTalkingTransform; // Talking by default
+            Vector3 offsetPos = m_lockTalkPos; // Talking by default
+            Quaternion offsetRot = m_lockTalkRot; // Talking by default
             //lockingTransform = m_mode == Mode.Freeroam ? m_lockedTalkingTransform : m_lockedTeaMakingTransform;
             switch (m_goToMode)
             {
@@ -171,18 +178,20 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Uh oh shouldn't be here!");
                     break;
                 case Mode.Talking:
-                    lockingTransform = m_lockedTalkingTransform;
+                    offsetPos = m_lockTalkPos;
+                    offsetRot = m_lockTalkRot;
                     break;
                 case Mode.TeaMaking:
-                    lockingTransform = m_lockedTeaMakingTransform;
+                    offsetPos = m_lockTeaMakePos;
+                    offsetRot = m_lockTeaMakeRot;
                     break;
                 default:
                     break;
             }
-            transform.rotation = Quaternion.Lerp(transform.rotation, lockingTransform.rotation, Time.deltaTime * 4.0f);
-            transform.position = Vector3.Lerp(transform.position, lockingTransform.position, Time.deltaTime * 3.0f);
-            float distance = Vector3.Distance(transform.position, lockingTransform.position);
-            if (lockingTransform == m_lockedTalkingTransform)
+            transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 4.0f);
+            transform.position = Vector3.Lerp(transform.position, offsetPos, Time.deltaTime * 3.0f);
+            float distance = Vector3.Distance(transform.position, offsetPos);
+            if (m_mode == Mode.Talking)
             {
                 if (distance < 0.1f)
                 {
@@ -190,18 +199,18 @@ public class PlayerController : MonoBehaviour
                 }
                 if (distance < 0.01f)
                 {
-                    transform.rotation = lockingTransform.rotation;
-                    m_camera.transform.localRotation = lockingTransform.rotation;
+                    transform.rotation = offsetRot;
+                    m_camera.transform.localRotation = offsetRot;
                     m_mode = Mode.Talking;
                     m_walkToLock = false;
                 }
             }
-            else
+            else if (m_mode == Mode.TeaMaking)
             {
                 if (distance < 0.01f)
                 {
-                    transform.rotation = lockingTransform.rotation;
-                    m_camera.transform.localRotation = lockingTransform.rotation;
+                    transform.rotation = offsetRot;
+                    m_camera.transform.localRotation = offsetRot;
                     m_mode = Mode.TeaMaking;
                     m_walkToLock = false;
                 }
@@ -457,8 +466,6 @@ public class PlayerController : MonoBehaviour
             m_dialogueFinished = true;
     }
     // Taken from Quantum Dialogue END -------------------
-
-
 
     // Input Actions
     // W
