@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: 6206517947901237340
     second: Cube.056|Cube.056Action
+  - first:
+      74: 1827226128182048838
+    second: Take 001
   externalObjects:
   - first:
       type: UnityEngine:Material
