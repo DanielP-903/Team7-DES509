@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c1742cd5ef92347930b4c7f8ad2d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: 
+  m_name: RecipeIngredients tea
 --- !u!65 &5375009207618041445
 BoxCollider:
   m_ObjectHideFlags: 0

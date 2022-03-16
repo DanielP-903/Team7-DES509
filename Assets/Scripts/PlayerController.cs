@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
             case Mode.TeaMaking:
                 {
                     TeaMakingActions();
-                    xRotation = Mathf.Clamp(xRotation, -15f, 15f);
+                    //xRotation = Mathf.Clamp(xRotation, -15f, 15f);
                     //yRotation = Mathf.Clamp(yRotation, -60f, 60f);
                     m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
                     //transform.localRotation = Quaternion.Euler(0f, yRotation + 90.0f, 0f);
