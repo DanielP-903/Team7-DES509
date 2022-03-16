@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc788fe28a1947c5906bf24c0472406, type: 3}
+  m_Name: Shylo_2_ReputationDialogue
+  m_EditorClassIdentifier: 
+  Conversations:
+  - ID: 1
+    Name: Ordering
+    FirstMessage: 4
+  - ID: 2
+    Name: Served_Neutral
+    FirstMessage: 10
+  - ID: 3
+    Name: Served_Happy
+    FirstMessage: 13
+  Speakers:
+  - ID: 0
+    Name: Shylo
+    Icon: {fileID: 0}
+  Messages:
+  - ID: 4
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: -1
+    NextMessage: 5
+    MessageText: Hey again!
+    Clip: {fileID: 0}
+  - ID: 5
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 4
+    NextMessage: 6
+    MessageText: Just something simple, you know me. Heheh.
+    Clip: {fileID: 0}
+  - ID: 6
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 5
+    NextMessage: 9
+    MessageText: "At your own pace of course, I uhm you know still wouldn\u2019t
+      want to put you out. Even if I am ehh, well I guess a regular now?"
+    Clip: {fileID: 0}
+  - ID: 9
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 6
+    NextMessage: -1
+    MessageText: "Which I\u2019m proud to be! I-If you\u2019d have me of course."
+    Clip: {fileID: 0}
+  - ID: 10
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: -1
+    NextMessage: 11
+    MessageText: "I uhm, w-woah you\u2019re impressive. Y-You know you uhm, you don\u2019t
+      ehm, you d-don\u2019t need to put too much effort into me."
+    Clip: {fileID: 0}
+  - ID: 11
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 10
+    NextMessage: 12
+    MessageText: "This was l-lovely though, I uhm. I just really w-wouldn\u2019t
+      want you to feel put out, y-you\u2019ve been kind."
+    Clip: {fileID: 0}
+  - ID: 12
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 11
+    NextMessage: -1
+    MessageText: Thanks.
+    Clip: {fileID: 0}
+  - ID: 13
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: -1
+    NextMessage: 14
+    MessageText: "Mmmh, wow. I don\u2019t know what I\u2019d do without these teas."
+    Clip: {fileID: 0}
+  - ID: 14
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 13
+    NextMessage: 15
+    MessageText: "I-I know this is what you do, what you\u2019re here for but I really
+      appreciate your existence.\r\n"
+    Clip: {fileID: 0}
+  - ID: 15
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 14
+    NextMessage: 16
+    MessageText: "I h-hope this isn\u2019t uhm, you know overstepping a boundary
+      b-but."
+    Clip: {fileID: 0}
+  - ID: 16
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 15
+    NextMessage: 17
+    MessageText: "I consider you a friend now. You\u2019re quiet, sure b-but I relate
+      to that. It\u2019s comforting, these drinks are comforting. I uhm, I really
+      needed a place like this so you know."
+    Clip: {fileID: 0}
+  - ID: 17
+    Speaker: 0
+    SpeakerName: Shylo
+    PreviousMessage: 16
+    NextMessage: -1
+    MessageText: "I guess what I\u2019m trying to say is uhm, thank you."
+    Clip: {fileID: 0}
+  Choices: []
