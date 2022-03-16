@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     private TeaMaker m_teaMakerRef;
     private Transform m_lockedTalkingTransform;
     private Transform m_lockedTeaMakingTransform;
+    Vector3 offset = new Vector3(0, -20, 0);
+
+    int a = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +77,19 @@ public class PlayerController : MonoBehaviour
             Debug.DebugBreak();
         }
 
+        Vector3 offset = new Vector3(-2, 0, 0);
+        float defaultY = transform.position.y;
+        m_lockedTalkingTransform = new GameObject().transform;
+        m_lockedTalkingTransform.position = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
+        m_lockedTalkingTransform.position = new Vector3(m_lockedTalkingTransform.position.x, transform.position.y, m_lockedTalkingTransform.position.z);
+        m_lockedTalkingTransform.rotation = transform.rotation;
+
+        m_lockedTeaMakingTransform = new GameObject().transform;
+        m_lockedTeaMakingTransform.position = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
+        m_lockedTeaMakingTransform.position = new Vector3(m_lockedTeaMakingTransform.position.x, transform.position.y, m_lockedTeaMakingTransform.position.z);
+        m_lockedTeaMakingTransform.rotation = transform.rotation;
+
+
         if (GameObject.FindGameObjectWithTag("GameManager"))
         {
             m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -106,6 +122,29 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         TalkingStart();
+    }
+    void OnDrawGizmos()
+    {
+        var color = Color.cyan;
+        color.a = 0.5f;
+        Gizmos.color = color;
+        if (m_lockedTalkingTransform == null) {
+            m_lockedTalkingTransform = new GameObject().transform;
+ 
+        }
+        m_lockedTalkingTransform.position = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
+        m_lockedTalkingTransform.position = new Vector3(m_lockedTalkingTransform.position.x, transform.position.y, m_lockedTalkingTransform.position.z);
+        m_lockedTalkingTransform.rotation = transform.rotation;
+        Gizmos.DrawSphere(m_lockedTalkingTransform.transform.position, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
+
+        if (m_lockedTeaMakingTransform == null) {
+            m_lockedTeaMakingTransform = new GameObject().transform;
+        }
+        m_lockedTeaMakingTransform.position = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
+        m_lockedTeaMakingTransform.position = new Vector3(m_lockedTeaMakingTransform.position.x, transform.position.y, m_lockedTeaMakingTransform.position.z);
+        m_lockedTeaMakingTransform.rotation = transform.rotation;
+
+        Gizmos.DrawSphere(m_lockedTeaMakingTransform.transform.position, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
     }
 
     private void TalkingStart()
