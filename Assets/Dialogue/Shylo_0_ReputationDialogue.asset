@@ -12,7 +12,117 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc788fe28a1947c5906bf24c0472406, type: 3}
   m_Name: Shylo_0_ReputationDialogue
   m_EditorClassIdentifier: 
-  Conversations: []
-  Speakers: []
-  Messages: []
+  Conversations:
+  - ID: 0
+    Name: Ordering
+    FirstMessage: 4
+  - ID: 2
+    Name: Served_Neutral
+    FirstMessage: 11
+  - ID: 3
+    Name: Served_Happy
+    FirstMessage: 15
+  Speakers:
+  - ID: 1
+    Name: Shylo
+    Icon: {fileID: 0}
+  Messages:
+  - ID: 4
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: -1
+    NextMessage: 5
+    MessageText: H-Hey again, uhm, ehhm, y'know how... How're you?
+    Clip: {fileID: 0}
+  - ID: 5
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 4
+    NextMessage: 7
+    MessageText: Oh uhm right yeah! Sorry I ehh, I don't want to uhm... Bother you
+      this time. Just something simple, nothing too complex.
+    Clip: {fileID: 0}
+  - ID: 7
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 5
+    NextMessage: 9
+    MessageText: Tea of course, I sh-should've said. N-Not that I think you're stupid!
+      I just, uhm, y'know.
+    Clip: {fileID: 0}
+  - ID: 9
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 7
+    NextMessage: 10
+    MessageText: Yesterday was nice. I just felt guilty you put s-so much work into
+      the t-tea. So many items.
+    Clip: {fileID: 0}
+  - ID: 10
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 9
+    NextMessage: -1
+    MessageText: S-Sorry.
+    Clip: {fileID: 0}
+  - ID: 11
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: -1
+    NextMessage: 12
+    MessageText: Uhm, woah this was lovely.
+    Clip: {fileID: 0}
+  - ID: 12
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 11
+    NextMessage: 14
+    MessageText: Th-Thanks, you must have put uhm, way too much ehm. E-Effort into
+      this
+    Clip: {fileID: 0}
+  - ID: 14
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 12
+    NextMessage: -1
+    MessageText: I-I should go, I don't want to trouble you any further.
+    Clip: {fileID: 0}
+  - ID: 15
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: -1
+    NextMessage: 16
+    MessageText: Mmh, oh my.
+    Clip: {fileID: 0}
+  - ID: 16
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 15
+    NextMessage: 17
+    MessageText: You sure do know how to make a relaxing brew. So calm, no fuss,
+      just simple flavour.
+    Clip: {fileID: 0}
+  - ID: 17
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 16
+    NextMessage: 18
+    MessageText: Oh! Ehhm, I hope my approach wasn't too startling o-or weird you
+      know.
+    Clip: {fileID: 0}
+  - ID: 18
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 17
+    NextMessage: 19
+    MessageText: it's sort of ehm, I guess you could call it my "thing"? It's what
+      I do, my job.
+    Clip: {fileID: 0}
+  - ID: 19
+    Speaker: 1
+    SpeakerName: Shylo
+    PreviousMessage: 18
+    NextMessage: -1
+    MessageText: A-Anyway, thanks again!
+    Clip: {fileID: 0}
   Choices: []

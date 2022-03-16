@@ -134,7 +134,7 @@ MonoBehaviour:
     SpeakerName: Shylo
     PreviousMessage: 32
     NextMessage: 35
-    MessageText: It's sort of... Well I guess you could call it my 'thing'? It's
+    MessageText: It's sort of... Well I guess you could call it my "thing"? It's
       what I do, my job.
     Clip: {fileID: 0}
   - ID: 35
