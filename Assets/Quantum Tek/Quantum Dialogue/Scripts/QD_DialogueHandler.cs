@@ -146,5 +146,19 @@ namespace QuantumTek.QuantumDialogue
             currentMessageInfo = new QD_MessageInfo(id, nextID, type);
             return currentMessageInfo;
         }
+
+        public QD_MessageInfo SetMessage(int messageID = -1)
+        {
+            int nextID = -1;
+            QD_NodeType type = QD_NodeType.Message;
+
+
+            QD_Message m = dialogue.GetMessage(messageID);
+            nextID = m.NextMessage;
+
+            currentMessageInfo = new QD_MessageInfo(messageID, nextID, type);
+            
+            return currentMessageInfo;
+        }
     }
 }

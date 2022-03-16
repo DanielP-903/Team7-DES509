@@ -38,16 +38,15 @@ public class PlayerController : MonoBehaviour
     private readonly float m_inputDelayTalking = 0.5f;
     private float m_inputTimer;
     private bool m_walkToLock = false;
+    private bool m_finishedTalking = false;
     private TeaMaker m_teaMakerRef;
 
     private Vector3 m_lockTalkPos;
     private Quaternion m_lockTalkRot;
     private Vector3 m_lockTeaMakePos;
     private Quaternion m_lockTeaMakeRot;
+    private Recipe m_recipeListRefPlayer;
 
-    Vector3 offset = new Vector3(0, -20, 0);
-
-    int a = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,27 +58,7 @@ public class PlayerController : MonoBehaviour
         dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
         speakerNameTextbox = dialogueBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         messageTextbox = dialogueBox.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-
-     
-       //if (GameObject.FindGameObjectWithTag("LockTalking"))
-       // {
-       //     m_lockedTalkingTransform = GameObject.FindGameObjectWithTag("LockTalking").transform;
-       // }
-       // else
-       // {
-       //     Debug.LogError("ERROR: No talking lock position with tag 'LockTalking' is in the scene!");
-       //     Debug.DebugBreak();
-       // }
-
-       // if (GameObject.FindGameObjectWithTag("LockTeaMaking"))
-       // {
-       //     m_lockedTeaMakingTransform = GameObject.FindGameObjectWithTag("LockTeaMaking").transform;
-       // }
-       // else
-       // {
-       //     Debug.LogError("ERROR: No tea making lock position with tag 'LockTeaMaking' is in the scene!");
-       //     Debug.DebugBreak();
-       // }
+        m_recipeListRefPlayer = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<Recipe>();
 
         //Vector3 offset = new Vector3(-2, 0, 0);
         //float defaultY = transform.position.y;
@@ -92,7 +71,6 @@ public class PlayerController : MonoBehaviour
         //m_lockedTeaMakingTransform.position = new Vector3(m_lockedTeaMakingTransform.position.x, transform.position.y, m_lockedTeaMakingTransform.position.z);
         //m_lockedTeaMakingTransform.rotation = transform.rotation;
 
-        Vector3 offset = new Vector3(-2, 0, 0);
         float defaultY = transform.position.y;
         m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
         m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
@@ -191,7 +169,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 4.0f);
             transform.position = Vector3.Lerp(transform.position, offsetPos, Time.deltaTime * 3.0f);
             float distance = Vector3.Distance(transform.position, offsetPos);
-            if (m_mode == Mode.Talking)
+            if (m_goToMode == Mode.Talking)
             {
                 if (distance < 0.1f)
                 {
@@ -205,7 +183,7 @@ public class PlayerController : MonoBehaviour
                     m_walkToLock = false;
                 }
             }
-            else if (m_mode == Mode.TeaMaking)
+            else if (m_goToMode == Mode.TeaMaking)
             {
                 if (distance < 0.01f)
                 {
@@ -216,6 +194,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        //Debug.Log("Mode: " + m_mode + " , GoTo Mode: " + m_goToMode);
         HandleInput();
     }
 
@@ -304,16 +283,18 @@ public class PlayerController : MonoBehaviour
             m_inputTimer = m_inputDelay;
             if (Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f))
             {
-                if (hit.transform.CompareTag("Character"))
+                if (hit.transform.CompareTag("Character") && m_finishedTalking == false)
                 {
                     // ACTIVATE CHARACTER DIALOGUE
                     m_walkToLock = true;
+                    m_goToMode = Mode.Talking;
                     m_dialogueFinished = false;
+                    handler.SetConversation("Ordering");
                     SetText();
+
                 }
-                if (hit.transform.CompareTag("Machine"))
+                if (hit.transform.CompareTag("Machine") && !GameManager.m_hasBrewedATea && m_finishedTalking == true)
                 {
-                    //m_mode = Mode.TeaMaking;
                     m_goToMode = Mode.TeaMaking;
                     m_walkToLock = true;
                 }
@@ -324,7 +305,7 @@ public class PlayerController : MonoBehaviour
     private void TalkingActions()
     {
         var mouse = Mouse.current;
-        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0)
+        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0 && m_finishedTalking == false)
         {
             m_inputTimer = m_inputDelayTalking;
             // GO TO NEXT DIALOGUE OPTION
@@ -334,21 +315,28 @@ public class PlayerController : MonoBehaviour
                 SetText();
                 return;
             }
-
-            if (handler.currentMessageInfo.Type == QD_NodeType.Message)
+            if (handler.currentMessageInfo.NextID == -1)
             {
-                if (handler.currentMessageInfo.NextID == -1)
+                //int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
+                //handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex).Name);
+                //m_dialogueFinished = true;
+                dialogueBox.SetActive(false);
+                m_mode = Mode.Freeroam;
+                m_goToMode = Mode.Freeroam;
+                if (handler.currentConversation.Name != "Ordering")
                 {
-                    int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
-                    handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex + 1).Name);
-                    m_dialogueFinished = true;
-                    dialogueBox.SetActive(false);
-                    m_mode = Mode.Freeroam;
+                    m_finishedTalking = false;
                 }
                 else
                 {
-                    Next();
+                    m_finishedTalking = true;
+                    GameManager.m_hasBrewedATea = false;
                 }
+                //SetText();
+            }
+            else
+            {
+                Next();
             }
         }
     }
@@ -364,7 +352,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Brew tea
                 m_teaMakerRef.BrewTea();
-                return;;
+                return;
             }
 
             if (m_heldObject != null)
@@ -393,8 +381,28 @@ public class PlayerController : MonoBehaviour
             {
                 // Give Tea
                 m_teaMakerRef.GiveTea();
+                //if (m_teaMakerRef.m_currentlyCalculatedRecipe.m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().m_favouriteRecipe)
+                if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().m_favouriteRecipe + " tea")
+                {
+                    handler.SetConversation("Served_Neutral");
+                    handler.SetMessage(handler.currentConversation.FirstMessage);
+                    handler.dialogue.SetMessage(handler.currentConversation.FirstMessage, handler.GetMessage());
+                    SetText();
+                    // handler.NextMessage();
+                }
+                else
+                {
+                    handler.SetConversation("Served_Happy");
+                    handler.SetMessage(handler.currentConversation.FirstMessage);
+                    handler.dialogue.SetMessage(handler.currentConversation.FirstMessage, handler.GetMessage());
+                    SetText();
+                    //handler.NextMessage();
+                }
+                m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
                 m_walkToLock = true;
-                m_goToMode = Mode.Talking; 
+                m_goToMode = Mode.Talking;
+                GameManager.m_hasBrewedATea = true;
+                m_finishedTalking = false;
                 return;
             }
         }

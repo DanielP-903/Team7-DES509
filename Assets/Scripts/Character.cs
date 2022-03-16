@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public  string m_characterName;
+    public  CharacterName m_characterName;
     public  int m_stage;
     private GameObject m_playerRef;
+    public string m_favouriteRecipe;
     private void Start()
     {
         m_playerRef = GameObject.FindGameObjectWithTag("Player");

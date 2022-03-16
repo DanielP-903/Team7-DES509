@@ -20,7 +20,7 @@ public class TeaMaker : MonoBehaviour
     private GameObject m_recipeBase;
     public GameObject m_teaModel;
     private int m_discoveredRecipesNo = 0;
-    private RecipeIngredients m_currentlyCalculatedRecipe;
+    [HideInInspector] public RecipeIngredients m_currentlyCalculatedRecipe;
     
     private Recipe m_recipeListRef;
     private int m_total = 0;
@@ -80,41 +80,34 @@ public class TeaMaker : MonoBehaviour
         m_teaModel.SetActive(true);
         if (m_currentlyCalculatedRecipe.m_name != null)
         {
-
-                m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe + " tea";
-                if (m_discoveredRecipes.ContainsKey(m_currentlyCalculatedRecipe.m_name))
+            m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe.m_name + " tea";
+            if (m_discoveredRecipes.ContainsKey(m_currentlyCalculatedRecipe.m_name))
+            {
+                if (m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] == false)
                 {
-                    if (m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] == false)
+                    m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] = true;
+                    m_discoveredRecipesNo++;
+                    GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
+                    listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(-m_discoveredRecipesNo * 50, listTheRecipe.GetComponent<RectTransform>().rect.position.y);
+                    listTheRecipe.SetActive(true);
+                    listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_currentlyCalculatedRecipe.m_name;
+                    foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)
                     {
-                        m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] = true;
-                        m_discoveredRecipesNo++;
-                        GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
-                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(-m_discoveredRecipesNo * 50, listTheRecipe.GetComponent<RectTransform>().rect.position.y);
-                        listTheRecipe.SetActive(true);
-                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_currentlyCalculatedRecipe.m_name;
-                        foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)
-                        {
-                            listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n" + item.Key.name + " x " + item.Value;
-                        }
-                        Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
+                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n" + item.Key.name + " x " + item.Value;
                     }
+                    Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
                 }
-                else
-                {
-                    Debug.LogError("OOPS! THIS RECIPE DOESN'T EXIST IN m_discoveredRecipes!");
-                }
-            
+            }
+            else
+            {
+                Debug.LogError("OOPS! THIS RECIPE DOESN'T EXIST IN m_discoveredRecipes!");
+            }
         }
-       
-
-           
         
-
         m_teaModel.GetComponent<Tea>().SetColour(Color.blue); // Default to magenta for now...
-        //m_teaModel.GetComponent<Tea>().m_colour = new Color(0,0,0,.5f);
         m_container.Clear();
         AddedOrder.Clear();
-        SearchForNewRecipes();
+        //SearchForNewRecipes();
     }
 
     public void GiveTea()
@@ -124,8 +117,9 @@ public class TeaMaker : MonoBehaviour
             // Slide tea to character
             // Do dialogue response
             // 
+            
             m_teaModel.SetActive(false);
-            m_teaModel.GetComponent<Tea>().m_name = String.Empty;
+            //m_teaModel.GetComponent<Tea>().m_name = String.Empty;
 
         }
     }
@@ -200,7 +194,9 @@ public class TeaMaker : MonoBehaviour
                 {
                     if (recipe.m_ingredients[item.Key] == item.Value)
                     {
-                        occurs++;
+                        occurs+=item.Value;
+                        if (occurs == recipe.m_ingredients.Count)
+                            break;
                     }
                 }
             }

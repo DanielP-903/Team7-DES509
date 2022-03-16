@@ -206,5 +206,16 @@ namespace QuantumTek.QuantumDialogue
         {
             Choices[GetChoiceIndex(id)] = choice;
         }
+
+
+
+        public int GetFirstMessage(string name)
+        {
+            foreach (var conversation in Conversations)
+                if (conversation.Name == name)
+                    return conversation.FirstMessage;
+
+            return -1;
+        }
     }
 }
