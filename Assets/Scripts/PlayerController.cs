@@ -11,11 +11,17 @@ enum Mode
 
 public class PlayerController : MonoBehaviour
 {
+    [Tooltip("Base movement speed")]
+    [SerializeField] private float m_speed;
 
-    [SerializeField] private QD_DialogueHandler handler;
-    [SerializeField] private TextMeshProUGUI speakerName;
-    [SerializeField] private TextMeshProUGUI messageText;
-    [SerializeField] private GameObject dialogueBox;
+    [Header("DEBUG")]
+    [Tooltip("Current player mode/event")]
+    [SerializeField] private Mode m_mode = Mode.Freeroam;
+    private Mode m_goToMode = Mode.Freeroam;
+    private QD_DialogueHandler handler;
+    private TextMeshProUGUI speakerNameTextbox;
+    private TextMeshProUGUI messageTextbox;
+    private GameObject dialogueBox;
     private bool m_dialogueFinished = false;
     private GameObject m_camera;
     private const float MouseSensitivity = 0.1f;
@@ -26,8 +32,6 @@ public class PlayerController : MonoBehaviour
     private bool m_moveLeft;
     private bool m_moveRight;
     private CharacterController m_characterController;
-    [Tooltip("Base movement speed")]
-    [SerializeField] private float m_speed;
     private GameObject m_heldObject;
     private GameManager m_gameManagerRef;
     private readonly float m_inputDelay = 0.1f;
@@ -35,13 +39,40 @@ public class PlayerController : MonoBehaviour
     private float m_inputTimer;
     private bool m_walkToLock = false;
     private TeaMaker m_teaMakerRef;
-    [SerializeField] private Mode m_mode = Mode.Freeroam;
-    [SerializeField] private Transform m_lockedTransform;
+    private Transform m_lockedTalkingTransform;
+    private Transform m_lockedTeaMakingTransform;
     // Start is called before the first frame update
     void Start()
     {
         m_inputTimer = 0.1f;
         m_camera = transform.GetChild(0).gameObject;
+        handler = transform.GetChild(1).gameObject.GetComponent<QD_DialogueHandler>();
+
+        GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
+        dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
+        speakerNameTextbox = dialogueBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+        messageTextbox = dialogueBox.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+
+     
+       if (GameObject.FindGameObjectWithTag("LockTalking"))
+        {
+            m_lockedTalkingTransform = GameObject.FindGameObjectWithTag("LockTalking").transform;
+        }
+        else
+        {
+            Debug.LogError("ERROR: No talking lock position with tag 'LockTalking' is in the scene!");
+            Debug.DebugBreak();
+        }
+
+        if (GameObject.FindGameObjectWithTag("LockTeaMaking"))
+        {
+            m_lockedTeaMakingTransform = GameObject.FindGameObjectWithTag("LockTeaMaking").transform;
+        }
+        else
+        {
+            Debug.LogError("ERROR: No tea making lock position with tag 'LockTeaMaking' is in the scene!");
+            Debug.DebugBreak();
+        }
 
         if (GameObject.FindGameObjectWithTag("GameManager"))
         {
@@ -88,30 +119,56 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
-        HandleInput();
+   
 
         if (m_walkToLock)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, m_lockedTransform.rotation, Time.deltaTime * 4.0f);
-            transform.position = Vector3.Lerp(transform.position, m_lockedTransform.position, Time.deltaTime * 3.0f);
-            float distance = Vector3.Distance(transform.position, m_lockedTransform.position);
-            if (distance < 0.1f)
+            Transform lockingTransform = m_lockedTalkingTransform; // Talking by default
+            //lockingTransform = m_mode == Mode.Freeroam ? m_lockedTalkingTransform : m_lockedTeaMakingTransform;
+            switch (m_goToMode)
             {
-                dialogueBox.SetActive(true);
+                case Mode.Freeroam:
+                    // n/a
+                    Debug.Log("Uh oh shouldn't be here!");
+                    break;
+                case Mode.Talking:
+                    lockingTransform = m_lockedTalkingTransform;
+                    break;
+                case Mode.TeaMaking:
+                    lockingTransform = m_lockedTeaMakingTransform;
+                    break;
+                default:
+                    break;
             }
-
-            if (distance < 0.01f)
+            transform.rotation = Quaternion.Lerp(transform.rotation, lockingTransform.rotation, Time.deltaTime * 4.0f);
+            transform.position = Vector3.Lerp(transform.position, lockingTransform.position, Time.deltaTime * 3.0f);
+            float distance = Vector3.Distance(transform.position, lockingTransform.position);
+            if (lockingTransform == m_lockedTalkingTransform)
             {
-                m_mode = Mode.Talking;
-                m_walkToLock = false;
+                if (distance < 0.1f)
+                {
+                    dialogueBox.SetActive(true);
+                }
+                if (distance < 0.01f)
+                {
+                    transform.rotation = lockingTransform.rotation;
+                    m_camera.transform.localRotation = lockingTransform.rotation;
+                    m_mode = Mode.Talking;
+                    m_walkToLock = false;
+                }
+            }
+            else
+            {
+                if (distance < 0.01f)
+                {
+                    transform.rotation = lockingTransform.rotation;
+                    m_camera.transform.localRotation = lockingTransform.rotation;
+                    m_mode = Mode.TeaMaking;
+                    m_walkToLock = false;
+                }
             }
         }
-
-        if (m_mode == Mode.Talking)
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, m_lockedTransform.rotation, Time.deltaTime * 4.0f);
-            //m_camera.transform.rotation = Quaternion.Lerp(m_camera.transform.rotation, m_lockedTransform.rotation, Time.deltaTime * 4.0f);
-        }
+        HandleInput();
     }
 
     // Handle player's inputs
@@ -132,6 +189,48 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleMouseInput();
+    }
+
+    private void HandleMouseInput()
+    {
+        var mouse = Mouse.current;
+        float mouseX = mouse.delta.x.ReadValue() * MouseSensitivity;
+        float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
+
+        xRotation -= mouseY;
+        yRotation += mouseX;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        switch (m_mode)
+        {
+            case Mode.Freeroam:
+                {
+                    FreeroamActions();
+                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                    break;
+                }
+            case Mode.Talking:
+                {
+                    TalkingActions();
+                    xRotation = Mathf.Clamp(xRotation, -15f, 15f);
+                    //yRotation = Mathf.Clamp(yRotation, -60f, 60f);
+                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                    //transform.localRotation = Quaternion.Euler(0f, yRotation + 90.0f, 0f);
+                    break;
+                }
+            case Mode.TeaMaking:
+                {
+                    TeaMakingActions();
+                    xRotation = Mathf.Clamp(xRotation, -15f, 15f);
+                    //yRotation = Mathf.Clamp(yRotation, -60f, 60f);
+                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                    //transform.localRotation = Quaternion.Euler(0f, yRotation + 90.0f, 0f);
+                    break;
+                }
+            default:
+                break;
+        }
+        transform.Rotate(Vector3.up * mouseX);
     }
 
     private GameObject FindIngredient()
@@ -159,14 +258,16 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Character"))
                 {
-                    //hit.transform.gameObject.GetComponent<Character>().m_characterName; // ACTIVATE CHARACTER DIALOGUE
-                    //transform.position = m_lockedTransform.position;
-                    //transform.rotation = m_lockedTransform.rotation;
-                    //dialogueBox.SetActive(true);
+                    // ACTIVATE CHARACTER DIALOGUE
                     m_walkToLock = true;
-
                     m_dialogueFinished = false;
                     SetText();
+                }
+                if (hit.transform.CompareTag("Machine"))
+                {
+                    //m_mode = Mode.TeaMaking;
+                    m_goToMode = Mode.TeaMaking;
+                    m_walkToLock = true;
                 }
             }
         }
@@ -182,20 +283,10 @@ public class PlayerController : MonoBehaviour
             // Don't do anything if the conversation is over
             if (m_dialogueFinished)
             {
-                // dialogueBox.SetActive(false);
-
-                //Go to next conversation (via index)
-                //int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
-
-                //handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex+1).Name);
-
-                // FIRST MESSAGE IS NOT READ
-                //dialogueBox.SetActive(false);
-                //m_dialogueFinished = false;
                 SetText();
                 return;
             }
-            // Check if the space key is pressed and the current message is not a choice
+
             if (handler.currentMessageInfo.Type == QD_NodeType.Message)
             {
                 if (handler.currentMessageInfo.NextID == -1)
@@ -250,6 +341,14 @@ public class PlayerController : MonoBehaviour
                 }
                 return;
             }
+            if (hit.transform != null && hit.transform.gameObject.GetComponent<Tea>())
+            {
+                // Give Tea
+                m_teaMakerRef.GiveTea();
+                m_walkToLock = true;
+                m_goToMode = Mode.Talking; 
+                return;
+            }
         }
         if (mouse.rightButton.IsActuated() && m_inputTimer <= 0)
         {
@@ -283,9 +382,9 @@ public class PlayerController : MonoBehaviour
     private void SetText()
     {
         // Clear everything
-        speakerName.text = "";
-        messageText.gameObject.SetActive(false);
-        messageText.text = "";
+        speakerNameTextbox.text = "";
+        messageTextbox.gameObject.SetActive(false);
+        messageTextbox.text = "";
 
         // If at the end, don't do anything
         if (m_dialogueFinished)
@@ -295,14 +394,14 @@ public class PlayerController : MonoBehaviour
         if (handler.currentMessageInfo.Type == QD_NodeType.Message)
         {
             QD_Message message = handler.GetMessage();
-            speakerName.text = message.SpeakerName;
-            messageText.text = message.MessageText;
-            messageText.gameObject.SetActive(true);
+            speakerNameTextbox.text = message.SpeakerName;
+            messageTextbox.text = message.MessageText;
+            messageTextbox.gameObject.SetActive(true);
 
         }
         else if (handler.currentMessageInfo.Type == QD_NodeType.Choice)
         {
-            speakerName.text = "Player";
+            speakerNameTextbox.text = "Player";
         }
     }
     public void Next(int choice = -1)
@@ -320,44 +419,6 @@ public class PlayerController : MonoBehaviour
     }
     // Taken from Quantum Dialogue END -------------------
 
-    private void HandleMouseInput()
-    {
-        var mouse = Mouse.current;
-        float mouseX = mouse.delta.x.ReadValue() * MouseSensitivity;
-        float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
-
-        xRotation -= mouseY;
-        yRotation += mouseX;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        switch (m_mode)
-        {
-            case Mode.Freeroam:
-                {
-                    FreeroamActions();
-                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                    break;
-                }
-            case Mode.Talking:
-                {
-                    TalkingActions();
-                    xRotation = Mathf.Clamp(xRotation, -15f, 15f);
-                    //yRotation = Mathf.Clamp(yRotation, -60f, 60f);
-                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                    //transform.localRotation = Quaternion.Euler(0f, yRotation + 90.0f, 0f);
-                    break;
-                }
-            case Mode.TeaMaking:
-                {
-                    TeaMakingActions();
-                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-                    break;
-                }
-            default:
-                break;
-        }
-        transform.Rotate(Vector3.up * mouseX);
-    }
 
 
     // Input Actions

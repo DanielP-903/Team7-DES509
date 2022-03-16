@@ -110,10 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_capacity: 4
-  m_Text: {fileID: 0}
-  m_recipeText: {fileID: 0}
-  m_recipeBase: {fileID: 0}
-  m_teaModel: {fileID: 0}
+  m_teaModel: {fileID: 5375009207618041371, guid: 60b5df4190aa7cb4eb686d6538592801, type: 3}
   m_container:
     m_keys: []
     m_values: 

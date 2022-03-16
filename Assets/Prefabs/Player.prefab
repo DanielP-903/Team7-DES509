@@ -262,6 +262,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8210468165090623394}
+  - {fileID: 8210468165857378248}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -326,13 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ffabc0c1a244a4c9eb6bc6cb13a8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handler: {fileID: 0}
-  speakerName: {fileID: 0}
-  messageText: {fileID: 0}
-  dialogueBox: {fileID: 0}
   m_speed: 1
   m_mode: 0
-  m_lockedTransform: {fileID: 0}
 --- !u!143 &8210468165845274959
 CharacterController:
   m_ObjectHideFlags: 0
@@ -365,3 +361,56 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8210468165857378294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8210468165857378248}
+  - component: {fileID: 8210468165857378295}
+  m_Layer: 0
+  m_Name: QD Dialogue Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8210468165857378248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210468165857378294}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -5, y: -2, z: -2.8000007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8210468165845274958}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8210468165857378295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210468165857378294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e215bbb36679a431e93c51bb0514659e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 11400000, guid: a97e30e53ebd7774c884c2d3cf109efa, type: 2}
+  currentConversationIndex: -1
+  currentConversation:
+    ID: 0
+    Name: 
+    FirstMessage: 0
+  currentMessageInfo:
+    ID: 0
+    NextID: 0
+    Type: 0

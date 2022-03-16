@@ -13,6 +13,10 @@ TagManager:
   - GameManager
   - Character
   - BrewTea
+  - MainCanvas
+  - LockTalking
+  - LockTeaMaking
+  - RecipeCanvas
   layers:
   - Default
   - TransparentFX
