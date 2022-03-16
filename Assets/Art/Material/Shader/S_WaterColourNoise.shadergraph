@@ -186,7 +186,11 @@
             "m_Id": "304238d8313e48ad831272cc0c534042"
         }
     ],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "6b245d9dfa804dec94fa13b250d4d2d5"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -1061,7 +1065,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "0efcd7762bd946cc8a76b97c504b0e25",
     "m_Id": 0,
-    "m_DisplayName": "UseTexture",
+    "m_DisplayName": "UseTexture_Roughness",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2552,6 +2556,26 @@
     },
     "m_Labels": [],
     "m_Space": 3
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "6b245d9dfa804dec94fa13b250d4d2d5",
+    "m_Title": "Mask Maps",
+    "m_Content": "R - Metalic\nG - AO\nB - Emissive\nA - Roughness",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -1803.0,
+        "y": 1149.0,
+        "width": 200.0,
+        "height": 160.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {
