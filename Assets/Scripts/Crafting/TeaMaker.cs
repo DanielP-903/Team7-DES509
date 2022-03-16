@@ -66,6 +66,14 @@ public class TeaMaker : MonoBehaviour
         m_teaModel = Instantiate(m_teaModel);
         m_teaModel.SetActive(false);
     }
+    void OnDrawGizmos()
+    {
+        var color = Color.cyan;
+        color.a = 0.5f;
+        Gizmos.color = color;
+
+        Gizmos.DrawMesh(m_teaModel.GetComponent<MeshFilter>().sharedMesh, 0, m_teaModel.transform.position, m_teaModel.transform.rotation, m_teaModel.transform.localScale );// transform.rotation * Quaternion.Euler(90, 0, 0));
+    }
 
     public void BrewTea()
     {
