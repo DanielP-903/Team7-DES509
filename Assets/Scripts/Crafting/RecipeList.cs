@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class RecipeIngredients
+public class Recipe
 {
     [Tooltip("Name given to the recipe")]
     [SerializeField] public string m_name;
-    //[Tooltip("Ingredients that make up the recipe")]
-    //[SerializeField] public List<GameObject> m_ingredients = new List<GameObject>();
+    [Tooltip("Colour of this recipe's brewed tea")]
+    [SerializeField] public Color m_colour;
 
     [SerializeField]
     public CustomIntDictionary m_ingredients;
@@ -18,7 +18,7 @@ public class RecipeIngredients
     }
 }
 
-public class Recipe : MonoBehaviour
+public class RecipeList : MonoBehaviour
 {
-    [SerializeField] public List<RecipeIngredients> m_recipes = new List<RecipeIngredients>();
+    [SerializeField] public List<Recipe> m_recipes = new List<Recipe>();
 }

@@ -17,12 +17,16 @@ public class TeaMaker : MonoBehaviour
     private TextMeshProUGUI m_Text;
     private TextMeshProUGUI m_recipeText;
 
-    private GameObject m_recipeBase;
+    [Tooltip("Model prefab for the tea cup")]
     public GameObject m_teaModel;
+    private GameObject m_recipeBase;
+    private GameObject m_lid;
+    private GameObject m_lidDestination;
+
     private int m_discoveredRecipesNo = 0;
-    [HideInInspector] public RecipeIngredients m_currentlyCalculatedRecipe;
+    [HideInInspector] public Recipe m_currentlyCalculatedRecipe;
     
-    private Recipe m_recipeListRef;
+    private RecipeList m_recipeListRef;
     private int m_total = 0;
     private readonly Stack<UnityEngine.Object> AddedOrder = new Stack<UnityEngine.Object>();
 
@@ -42,9 +46,13 @@ public class TeaMaker : MonoBehaviour
         set { m_discoveredRecipes.CopyFrom(value); }
     }
 
+
+
     // Start is called before the first frame update
     void Start()
     {
+        m_lid = transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
+        m_lidDestination = transform.GetChild(1).gameObject.transform.GetChild(1).gameObject;
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
         m_Text = mainCanvas.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         m_recipeText = mainCanvas.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
@@ -52,7 +60,7 @@ public class TeaMaker : MonoBehaviour
         GameObject recipeCanvas = GameObject.FindGameObjectWithTag("RecipeCanvas");
         m_recipeBase = recipeCanvas.transform.GetChild(1).gameObject;
 
-        m_recipeListRef = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<Recipe>();
+        m_recipeListRef = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
         m_recipeText.text = "";
 
         foreach (var item in m_recipeListRef.m_recipes)
@@ -72,7 +80,7 @@ public class TeaMaker : MonoBehaviour
         color.a = 0.5f;
         Gizmos.color = color;
 
-        Gizmos.DrawMesh(m_teaModel.GetComponent<MeshFilter>().sharedMesh, 0, m_teaModel.transform.position, m_teaModel.transform.rotation, m_teaModel.transform.localScale );// transform.rotation * Quaternion.Euler(90, 0, 0));
+        Gizmos.DrawMesh(m_teaModel.GetComponent<MeshFilter>().sharedMesh, 0, m_teaModel.transform.position, m_teaModel.transform.rotation, m_teaModel.transform.localScale );
     }
 
     public void BrewTea()
@@ -104,10 +112,13 @@ public class TeaMaker : MonoBehaviour
             }
         }
         
-        m_teaModel.GetComponent<Tea>().SetColour(Color.blue); // Default to magenta for now...
+        //m_teaModel.GetComponent<Tea>().SetColour(Color.blue); // Default to blue for now...
+        m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
+
+        m_lid.SetActive(false);
+        m_lidDestination.SetActive(true);
         m_container.Clear();
         AddedOrder.Clear();
-        //SearchForNewRecipes();
     }
 
     public void GiveTea()
@@ -116,11 +127,10 @@ public class TeaMaker : MonoBehaviour
         {
             // Slide tea to character
             // Do dialogue response
-            // 
-            
             m_teaModel.SetActive(false);
-            //m_teaModel.GetComponent<Tea>().m_name = String.Empty;
 
+            m_lid.SetActive(true);
+            m_lidDestination.SetActive(false);
         }
     }
 
@@ -184,7 +194,7 @@ public class TeaMaker : MonoBehaviour
     void SearchForNewRecipes()
     {
         m_recipeText.text = "";
-        m_currentlyCalculatedRecipe = new RecipeIngredients();
+        m_currentlyCalculatedRecipe = new Recipe();
         foreach (var recipe in m_recipeListRef.m_recipes)
         {
             int occurs = 0;
@@ -205,6 +215,7 @@ public class TeaMaker : MonoBehaviour
                 m_recipeText.text = "FOUND: " + recipe.m_name;
                 m_currentlyCalculatedRecipe.m_name = recipe.m_name;
                 m_currentlyCalculatedRecipe.m_ingredients = recipe.m_ingredients;
+                m_currentlyCalculatedRecipe.m_colour = recipe.m_colour;
             }
         }
     }

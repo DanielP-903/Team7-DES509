@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion m_lockTalkRot;
     private Vector3 m_lockTeaMakePos;
     private Quaternion m_lockTeaMakeRot;
-    private Recipe m_recipeListRefPlayer;
+    private RecipeList m_recipeListRefPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -58,25 +58,14 @@ public class PlayerController : MonoBehaviour
         dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
         speakerNameTextbox = dialogueBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         messageTextbox = dialogueBox.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-        m_recipeListRefPlayer = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<Recipe>();
-
-        //Vector3 offset = new Vector3(-2, 0, 0);
-        //float defaultY = transform.position.y;
-        //m_lockedTalkingTransform = new GameObject().transform;
-        //m_lockedTalkingTransform.position = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
-        //m_lockedTalkingTransform.position = new Vector3(m_lockedTalkingTransform.position.x, transform.position.y, m_lockedTalkingTransform.position.z);
-        //m_lockedTalkingTransform.rotation = transform.rotation;
-        //m_lockedTeaMakingTransform = new GameObject().transform;
-        //m_lockedTeaMakingTransform.position = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
-        //m_lockedTeaMakingTransform.position = new Vector3(m_lockedTeaMakingTransform.position.x, transform.position.y, m_lockedTeaMakingTransform.position.z);
-        //m_lockedTeaMakingTransform.rotation = transform.rotation;
+        m_recipeListRefPlayer = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
 
         float defaultY = transform.position.y;
-        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
+        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, -2.4f);
         m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
         m_lockTalkRot = transform.rotation;
 
-        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
+        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
         m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
         m_lockTeaMakeRot = transform.rotation;
 
@@ -118,17 +107,18 @@ public class PlayerController : MonoBehaviour
         var color = Color.cyan;
         color.a = 0.5f;
         Gizmos.color = color;
-        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(-2.2f, 0, 0);
+        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
         m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
         m_lockTalkRot = transform.rotation;
 
-        Gizmos.DrawSphere(m_lockTalkPos, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
+        Gizmos.DrawSphere(m_lockTalkPos, 0.5f);
 
-        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(-1, 0, 0);
+        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
         m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
         m_lockTeaMakeRot = transform.rotation;
-
-        Gizmos.DrawSphere(m_lockTeaMakePos, 0.5f);// transform.rotation * Quaternion.Euler(90, 0, 0));
+        color = Color.magenta;
+        Gizmos.color = color;
+        Gizmos.DrawSphere(m_lockTeaMakePos, 0.5f);
     }
 
     private void TalkingStart()
@@ -142,13 +132,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
-   
+        
 
         if (m_walkToLock)
         {
-            Vector3 offsetPos = m_lockTalkPos; // Talking by default
-            Quaternion offsetRot = m_lockTalkRot; // Talking by default
-            //lockingTransform = m_mode == Mode.Freeroam ? m_lockedTalkingTransform : m_lockedTeaMakingTransform;
+            Vector3 offsetPos = m_lockTalkPos;
+            Quaternion offsetRot = m_lockTalkRot;
             switch (m_goToMode)
             {
                 case Mode.Freeroam:
@@ -194,7 +183,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        //Debug.Log("Mode: " + m_mode + " , GoTo Mode: " + m_goToMode);
         HandleInput();
     }
 
@@ -233,30 +221,22 @@ public class PlayerController : MonoBehaviour
             case Mode.Freeroam:
                 {
                     FreeroamActions();
-                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
                     break;
                 }
             case Mode.Talking:
                 {
                     TalkingActions();
-                    xRotation = Mathf.Clamp(xRotation, -15f, 15f);
-                    //yRotation = Mathf.Clamp(yRotation, -60f, 60f);
-                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                    //transform.localRotation = Quaternion.Euler(0f, yRotation + 90.0f, 0f);
                     break;
                 }
             case Mode.TeaMaking:
                 {
                     TeaMakingActions();
-                    //xRotation = Mathf.Clamp(xRotation, -15f, 15f);
-                    //yRotation = Mathf.Clamp(yRotation, -60f, 60f);
-                    m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                    //transform.localRotation = Quaternion.Euler(0f, yRotation + 90.0f, 0f);
                     break;
                 }
             default:
                 break;
         }
+        m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -317,9 +297,6 @@ public class PlayerController : MonoBehaviour
             }
             if (handler.currentMessageInfo.NextID == -1)
             {
-                //int nextConvoIndex = handler.currentConversationIndex + 1 < handler.dialogue.Conversations.Count ? handler.currentConversationIndex + 1 : 0;
-                //handler.SetConversation(handler.dialogue.GetConversation(nextConvoIndex).Name);
-                //m_dialogueFinished = true;
                 dialogueBox.SetActive(false);
                 m_mode = Mode.Freeroam;
                 m_goToMode = Mode.Freeroam;
@@ -332,7 +309,6 @@ public class PlayerController : MonoBehaviour
                     m_finishedTalking = true;
                     GameManager.m_hasBrewedATea = false;
                 }
-                //SetText();
             }
             else
             {
@@ -381,14 +357,12 @@ public class PlayerController : MonoBehaviour
             {
                 // Give Tea
                 m_teaMakerRef.GiveTea();
-                //if (m_teaMakerRef.m_currentlyCalculatedRecipe.m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().m_favouriteRecipe)
                 if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().m_favouriteRecipe + " tea")
                 {
                     handler.SetConversation("Served_Neutral");
                     handler.SetMessage(handler.currentConversation.FirstMessage);
                     handler.dialogue.SetMessage(handler.currentConversation.FirstMessage, handler.GetMessage());
                     SetText();
-                    // handler.NextMessage();
                 }
                 else
                 {
@@ -396,7 +370,6 @@ public class PlayerController : MonoBehaviour
                     handler.SetMessage(handler.currentConversation.FirstMessage);
                     handler.dialogue.SetMessage(handler.currentConversation.FirstMessage, handler.GetMessage());
                     SetText();
-                    //handler.NextMessage();
                 }
                 m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
                 m_walkToLock = true;

@@ -12,14 +12,16 @@ GameObject:
   - component: {fileID: 8535400312733278980}
   - component: {fileID: 5879205313255135182}
   - component: {fileID: 5375009207618041444}
-  - component: {fileID: 5375009207618041445}
+  - component: {fileID: 3886285128546891705}
+  - component: {fileID: 8491645457348617682}
+  - component: {fileID: 4621472844370404562}
   m_Layer: 0
-  m_Name: A Tea
+  m_Name: Tea Cup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4745684367789436065
 Transform:
   m_ObjectHideFlags: 0
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5375009207618041371}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 4.2000003, y: 0.099999905, z: 1.5}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 7937593705874573279}
   m_Father: {fileID: 0}
@@ -97,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_name: RecipeIngredients tea
---- !u!65 &5375009207618041445
-BoxCollider:
+--- !u!64 &3886285128546891705
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,9 +109,45 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.02, z: 0.02}
-  m_Center: {x: -0.0010401467, y: 0.000099999364, z: 0.0059873005}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 963726142839289295, guid: aa20ed3b6d316754ba9c70a93aa8afb5, type: 3}
+--- !u!111 &8491645457348617682
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5375009207618041371}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c6ba97c4d42f0864f8a694b1132d7290, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: c6ba97c4d42f0864f8a694b1132d7290, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &4621472844370404562
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5375009207618041371}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52de27c7e09aebb43bd8d26f8cd6d3d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7937593705874573278
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,8 +174,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937593705874573278}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0.007999993}
-  m_LocalScale: {x: 0.015, y: 0.001, z: 0.015}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0153}
+  m_LocalScale: {x: 0.06, y: 0.001, z: 0.06}
   m_Children: []
   m_Father: {fileID: 4745684367789436065}
   m_RootOrder: 0
