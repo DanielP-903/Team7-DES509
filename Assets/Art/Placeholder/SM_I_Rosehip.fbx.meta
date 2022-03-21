@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aa20ed3b6d316754ba9c70a93aa8afb5
+guid: 9bae3613531d6aa4986ba95802e96ef8
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ClossetTest
-    second: {fileID: 2100000, guid: 3768279896bbd3b4aabfe813d7df2fcc, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TT_checker_512x512_UV_GRID
-    second: {fileID: 2100000, guid: 76a6f34e69fd5954e84b45f7d61441be, type: 2}
+      name: lambert3
+    second: {fileID: 2100000, guid: 6a013776be10311498c1d9a242389c0e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -44,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.5
+    globalScale: 0.2
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -95,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.015
+    globalScale: 0.002
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
