@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 5
+  MouseSensitivity: 0.1
   m_mode: 0
 --- !u!143 &8210468165845274959
 CharacterController:

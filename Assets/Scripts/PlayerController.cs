@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
 {
     [Tooltip("Base movement speed")]
     [SerializeField] private float m_speed;
-
+    [Tooltip("Player Look Sensitivity")]
+    [Range(0, 0.3f)]
+    [SerializeField] private float MouseSensitivity = 0.1f;
     [Header("DEBUG")]
     [Tooltip("Current player mode/event")]
     [SerializeField] private Mode m_mode = Mode.Freeroam;
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private GameObject dialogueBox;
     private bool m_dialogueFinished = false;
     private GameObject m_camera;
-    private const float MouseSensitivity = 0.1f;
+
     private float xRotation = 0f;
     private float yRotation = 0f;
     private bool m_moveForward;
@@ -61,13 +63,14 @@ public class PlayerController : MonoBehaviour
         m_recipeListRefPlayer = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
 
         float defaultY = transform.position.y;
-        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, -2.4f);
+        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
         m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
         m_lockTalkRot = transform.rotation;
 
         m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
         m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
         m_lockTeaMakeRot = transform.rotation;
+        m_lockTeaMakeRot.Set(m_lockTeaMakeRot.x, 0, m_lockTeaMakeRot.z,1);
 
         if (GameObject.FindGameObjectWithTag("GameManager"))
         {
@@ -117,6 +120,7 @@ public class PlayerController : MonoBehaviour
         m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
         m_lockTeaMakeRot = transform.rotation;
         color = Color.magenta;
+        color.a = 0.5f;
         Gizmos.color = color;
         Gizmos.DrawSphere(m_lockTeaMakePos, 0.5f);
     }
@@ -240,20 +244,6 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    private GameObject FindIngredient()
-    {
-        GameObject g = new GameObject();
-
-        foreach (var ingredient in m_gameManagerRef.m_ingredientList)
-        {
-            if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<Ingredient>().m_type)
-            {
-                g = ingredient;
-            }
-        }
-
-        return g;
-    }
 
     private void FreeroamActions()
     {
@@ -303,6 +293,7 @@ public class PlayerController : MonoBehaviour
                 if (handler.currentConversation.Name != "Ordering")
                 {
                     m_finishedTalking = false;
+                   // m_teaMakerRef.ResetTea();
                 }
                 else
                 {
@@ -316,7 +307,20 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public GameObject FindIngredient()
+    {
+        GameObject g = new GameObject();
 
+        foreach (var ingredient in m_gameManagerRef.m_ingredientList)
+        {
+            if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<Ingredient>().m_type)
+            {
+                g = ingredient;
+            }
+        }
+
+        return g;
+    }
     private void TeaMakingActions()
     {
         var mouse = Mouse.current;
