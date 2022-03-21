@@ -19,6 +19,7 @@ public class TeaMaker : MonoBehaviour
 
     [Tooltip("Model prefab for the tea cup")]
     public GameObject m_teaModel;
+
     private GameObject m_recipeBase;
     private GameObject m_lid;
     private GameObject m_lidDestination;
@@ -30,6 +31,10 @@ public class TeaMaker : MonoBehaviour
     private int m_total = 0;
     private readonly Stack<UnityEngine.Object> AddedOrder = new Stack<UnityEngine.Object>();
 
+    public Transform m_cupStartPoint;
+    public Transform m_cupEndPoint;
+    private GameManager m_gameManagerRef;
+    private PlayerController m_playerRef;
     [SerializeField]
     CustomIntDictionary m_container;
     public IDictionary<UnityEngine.Object, int> CustomIntDictionary
@@ -51,6 +56,8 @@ public class TeaMaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        m_playerRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         m_lid = transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
         m_lidDestination = transform.GetChild(1).gameObject.transform.GetChild(1).gameObject;
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
@@ -71,8 +78,11 @@ public class TeaMaker : MonoBehaviour
             }
         }
 
-        m_teaModel = Instantiate(m_teaModel);
-        m_teaModel.SetActive(false);
+        m_teaModel = Instantiate(m_teaModel, transform.parent);
+        //m_cupStartPoint = m_teaModel.transform;
+        m_teaModel.SetActive(true);
+        //m_teaModel.transform.GetChild(0).gameObject.SetActive(false);
+        m_teaModel.GetComponent<Animator>().SetBool("isActive", false);
     }
     void OnDrawGizmos()
     {
@@ -81,44 +91,82 @@ public class TeaMaker : MonoBehaviour
         Gizmos.color = color;
 
         Gizmos.DrawMesh(m_teaModel.GetComponent<MeshFilter>().sharedMesh, 0, m_teaModel.transform.position, m_teaModel.transform.rotation, m_teaModel.transform.localScale );
-    }
 
-    public void BrewTea()
+        color = Color.red;
+        color.a = 0.5f;
+        Gizmos.color = color;
+        Gizmos.DrawSphere(m_cupEndPoint.position, 0.1f);
+    }
+    private GameObject FindIngredient(GameObject toFind)
     {
-        m_teaModel.SetActive(true);
-        if (m_currentlyCalculatedRecipe.m_name != null)
+        GameObject g = new GameObject();
+
+        foreach (var ingredient in m_gameManagerRef.m_ingredientList)
         {
-            m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe.m_name + " tea";
-            if (m_discoveredRecipes.ContainsKey(m_currentlyCalculatedRecipe.m_name))
+            if (ingredient.GetComponent<Ingredient>().m_type == toFind.GetComponent<Ingredient>().m_type)
             {
-                if (m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] == false)
-                {
-                    m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] = true;
-                    m_discoveredRecipesNo++;
-                    GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
-                    listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(-m_discoveredRecipesNo * 50, listTheRecipe.GetComponent<RectTransform>().rect.position.y);
-                    listTheRecipe.SetActive(true);
-                    listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_currentlyCalculatedRecipe.m_name;
-                    foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)
-                    {
-                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n" + item.Key.name + " x " + item.Value;
-                    }
-                    Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
-                }
-            }
-            else
-            {
-                Debug.LogError("OOPS! THIS RECIPE DOESN'T EXIST IN m_discoveredRecipes!");
+                g = ingredient;
             }
         }
-        
-        //m_teaModel.GetComponent<Tea>().SetColour(Color.blue); // Default to blue for now...
-        m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
 
-        m_lid.SetActive(false);
-        m_lidDestination.SetActive(true);
-        m_container.Clear();
-        AddedOrder.Clear();
+        return g;
+    }
+    public void BrewTea()
+    {
+        if (m_container.Count > 0)
+        {
+            m_teaModel.SetActive(true);
+            m_teaModel.transform.GetChild(0).gameObject.SetActive(true);
+            m_teaModel.GetComponent<Animator>().SetBool("isActive", true);
+            if (m_currentlyCalculatedRecipe.m_name != null)
+            {
+                m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe.m_name + " tea";
+                if (m_discoveredRecipes.ContainsKey(m_currentlyCalculatedRecipe.m_name))
+                {
+                    if (m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] == false)
+                    {
+                        m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] = true;
+                        m_discoveredRecipesNo++;
+                        GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
+                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(-m_discoveredRecipesNo * 50,
+                            listTheRecipe.GetComponent<RectTransform>().rect.position.y);
+                        listTheRecipe.SetActive(true);
+                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
+                            m_currentlyCalculatedRecipe.m_name;
+                        foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)
+                        {
+                            listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text +=
+                                "\n" + item.Key.name + " x " + item.Value;
+                        }
+
+                        Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
+                        m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
+                    }
+                    else
+                    {
+                        // Not a defined tea but that's a-ok!
+                        m_teaModel.GetComponent<Tea>().m_name = "A normal tea";
+                        m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
+                        Color combinedColour = new Color(0, 0, 0, 1);
+                        foreach (var item in m_container)
+                        {
+                            combinedColour += FindIngredient((GameObject) item.Key).GetComponent<Ingredient>().m_colour;
+                        }
+
+                        m_teaModel.GetComponent<Tea>().SetColour(combinedColour);
+                    }
+
+                    m_lid.SetActive(false);
+                    m_lidDestination.SetActive(true);
+                    m_container.Clear();
+                    AddedOrder.Clear();
+                }
+                else
+                {
+                    Debug.LogError("OOPS! THIS RECIPE DOESN'T EXIST IN m_discoveredRecipes!");
+                }
+            }
+        }
     }
 
     public void GiveTea()
@@ -127,14 +175,25 @@ public class TeaMaker : MonoBehaviour
         {
             // Slide tea to character
             // Do dialogue response
-            m_teaModel.SetActive(false);
+            //m_teaModel.SetActive(false);
 
             m_lid.SetActive(true);
             m_lidDestination.SetActive(false);
+
         }
+        m_teaModel.transform.position = m_cupEndPoint.transform.position;
+        m_teaModel.transform.rotation = m_cupEndPoint.transform.rotation;
     }
 
 
+    public void ResetTea()
+    {
+        m_teaModel.GetComponent<Animator>().SetBool("isActive", false);
+        //m_teaModel.transform.GetChild(0).gameObject.SetActive(false);
+        m_teaModel.SetActive(true);
+        m_teaModel.transform.position = m_cupStartPoint.transform.position;
+        m_teaModel.transform.rotation = m_cupStartPoint.transform.rotation;
+    }
     public void AddIngredient(UnityEngine.Object ingredient)
     {
         if (m_total + 1 <= m_capacity)

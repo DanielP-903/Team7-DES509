@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
                 if (handler.currentConversation.Name != "Ordering")
                 {
                     m_finishedTalking = false;
-                   // m_teaMakerRef.ResetTea();
+                    m_teaMakerRef.ResetTea();
                 }
                 else
                 {
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    public GameObject FindIngredient()
+    private GameObject FindIngredient()
     {
         GameObject g = new GameObject();
 

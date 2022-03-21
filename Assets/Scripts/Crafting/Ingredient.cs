@@ -24,6 +24,8 @@ public class Ingredient : MonoBehaviour
     //[SerializeField] private GameObject m_model;
 
     [Header("Properties")]
+    [Tooltip("Colour of ingredient when put in tea")]
+    public Color m_colour;
     [Tooltip("Change bitterness rating")]
     [Range(0, 10)]
     [SerializeField] private int m_bitterness;
