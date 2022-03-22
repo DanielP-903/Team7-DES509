@@ -190,6 +190,7 @@ public class TeaMaker : MonoBehaviour
 
     public void ResetTea()
     {
+        m_currentlyCalculatedRecipe = null;
         m_teaModel.GetComponent<Animator>().SetBool("isActive", false);
         m_teaModel.SetActive(true);
         m_teaModel.transform.position = m_cupStartPoint.transform.position;
@@ -268,6 +269,7 @@ public class TeaMaker : MonoBehaviour
                 {
                     if (recipe.m_ingredients[item.Key] == item.Value)
                     {
+                        //occurs+=item.Value;
                         occurs+=item.Value;
                         if (occurs == recipe.m_ingredients.Count)
                             break;
@@ -282,5 +284,14 @@ public class TeaMaker : MonoBehaviour
                 m_currentlyCalculatedRecipe.m_colour = recipe.m_colour;
             }
         }
+    }
+
+    private float CalculateTotal(Recipe r)
+    {
+        foreach (var item in r.m_ingredients)
+        {
+            // NEXT TODO
+        }
+        return 0f;
     }
 }

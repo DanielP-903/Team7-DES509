@@ -8255,6 +8255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Test
       objectReference: {fileID: 0}
+    - target: {fileID: 7814783753685440646, guid: 64f24922a775be74ebc42f02a6407bd2, type: 3}
+      propertyPath: m_favouriteRecipe
+      value: Lavender Mint
+      objectReference: {fileID: 0}
     - target: {fileID: 7814783753685440647, guid: 64f24922a775be74ebc42f02a6407bd2, type: 3}
       propertyPath: m_RootOrder
       value: 3

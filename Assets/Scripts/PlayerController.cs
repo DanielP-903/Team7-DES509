@@ -170,8 +170,8 @@ public class PlayerController : MonoBehaviour
                 }
                 if (distance < 0.01f)
                 {
-                    transform.rotation = offsetRot;
-                    m_camera.transform.localRotation = offsetRot;
+                    //transform.rotation = offsetRot;
+                    //m_camera.transform.localRotation = offsetRot;
                     m_mode = Mode.Talking;
                     m_walkToLock = false;
                 }
@@ -180,8 +180,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (distance < 0.01f)
                 {
-                    transform.rotation = offsetRot;
-                    m_camera.transform.localRotation = offsetRot;
+                    //transform.rotation = offsetRot;
+                    //m_camera.transform.localRotation = offsetRot;
                     m_mode = Mode.TeaMaking;
                     m_walkToLock = false;
                 }
