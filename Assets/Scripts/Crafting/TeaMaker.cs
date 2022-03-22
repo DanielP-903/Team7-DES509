@@ -113,7 +113,7 @@ public class TeaMaker : MonoBehaviour
     }
     public void BrewTea()
     {
-        if (m_container.Count > 0)
+        if (m_container.Count > 0 && AddedOrder.Count > 0)
         {
             m_teaModel.SetActive(true);
             m_teaModel.transform.GetChild(0).gameObject.SetActive(true);
@@ -142,20 +142,8 @@ public class TeaMaker : MonoBehaviour
                         Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
                         m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
                     }
-                    else
-                    {
-                        // Not a defined tea but that's a-ok!
-                        m_teaModel.GetComponent<Tea>().m_name = "A normal tea";
-                        m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
-                        Color combinedColour = new Color(0, 0, 0, 1);
-                        foreach (var item in m_container)
-                        {
-                            combinedColour += FindIngredient((GameObject) item.Key).GetComponent<Ingredient>().m_colour;
-                        }
 
-                        m_teaModel.GetComponent<Tea>().SetColour(combinedColour);
-                    }
-
+                    m_currentlyCalculatedRecipe = null;
                     m_lid.SetActive(false);
                     m_lidDestination.SetActive(true);
                     m_container.Clear();
@@ -165,6 +153,22 @@ public class TeaMaker : MonoBehaviour
                 {
                     Debug.LogError("OOPS! THIS RECIPE DOESN'T EXIST IN m_discoveredRecipes!");
                 }
+            }
+            else
+            {
+                // Not a defined tea but that's a-ok!
+                m_teaModel.GetComponent<Tea>().m_name = "A normal tea";
+                m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
+                Color combinedColour = new Color(0, 0, 0, 1);
+                foreach (var item in m_container)
+                {
+                    combinedColour += FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_colour;
+                }
+                m_teaModel.GetComponent<Tea>().SetColour(combinedColour);            
+                m_lid.SetActive(false);
+                m_lidDestination.SetActive(true);
+                m_container.Clear();
+                AddedOrder.Clear();
             }
         }
     }
@@ -233,6 +237,9 @@ public class TeaMaker : MonoBehaviour
         }
         else
         {
+            AddedOrder.Clear();
+            m_container.Clear();
+
             Debug.LogWarning("Stack is empty!");        
         }
     }
