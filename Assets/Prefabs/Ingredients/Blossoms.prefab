@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_type: 4
   m_name: 
+  m_colour: {r: 0.6886792, g: 0.43204877, b: 0.43204877, a: 0.7647059}
   m_bitterness: 10
   m_sweetness: 4
   m_fruitiness: 7
