@@ -175,8 +175,6 @@ public class TeaMaker : MonoBehaviour
         {
             // Slide tea to character
             // Do dialogue response
-            //m_teaModel.SetActive(false);
-
             m_lid.SetActive(true);
             m_lidDestination.SetActive(false);
 
@@ -189,11 +187,11 @@ public class TeaMaker : MonoBehaviour
     public void ResetTea()
     {
         m_teaModel.GetComponent<Animator>().SetBool("isActive", false);
-        //m_teaModel.transform.GetChild(0).gameObject.SetActive(false);
         m_teaModel.SetActive(true);
         m_teaModel.transform.position = m_cupStartPoint.transform.position;
         m_teaModel.transform.rotation = m_cupStartPoint.transform.rotation;
     }
+
     public void AddIngredient(UnityEngine.Object ingredient)
     {
         if (m_total + 1 <= m_capacity)

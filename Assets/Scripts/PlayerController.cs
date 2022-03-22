@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private GameObject m_heldObject;
     private GameManager m_gameManagerRef;
     private readonly float m_inputDelay = 0.1f;
-    private readonly float m_inputDelayTalking = 0.5f;
+    private readonly float m_inputDelayTalking = 0.1f;
     private float m_inputTimer;
     private bool m_walkToLock = false;
     private bool m_finishedTalking = false;

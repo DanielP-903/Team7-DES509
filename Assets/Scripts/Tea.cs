@@ -13,4 +13,25 @@ public class Tea : MonoBehaviour
         transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.color = m_colour;
         GetComponent<Animator>().Play("CupFill");
     }
+    public bool IsHeld = false;
+    private GameObject m_heldLocationRef;
+    void Start()
+    {
+        m_heldLocationRef = GameObject.FindGameObjectWithTag("HoldLocation");
+    }
+
+    void Update()
+    {
+        if (IsHeld)
+        {
+            transform.position = m_heldLocationRef.transform.position;
+            transform.rotation = m_heldLocationRef.transform.rotation;
+            transform.parent = m_heldLocationRef.transform;
+
+        }
+        else
+        {
+            transform.parent = null;
+        }
+    }
 }
