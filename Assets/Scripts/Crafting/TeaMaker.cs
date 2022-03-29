@@ -17,6 +17,8 @@ public class TeaMaker : MonoBehaviour
     private TextMeshProUGUI m_Text;
     private TextMeshProUGUI m_recipeText;
 
+
+
     [Tooltip("Model prefab for the tea cup")]
     public GameObject m_teaModel;
 
@@ -78,6 +80,9 @@ public class TeaMaker : MonoBehaviour
             }
         }
 
+        m_Text.gameObject.SetActive(false);
+        m_recipeText.gameObject.SetActive(false);
+
         m_teaModel = Instantiate(m_teaModel, transform.parent);
         //m_cupStartPoint = m_teaModel.transform;
         m_teaModel.SetActive(true);
@@ -111,13 +116,17 @@ public class TeaMaker : MonoBehaviour
 
         return g;
     }
+
+    public int GetContainerCount()
+    {
+        return m_container.Count;
+    }
     public void BrewTea()
     {
         if (m_container.Count > 0 && AddedOrder.Count > 0)
         {
             m_teaModel.SetActive(true);
             m_teaModel.transform.GetChild(0).gameObject.SetActive(true);
-            //m_teaModel.GetComponent<Animator>().SetTrigger("Activate");
             if (m_currentlyCalculatedRecipe.m_name != null)
             {
                 m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe.m_name + " tea";
@@ -158,7 +167,6 @@ public class TeaMaker : MonoBehaviour
             {
                 // Not a defined tea but that's a-ok!
                 m_teaModel.GetComponent<Tea>().m_name = "A normal tea";
-               // m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
                 Color combinedColour = new Color(0, 0, 0, 1);
                 foreach (var item in m_container)
                 {
@@ -181,20 +189,13 @@ public class TeaMaker : MonoBehaviour
             // Do dialogue response
             m_lid.SetActive(true);
             m_lidDestination.SetActive(false);
-            
-
         }
         m_teaModel.GetComponent<Tea>().IsHeld = true;
-        //m_teaModel.transform.position = m_cupEndPoint.transform.position;
-        //m_teaModel.transform.rotation = m_cupEndPoint.transform.rotation;
     }
-
 
     public void ResetTea()
     {
         m_currentlyCalculatedRecipe = null;
-
-        //m_teaModel.GetComponent<Animator>().SetTrigger("Activate");
         m_teaModel.SetActive(true);
         m_teaModel.transform.position = m_cupStartPoint.transform.position;
         m_teaModel.transform.rotation = m_cupStartPoint.transform.rotation;
@@ -216,6 +217,7 @@ public class TeaMaker : MonoBehaviour
             SearchForNewRecipes();
         }
     }
+
     public void RemoveIngredient()
     {
         if (AddedOrder.Count > 0)
@@ -272,7 +274,6 @@ public class TeaMaker : MonoBehaviour
                 {
                     if (recipe.m_ingredients[item.Key] == item.Value)
                     {
-                        //occurs+=item.Value;
                         occurs+=item.Value;
                         if (occurs == CalculateTotal(recipe))
                             break;
@@ -297,7 +298,6 @@ public class TeaMaker : MonoBehaviour
             // NEXT TODO
             total += item.Value;
         }
-        //Debug.Log("Total: " + total);
         return total;
     }
 }
