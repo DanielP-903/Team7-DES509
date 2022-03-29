@@ -14,4 +14,11 @@ public class GameManager : MonoBehaviour
    public static bool m_hasBrewedATea = false;
 
    public CharacterName currentCharacter = CharacterName.Shylo;
+
+    [SerializeField] private Animator m_doors;
+
+    void Start()
+    {
+        m_doors.SetTrigger("Open");
+    }
 }

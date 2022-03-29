@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,6 +27,11 @@ public class TeaMaker : MonoBehaviour
     private GameObject m_lid;
     private GameObject m_lidDestination;
 
+    // New Recipe Found
+    private GameObject m_foundObject;
+    private TextMeshProUGUI m_foundText;
+
+
     private int m_discoveredRecipesNo = 0;
     [HideInInspector] public Recipe m_currentlyCalculatedRecipe;
     
@@ -36,9 +42,8 @@ public class TeaMaker : MonoBehaviour
     public Transform m_cupStartPoint;
     public Transform m_cupEndPoint;
     private GameManager m_gameManagerRef;
-    private PlayerController m_playerRef;
     [SerializeField]
-    CustomIntDictionary m_container;
+    public CustomIntDictionary m_container;
     public IDictionary<UnityEngine.Object, int> CustomIntDictionary
     {
         get { return m_container; }
@@ -59,7 +64,6 @@ public class TeaMaker : MonoBehaviour
     void Start()
     {
         m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        m_playerRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         m_lid = transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
         m_lidDestination = transform.GetChild(1).gameObject.transform.GetChild(1).gameObject;
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
@@ -72,6 +76,9 @@ public class TeaMaker : MonoBehaviour
         m_recipeListRef = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
         m_recipeText.text = "";
 
+        m_foundObject = mainCanvas.transform.GetChild(5).gameObject;
+        m_foundText = m_foundObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+
         foreach (var item in m_recipeListRef.m_recipes)
         {
             if (!m_discoveredRecipes.ContainsKey(item.m_name))
@@ -83,11 +90,9 @@ public class TeaMaker : MonoBehaviour
         m_Text.gameObject.SetActive(false);
         m_recipeText.gameObject.SetActive(false);
 
+        m_foundObject.SetActive(false);
         m_teaModel = Instantiate(m_teaModel, transform.parent);
-        //m_cupStartPoint = m_teaModel.transform;
         m_teaModel.SetActive(true);
-        //m_teaModel.transform.GetChild(0).gameObject.SetActive(false);
-        //m_teaModel.GetComponent<Animator>().SetTrigger("Activate");
     }
     void OnDrawGizmos()
     {
@@ -102,19 +107,24 @@ public class TeaMaker : MonoBehaviour
         Gizmos.color = color;
         Gizmos.DrawSphere(m_cupEndPoint.position, 0.1f);
     }
-    private GameObject FindIngredient(GameObject toFind)
+    public GameObject FindIngredient(GameObject toFind)
     {
-        GameObject g = new GameObject();
-
         foreach (var ingredient in m_gameManagerRef.m_ingredientList)
         {
             if (ingredient.GetComponent<Ingredient>().m_type == toFind.GetComponent<Ingredient>().m_type)
             {
-                g = ingredient;
+                return ingredient;
             }
         }
 
-        return g;
+        return null;
+    }
+
+    private IEnumerator displayNewRecipeFoundPopup(float waitTime) 
+    {
+        m_foundObject.SetActive(true);
+        yield return new WaitForSeconds(waitTime);
+        m_foundObject.SetActive(false);
     }
 
     public int GetContainerCount()
@@ -137,18 +147,17 @@ public class TeaMaker : MonoBehaviour
                         m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] = true;
                         m_discoveredRecipesNo++;
                         GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
-                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(-m_discoveredRecipesNo * 50,
-                            listTheRecipe.GetComponent<RectTransform>().rect.position.y);
+                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(-m_discoveredRecipesNo * 50, listTheRecipe.GetComponent<RectTransform>().rect.position.y);
                         listTheRecipe.SetActive(true);
-                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
-                            m_currentlyCalculatedRecipe.m_name;
+                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_currentlyCalculatedRecipe.m_name;
                         foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)
                         {
-                            listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text +=
-                                "\n" + item.Key.name + " x " + item.Value;
+                            listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n" + item.Key.name + " x " + item.Value;
                         }
 
                         Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
+                        m_foundText.text = "New Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name;
+                        StartCoroutine(displayNewRecipeFoundPopup(5.0f));
                         m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
                     }
 
