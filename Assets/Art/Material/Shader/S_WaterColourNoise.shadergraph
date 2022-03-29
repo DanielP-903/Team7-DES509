@@ -29,6 +29,9 @@
         },
         {
             "m_Id": "05ff23b909d8404fa309a44a2d4d6632"
+        },
+        {
+            "m_Id": "be1733f642884033a8fcf1956575c1d9"
         }
     ],
     "m_Keywords": [],
@@ -170,6 +173,9 @@
         },
         {
             "m_Id": "8c899e81525749219c9178c0e6b69b08"
+        },
+        {
+            "m_Id": "7ff4f3dd01f64af7bf0bb1dfbaf58e94"
         }
     ],
     "m_GroupDatas": [
@@ -372,6 +378,20 @@
                     "m_Id": "11dad37fb57040359e513c1d4765850c"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "7ff4f3dd01f64af7bf0bb1dfbaf58e94"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "a0835977b62f444fab271683cc99b1d9"
+                },
+                "m_SlotId": 1
             }
         },
         {
@@ -2262,6 +2282,19 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
+    "m_ObjectId": "51f942079839429e99536190eb916629",
+    "m_Id": 0,
+    "m_DisplayName": "Mask",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_BareResource": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "5576fb034d0f40d0b1ce60d9f83b69aa",
     "m_Id": 2,
@@ -2912,6 +2945,41 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "7ff4f3dd01f64af7bf0bb1dfbaf58e94",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -2285.0,
+            "y": 943.0,
+            "width": 113.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "51f942079839429e99536190eb916629"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "be1733f642884033a8fcf1956575c1d9"
     }
 }
 
@@ -4317,6 +4385,29 @@
         }
     ],
     "m_CustomEditorGUI": ""
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "be1733f642884033a8fcf1956575c1d9",
+    "m_Guid": {
+        "m_GuidSerialized": "af355cda-2700-440f-88ff-76772146939a"
+    },
+    "m_Name": "Mask",
+    "m_DefaultReferenceName": "Texture2D_be1733f642884033a8fcf1956575c1d9",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"ad5a5717f31048345bde2d0eaeacbfcc\",\"type\":3}}",
+        "m_Guid": ""
+    },
+    "m_Modifiable": true,
+    "m_DefaultType": 0
 }
 
 {

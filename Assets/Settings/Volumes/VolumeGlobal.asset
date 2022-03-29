@@ -16,14 +16,14 @@ MonoBehaviour:
   m_AdvancedMode: 0
   indirectDiffuseLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 13.13
+    m_Value: 13
     min: 0
   indirectDiffuseLightingLayers:
     m_OverrideState: 0
     m_Value: 255
   reflectionLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 3.47
+    m_Value: 3.4
     min: 0
   reflectionLightingLayers:
     m_OverrideState: 0
