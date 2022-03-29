@@ -28,16 +28,16 @@ public class Ingredient : MonoBehaviour
     public Color m_colour;
     [Tooltip("Change bitterness rating")]
     [Range(0, 10)]
-    [SerializeField] private int m_bitterness;
+    public int m_bitterness;
     [Tooltip("Change sweetness rating")]
     [Range(0, 10)]
-    [SerializeField] private int m_sweetness;
+    public int m_sweetness;
     [Tooltip("Change fruitiness rating")]
     [Range(0, 10)]
-    [SerializeField] private int m_fruitiness;
+    public int m_fruitiness;
     [Tooltip("Change earthiness rating")]
     [Range(0, 10)]
-    [SerializeField] private int m_earthiness;
+    public int m_earthiness;
     [Tooltip("Any special properties that occur when mixed (NOTE: this may only impact the output when mixed as part of a recipe)")]
     [SerializeField] private SpecialProperties m_specialProperties;
 

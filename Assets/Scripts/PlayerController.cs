@@ -19,6 +19,12 @@ public class PlayerController : MonoBehaviour
     [Header("DEBUG")]
     [Tooltip("Current player mode/event")]
     [SerializeField] private Mode m_mode = Mode.Freeroam;
+
+    [HideInInspector] public bool m_finishedTalking = false;
+    [HideInInspector] public bool m_teaAnimFlag;
+
+    private TextMeshProUGUI m_tooltipText;
+    private GameObject m_tooltipObject;
     private Mode m_goToMode = Mode.Freeroam;
     private QD_DialogueHandler handler;
     private TextMeshProUGUI speakerNameTextbox;
@@ -26,9 +32,7 @@ public class PlayerController : MonoBehaviour
     private GameObject dialogueBox;
     private bool m_dialogueFinished = false;
     private GameObject m_camera;
-
     private float xRotation = 0f;
-    private float yRotation = 0f;
     private bool m_moveForward;
     private bool m_moveBackward;
     private bool m_moveLeft;
@@ -40,14 +44,11 @@ public class PlayerController : MonoBehaviour
     private readonly float m_inputDelayTalking = 0.1f;
     private float m_inputTimer;
     private bool m_walkToLock = false;
-    [HideInInspector] public bool m_finishedTalking = false;
     private TeaMaker m_teaMakerRef;
-    public bool m_teaAnimFlag;
     private Vector3 m_lockTalkPos;
     private Quaternion m_lockTalkRot;
     private Vector3 m_lockTeaMakePos;
     private Quaternion m_lockTeaMakeRot;
-    private RecipeList m_recipeListRefPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -56,11 +57,14 @@ public class PlayerController : MonoBehaviour
         m_camera = transform.GetChild(0).gameObject;
         handler = transform.GetChild(1).gameObject.GetComponent<QD_DialogueHandler>();
 
+
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
         dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
         speakerNameTextbox = dialogueBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         messageTextbox = dialogueBox.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-        m_recipeListRefPlayer = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
+
+        m_tooltipObject = mainCanvas.transform.GetChild(4).gameObject;
+        m_tooltipText = m_tooltipObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
 
         float defaultY = transform.position.y;
         m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
@@ -102,6 +106,8 @@ public class PlayerController : MonoBehaviour
             Debug.DebugBreak();
         }
 
+        m_tooltipObject.SetActive(false);
+        m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         TalkingStart();
     }
@@ -165,16 +171,12 @@ public class PlayerController : MonoBehaviour
             if (m_goToMode == Mode.Talking)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 3.0f);
-                //m_lockTalkRot = Quaternion.Euler(200,0,180);
-                //m_camera.transform.localRotation = Quaternion.Lerp(m_camera.transform.localRotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 3.0f);
                 if (distance < 0.1f)
                 {
                     dialogueBox.SetActive(true);
                 }
                 if (distance < 0.05f)
                 {
-                    //transform.rotation = offsetRot;
-                    //m_camera.transform.localRotation = offsetRot;
                     m_teaMakerRef.m_teaModel.GetComponent<Tea>().IsHeld = false;
                     m_teaMakerRef.m_teaModel.GetComponent<Animator>().Play("Inactive");
                     m_mode = Mode.Talking;
@@ -186,8 +188,6 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 1.0f);
                 if (distance < 0.05f)
                 {
-                    //transform.rotation = offsetRot;
-                    //m_camera.transform.localRotation = offsetRot;
                     m_mode = Mode.TeaMaking;
                     m_walkToLock = false;
                 }
@@ -222,7 +222,6 @@ public class PlayerController : MonoBehaviour
         float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
 
         xRotation -= mouseY;
-        yRotation += mouseX;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         switch (m_mode)
@@ -339,6 +338,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Brew tea
                 m_teaMakerRef.BrewTea();
+                m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled = true;
                 return;
             }
 
@@ -366,6 +366,7 @@ public class PlayerController : MonoBehaviour
             }
             if (hit.transform != null && hit.transform.gameObject.GetComponent<Tea>())
             {
+                m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled = false;
                 // Give Tea
                 m_teaMakerRef.GiveTea();
                 if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().m_favouriteRecipe + " tea")
@@ -400,8 +401,6 @@ public class PlayerController : MonoBehaviour
                 m_teaMakerRef.m_teaModel.SetActive(false);
                 m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
                 m_teaMakerRef.ResetTea();
-                //m_teaMakerRef.m_teaModel.GetComponent<Tea>().SetColour(new Color(0, 0, 0, .5f));
-                //m_teaMakerRef.m_teaModel.GetComponent<Tea>().SetColour(new Color(0, 0, 0, .5f));
                 return;
             }
             if (m_heldObject != null)
@@ -416,6 +415,36 @@ public class PlayerController : MonoBehaviour
                 // Remove item from teapot
                 m_teaMakerRef.RemoveIngredient();
             }
+        }
+
+        Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit constantHit, 100.0f);
+
+        if (constantHit.transform != null && constantHit.transform.gameObject.GetComponent<Ingredient>())
+        {
+            m_tooltipObject.SetActive(true);
+            Ingredient values = constantHit.transform.gameObject.GetComponent<Ingredient>();
+            m_tooltipText.text = values.m_type.ToString();
+            if (values.m_bitterness > 5)
+            {
+                m_tooltipText.text += "\n - Bitter";
+            }
+            if (values.m_earthiness > 5)
+            {
+                m_tooltipText.text += "\n - Earthy";
+            }
+            if (values.m_fruitiness > 5)
+            {
+                m_tooltipText.text += "\n - Fruity";
+            }
+            if (values.m_sweetness > 5)
+            {
+                m_tooltipText.text += "\n - Sweet";
+            }
+        }
+        else
+        {
+            // Not hovering over ingredient
+            m_tooltipObject.SetActive(false);
         }
     }
 
