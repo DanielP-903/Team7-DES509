@@ -37,12 +37,12 @@ public class PlayerController : MonoBehaviour
     private GameObject m_heldObject;
     private GameManager m_gameManagerRef;
     private readonly float m_inputDelay = 0.1f;
-    private readonly float m_inputDelayTalking = 0.5f;
+    private readonly float m_inputDelayTalking = 0.1f;
     private float m_inputTimer;
     private bool m_walkToLock = false;
-    private bool m_finishedTalking = false;
+    [HideInInspector] public bool m_finishedTalking = false;
     private TeaMaker m_teaMakerRef;
-
+    public bool m_teaAnimFlag;
     private Vector3 m_lockTalkPos;
     private Quaternion m_lockTalkRot;
     private Vector3 m_lockTeaMakePos;
@@ -136,7 +136,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
-        
+        HandleInput();
+
 
         if (m_walkToLock)
         {
@@ -159,35 +160,39 @@ public class PlayerController : MonoBehaviour
                 default:
                     break;
             }
-            transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 4.0f);
             transform.position = Vector3.Lerp(transform.position, offsetPos, Time.deltaTime * 3.0f);
             float distance = Vector3.Distance(transform.position, offsetPos);
             if (m_goToMode == Mode.Talking)
             {
+                transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 3.0f);
+                //m_lockTalkRot = Quaternion.Euler(200,0,180);
+                //m_camera.transform.localRotation = Quaternion.Lerp(m_camera.transform.localRotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 3.0f);
                 if (distance < 0.1f)
                 {
                     dialogueBox.SetActive(true);
                 }
-                if (distance < 0.01f)
+                if (distance < 0.05f)
                 {
-                    transform.rotation = offsetRot;
-                    m_camera.transform.localRotation = offsetRot;
+                    //transform.rotation = offsetRot;
+                    //m_camera.transform.localRotation = offsetRot;
+                    m_teaMakerRef.m_teaModel.GetComponent<Tea>().IsHeld = false;
+                    m_teaMakerRef.m_teaModel.GetComponent<Animator>().Play("Inactive");
                     m_mode = Mode.Talking;
                     m_walkToLock = false;
                 }
             }
             else if (m_goToMode == Mode.TeaMaking)
             {
-                if (distance < 0.01f)
+                transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 1.0f);
+                if (distance < 0.05f)
                 {
-                    transform.rotation = offsetRot;
-                    m_camera.transform.localRotation = offsetRot;
+                    //transform.rotation = offsetRot;
+                    //m_camera.transform.localRotation = offsetRot;
                     m_mode = Mode.TeaMaking;
                     m_walkToLock = false;
                 }
             }
         }
-        HandleInput();
     }
 
     // Handle player's inputs
@@ -294,10 +299,12 @@ public class PlayerController : MonoBehaviour
                 {
                     m_finishedTalking = false;
                     m_teaMakerRef.ResetTea();
+                    m_teaAnimFlag = true;
                 }
                 else
                 {
                     m_finishedTalking = true;
+                    m_teaAnimFlag = false;
                     GameManager.m_hasBrewedATea = false;
                 }
             }
@@ -392,6 +399,7 @@ public class PlayerController : MonoBehaviour
                 // Scrap tea
                 m_teaMakerRef.m_teaModel.SetActive(false);
                 m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
+                m_teaMakerRef.ResetTea();
                 //m_teaMakerRef.m_teaModel.GetComponent<Tea>().SetColour(new Color(0, 0, 0, .5f));
                 //m_teaMakerRef.m_teaModel.GetComponent<Tea>().SetColour(new Color(0, 0, 0, .5f));
                 return;
