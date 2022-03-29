@@ -175,7 +175,37 @@ MonoBehaviour:
     Speaker: -1
     SpeakerName: 
     PreviousMessage: -1
+    NextMessage: 23
+    MessageText: Shylo takes a sip from the tea and is uplifted slightly at the sweet
+      taste though you hear a few soft smacks of what sounds like lips at the empowered
+      sweetness.
+    Clip: {fileID: 0}
+  - ID: 23
+    Speaker: -1
+    SpeakerName: 
+    PreviousMessage: 22
+    NextMessage: 24
+    MessageText: Shylo takes a swig from the tea followed by a series of sips as
+      if to dodge an aftertaste that causes a familiar lip smacking sound to emit
+      from the spirit.
+    Clip: {fileID: 0}
+  - ID: 24
+    Speaker: -1
+    SpeakerName: 
+    PreviousMessage: 23
+    NextMessage: 26
+    MessageText: "Shylo\u2019s ethereal cheeks raise as if he curled them into a
+      smile though this raise did not last for long until a familiar lip smacking
+      sound would occur and another sip was taken hastily."
+    Clip: {fileID: 0}
+  - ID: 26
+    Speaker: -1
+    SpeakerName: 
+    PreviousMessage: 24
     NextMessage: -1
-    MessageText: 
+    MessageText: "It would seem obvious that although Shylo enjoyed the sweet taste,
+      there would be a jump towards taking another sip as the aftertaste starts to
+      settle in. It seems that Shylo isn\u2019t well adjusted to these sweet teas,
+      perhaps keeping out Ebonstraw from the tea would be better for Shylo."
     Clip: {fileID: 0}
   Choices: []
