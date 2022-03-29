@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: 5f5556c85b3008846901dd8c91668716
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -4263818537984667925
+    second: BezierCurve.002|BezierCurveAction
   externalObjects: {}
   materials:
     materialImportMode: 2
