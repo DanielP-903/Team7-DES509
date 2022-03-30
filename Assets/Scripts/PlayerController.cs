@@ -315,17 +315,14 @@ public class PlayerController : MonoBehaviour
     }
     private GameObject FindIngredient()
     {
-        GameObject g = new GameObject();
-
         foreach (var ingredient in m_gameManagerRef.m_ingredientList)
         {
             if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<Ingredient>().m_type)
             {
-                g = ingredient;
+               return ingredient;
             }
         }
-
-        return g;
+        return null;
     }
     private void TeaMakingActions()
     {
@@ -439,6 +436,18 @@ public class PlayerController : MonoBehaviour
             if (values.m_sweetness > 5)
             {
                 m_tooltipText.text += "\n - Sweet";
+            }
+        }
+        else if (constantHit.transform != null && constantHit.transform.CompareTag("Machine") && !m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled)
+        {
+            m_tooltipObject.SetActive(true);
+            m_tooltipText.text = "Contains: ";
+            foreach (var item in constantHit.transform.gameObject.GetComponent<TeaMaker>().m_container)
+            {
+                if (item.Value != 0)
+                {
+                    m_tooltipText.text += "\n" + m_teaMakerRef.FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_type.ToString() + " x " + item.Value.ToString();
+                }
             }
         }
         else
