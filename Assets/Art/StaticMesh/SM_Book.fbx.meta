@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: -4263818537984667925
     second: BezierCurve.002|BezierCurveAction
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TT_checker_512x512_UV_GRID
+    second: {fileID: 2100000, guid: ffb822a1b4a129e4f93c7b287fffa3e8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
