@@ -11,7 +11,6 @@ public class Tea : MonoBehaviour
     {
         m_colour = colour;
         transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.color = m_colour;
-        //GetComponent<Animator>().SetTrigger("Activate");
         GetComponent<Animator>().Play("CupFill");
     }
     public bool IsHeld = false;
@@ -35,16 +34,28 @@ public class Tea : MonoBehaviour
             transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
             transform.parent = m_heldLocationRef.transform;
+            //if (m_playerRef.transform.position == m_playerRef.m_lockTalkPos)
+            if (Vector3.Distance(m_playerRef.transform.position, m_playerRef.m_lockTalkPos) < 0.1f)
+            {
+                IsHeld = false;
+                transform.position = m_teaMakerRef.m_cupEndPoint.position;
 
+            }
         }
         else
         {
             transform.parent = null;
-            if (!GameManager.m_hasBrewedATea || m_playerRef.m_teaAnimFlag) 
+           // if (!GameManager.m_hasBrewedATea && m_playerRef.m_teaAnimFlag) 
+            if (!GameManager.m_hasBrewedATea)
             {
                 transform.position = m_teaMakerRef.m_cupStartPoint.position;
             }
             else
+            {
+                //transform.position = m_teaMakerRef.m_cupEndPoint.position;
+            }
+
+            if (m_playerRef.transform.position == m_playerRef.m_lockTalkPos)
             {
                 transform.position = m_teaMakerRef.m_cupEndPoint.position;
             }

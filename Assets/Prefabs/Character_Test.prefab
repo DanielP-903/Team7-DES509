@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7814783753685440643}
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 5, y: 2.3, z: -5.2000003}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8ec8f0733abf94f4cb195bca2cd324ed, type: 2}
+  - {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +95,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 3}
+  m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0.5, y: 0, z: 0}
 --- !u!114 &7814783753685440646
 MonoBehaviour:
@@ -109,9 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c76f56dddd403c4dbf6bbeff1f693f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterName: 0
-  m_stage: 0
-  m_favouriteRecipe: Test
+  characterScriptableObject: {fileID: 11400000, guid: 91d8dc4d21ff6774dad8611009c870f8, type: 2}
+  m_isAvailable: 0
 --- !u!95 &378314739
 Animator:
   serializedVersion: 3

@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Player Look Sensitivity")]
     [Range(0, 0.3f)]
     [SerializeField] private float MouseSensitivity = 0.1f;
+    [Tooltip("Talking Skip/Next Delay")]
+    [Range(0.1f, 0.5f)]
+    [SerializeField] private float m_inputDelayTalking = 0.1f;
+
     [Header("DEBUG")]
     [Tooltip("Current player mode/event")]
     [SerializeField] private Mode m_mode = Mode.Freeroam;
@@ -41,13 +45,13 @@ public class PlayerController : MonoBehaviour
     private GameObject m_heldObject;
     private GameManager m_gameManagerRef;
     private readonly float m_inputDelay = 0.1f;
-    private readonly float m_inputDelayTalking = 0.1f;
+
     private float m_inputTimer;
     private bool m_walkToLock = false;
     private TeaMaker m_teaMakerRef;
-    private Vector3 m_lockTalkPos;
+    public Vector3 m_lockTalkPos;
     private Quaternion m_lockTalkRot;
-    private Vector3 m_lockTeaMakePos;
+    public Vector3 m_lockTeaMakePos;
     private Quaternion m_lockTeaMakeRot;
 
     // Start is called before the first frame update
@@ -67,8 +71,9 @@ public class PlayerController : MonoBehaviour
         m_tooltipText = m_tooltipObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
 
         float defaultY = transform.position.y;
-        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
-        m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
+       // m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
+        
+        m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
         m_lockTalkRot = transform.rotation;
 
         m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
@@ -116,8 +121,9 @@ public class PlayerController : MonoBehaviour
         var color = Color.cyan;
         color.a = 0.5f;
         Gizmos.color = color;
-        m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
-        m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
+        //m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
+        //m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
+        m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
         m_lockTalkRot = transform.rotation;
 
         Gizmos.DrawSphere(m_lockTalkPos, 0.5f);
@@ -299,6 +305,10 @@ public class PlayerController : MonoBehaviour
                     m_finishedTalking = false;
                     m_teaMakerRef.ResetTea();
                     m_teaAnimFlag = true;
+
+                    // End of interaction, go away
+                    m_gameManagerRef.currentCharacter.leaving = true;
+                    m_gameManagerRef.currentCharacter.isAvailable = false;
                 }
                 else
                 {
@@ -366,7 +376,7 @@ public class PlayerController : MonoBehaviour
                 m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled = false;
                 // Give Tea
                 m_teaMakerRef.GiveTea();
-                if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().m_favouriteRecipe + " tea")
+                if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().characterScriptableObject.favouriteRecipe + " tea")
                 {
                     handler.SetConversation("Served_Neutral");
                     handler.SetMessage(handler.currentConversation.FirstMessage);
