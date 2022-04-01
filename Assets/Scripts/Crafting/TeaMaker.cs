@@ -44,6 +44,8 @@ public class TeaMaker : MonoBehaviour
     private GameManager m_gameManagerRef;
     [SerializeField]
     public CustomIntDictionary m_container;
+
+    public bool hasClickedBrew = false;
     public IDictionary<UnityEngine.Object, int> CustomIntDictionary
     {
         get { return m_container; }
@@ -135,6 +137,7 @@ public class TeaMaker : MonoBehaviour
     {
         if (m_container.Count > 0 && AddedOrder.Count > 0)
         {
+            hasClickedBrew = true;
             m_teaModel.SetActive(true);
             m_teaModel.transform.GetChild(0).gameObject.SetActive(true);
             if (m_currentlyCalculatedRecipe.m_name != null)
@@ -200,6 +203,7 @@ public class TeaMaker : MonoBehaviour
             m_lidDestination.SetActive(false);
         }
         m_teaModel.GetComponent<Tea>().IsHeld = true;
+        hasClickedBrew = false;
     }
 
     public void ResetTea()

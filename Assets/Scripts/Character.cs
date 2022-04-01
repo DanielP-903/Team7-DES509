@@ -31,27 +31,18 @@ public class Character : MonoBehaviour
     private void Update()
     {
         GetComponent<BoxCollider>().enabled = isAvailable;
-
-        if (isAvailable)
-        {
-            UpdateLook();
-        }
-        else
+        transform.LookAt(m_playerRef.transform, Vector3.up);
+        transform.eulerAngles = new Vector3(90.0f, transform.eulerAngles.y, 0.0f);
+        if (!isAvailable)
         {
             MoveIntoPosition();
         }
     }
 
-    private void UpdateLook()
-    {
-        transform.LookAt(m_playerRef.transform, Vector3.up);
-        transform.eulerAngles = new Vector3(90.0f, transform.eulerAngles.y, 0.0f);
-    }
-
     private void MoveIntoPosition()
     {
         Vector3 destination = leaving ? m_gameManagerRef.m_entryPos : m_gameManagerRef.m_exitPos;
-        transform.position = Vector3.MoveTowards(transform.position, destination, 0.01f);
+        transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime*2);
         if (Vector3.Distance(transform.position, destination) < 0.02f)
         {
             transform.position = destination;

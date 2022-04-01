@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool m_finishedTalking = false;
     [HideInInspector] public bool m_teaAnimFlag;
-
+    private bool m_mouseDown = false;
     private TextMeshProUGUI m_tooltipText;
     private GameObject m_tooltipObject;
     private Mode m_goToMode = Mode.Freeroam;
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
                 if (distance < 0.05f)
                 {
                     m_teaMakerRef.m_teaModel.GetComponent<Tea>().IsHeld = false;
-                    m_teaMakerRef.m_teaModel.GetComponent<Animator>().Play("Inactive");
+                    StartCoroutine(m_teaMakerRef.m_teaModel.GetComponent<Tea>().PlayAnim());
                     m_mode = Mode.Talking;
                     m_walkToLock = false;
                 }
@@ -223,6 +223,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMouseInput()
     {
+        CheckReleased();
+
         var mouse = Mouse.current;
         float mouseX = mouse.delta.x.ReadValue() * MouseSensitivity;
         float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
@@ -254,7 +256,6 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-
     private void FreeroamActions()
     {
         var mouse = Mouse.current;
@@ -285,8 +286,9 @@ public class PlayerController : MonoBehaviour
     private void TalkingActions()
     {
         var mouse = Mouse.current;
-        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0 && m_finishedTalking == false)
+        if (mouse.leftButton.IsActuated() && m_inputTimer <= 0 && m_finishedTalking == false && m_mouseDown == false)
         {
+            m_mouseDown = true;
             m_inputTimer = m_inputDelayTalking;
             // GO TO NEXT DIALOGUE OPTION
             // Don't do anything if the conversation is over
@@ -323,6 +325,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void CheckReleased()
+    {
+        if (m_mouseDown && Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            m_mouseDown = false;
+        }
+    }
+
     private GameObject FindIngredient()
     {
         foreach (var ingredient in m_gameManagerRef.m_ingredientList)
@@ -334,6 +345,7 @@ public class PlayerController : MonoBehaviour
         }
         return null;
     }
+
     private void TeaMakingActions()
     {
         var mouse = Mouse.current;
@@ -424,46 +436,86 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // TOOLTIPS
         Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit constantHit, 100.0f);
-
-        if (constantHit.transform != null && constantHit.transform.gameObject.GetComponent<Ingredient>())
-        {
-            m_tooltipObject.SetActive(true);
-            Ingredient values = constantHit.transform.gameObject.GetComponent<Ingredient>();
-            m_tooltipText.text = values.m_type.ToString();
-            if (values.m_bitterness > 5)
-            {
-                m_tooltipText.text += "\n - Bitter";
-            }
-            if (values.m_earthiness > 5)
-            {
-                m_tooltipText.text += "\n - Earthy";
-            }
-            if (values.m_fruitiness > 5)
-            {
-                m_tooltipText.text += "\n - Fruity";
-            }
-            if (values.m_sweetness > 5)
-            {
-                m_tooltipText.text += "\n - Sweet";
-            }
-        }
-        else if (constantHit.transform != null && constantHit.transform.CompareTag("Machine") && !m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled)
-        {
-            m_tooltipObject.SetActive(true);
-            m_tooltipText.text = "Contains: ";
-            foreach (var item in constantHit.transform.gameObject.GetComponent<TeaMaker>().m_container)
-            {
-                if (item.Value != 0)
-                {
-                    m_tooltipText.text += "\n" + m_teaMakerRef.FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_type.ToString() + " x " + item.Value.ToString();
-                }
-            }
-        }
-        else
+        if (constantHit.transform == null)
         {
             // Not hovering over ingredient
             m_tooltipObject.SetActive(false);
+        }
+        else
+        {
+            if (constantHit.transform.gameObject.GetComponent<Ingredient>())
+            {
+                m_tooltipObject.SetActive(true);
+                Ingredient values = constantHit.transform.gameObject.GetComponent<Ingredient>();
+                m_tooltipText.text = values.m_type.ToString();
+                if (values.m_bitterness > 5)
+                {
+                    m_tooltipText.text += "\n - Bitter";
+                }
+
+                if (values.m_earthiness > 5)
+                {
+                    m_tooltipText.text += "\n - Earthy";
+                }
+
+                if (values.m_fruitiness > 5)
+                {
+                    m_tooltipText.text += "\n - Fruity";
+                }
+
+                if (values.m_sweetness > 5)
+                {
+                    m_tooltipText.text += "\n - Sweet";
+                }
+            }
+            else if (constantHit.transform.CompareTag("Machine") && !m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled && !m_teaMakerRef.hasClickedBrew)
+            {
+                m_tooltipObject.SetActive(true);
+                m_tooltipText.text = "Contains: ";
+                foreach (var item in constantHit.transform.gameObject.GetComponent<TeaMaker>().m_container)
+                {
+                    if (item.Value != 0)
+                    {
+                        m_tooltipText.text +=
+                            "\n" + m_teaMakerRef.FindIngredient((GameObject) item.Key).GetComponent<Ingredient>().m_type
+                                .ToString() + " x " + item.Value.ToString();
+                    }
+                }
+            }
+            else if (constantHit.transform.gameObject.GetComponent<Tea>() && m_teaMakerRef.hasClickedBrew)
+            {
+                m_tooltipObject.SetActive(true);
+                if (m_teaMakerRef.m_currentlyCalculatedRecipe != null &&
+                    m_teaMakerRef.m_currentlyCalculatedRecipe.m_name != "")
+                {
+                    m_tooltipText.text = m_teaMakerRef.m_currentlyCalculatedRecipe.m_name + "Tea";
+                }
+                else
+                {
+                    m_tooltipText.text = "Tea";
+                }
+
+                foreach (var item in m_teaMakerRef.m_container)
+                {
+                    if (item.Value != 0)
+                    {
+                        m_tooltipText.text +=
+                            "\n" + m_teaMakerRef.FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_type
+                                .ToString() + " x " + item.Value.ToString();
+                    }
+                }
+            }
+            else if (constantHit.transform.CompareTag("BrewTea") && !m_teaMakerRef.hasClickedBrew && m_teaMakerRef.m_container.Count > 0)
+            {
+                m_tooltipObject.SetActive(true);
+                m_tooltipText.text = "Click to brew";
+            }
+            else
+            {
+                m_tooltipObject.SetActive(false);
+            }
         }
     }
 

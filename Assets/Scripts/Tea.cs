@@ -13,6 +13,13 @@ public class Tea : MonoBehaviour
         transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.color = m_colour;
         GetComponent<Animator>().Play("CupFill");
     }
+
+    public IEnumerator PlayAnim()
+    {
+        yield return new WaitForSeconds(2.0f);
+        GetComponent<Animator>().Play("Inactive");
+    }
+
     public bool IsHeld = false;
     private GameObject m_heldLocationRef;
     private TeaMaker m_teaMakerRef;
