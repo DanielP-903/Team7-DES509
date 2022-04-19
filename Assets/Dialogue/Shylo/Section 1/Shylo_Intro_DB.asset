@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shylo_Intro_DB
   m_EditorClassIdentifier: 
   DataDB: {fileID: 11400000, guid: a97e30e53ebd7774c884c2d3cf109efa, type: 2}
-  NextID: 36
+  NextID: 37
   Nodes:
   - ID: 0
     Type: 2
@@ -167,7 +167,7 @@ MonoBehaviour:
     Type: 1
     Window:
       serializedVersion: 2
-      x: 10
+      x: 24
       y: 627
       width: 200
       height: 65
