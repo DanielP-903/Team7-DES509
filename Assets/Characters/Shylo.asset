@@ -16,3 +16,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   stage: 0
   favouriteRecipe: Lavender Mint
+  dialogues:
+  - {fileID: 11400000, guid: a97e30e53ebd7774c884c2d3cf109efa, type: 2}
+  - {fileID: 11400000, guid: 100e8e2a0686a634180eb0987ed919a1, type: 2}
+  - {fileID: 11400000, guid: efe284a6f0910e44eb683dda0235e64e, type: 2}
+  - {fileID: 11400000, guid: 84d1be85e197e864f852c0e1c331ea30, type: 2}

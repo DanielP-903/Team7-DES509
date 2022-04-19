@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
         m_camera = transform.GetChild(0).gameObject;
         handler = transform.GetChild(1).gameObject.GetComponent<QD_DialogueHandler>();
 
-
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
         dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
         speakerNameTextbox = dialogueBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
@@ -71,7 +70,6 @@ public class PlayerController : MonoBehaviour
         m_tooltipText = m_tooltipObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
 
         float defaultY = transform.position.y;
-       // m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
         
         m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
         m_lockTalkRot = transform.rotation;
@@ -121,8 +119,6 @@ public class PlayerController : MonoBehaviour
         var color = Color.cyan;
         color.a = 0.5f;
         Gizmos.color = color;
-        //m_lockTalkPos = GameObject.FindGameObjectWithTag("Character").transform.position + new Vector3(0, 0, 2.4f);
-        //m_lockTalkPos = new Vector3(m_lockTalkPos.x, transform.position.y, m_lockTalkPos.z);
         m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
         m_lockTalkRot = transform.rotation;
 
@@ -139,6 +135,7 @@ public class PlayerController : MonoBehaviour
 
     private void TalkingStart()
     {
+        handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
         handler.SetConversation("Ordering");
         SetText();
         dialogueBox.SetActive(false);
@@ -316,6 +313,19 @@ public class PlayerController : MonoBehaviour
                     // End of interaction, go away
                     m_gameManagerRef.currentCharacter.leaving = true;
                     m_gameManagerRef.currentCharacter.isAvailable = false;
+
+                    // Go to next dialogue state
+                    if (m_gameManagerRef.currentCharacter.stage == 0 || handler.currentConversation.Name == "Served_Happy")
+                    {
+                        if (m_gameManagerRef.currentCharacter.stage < 3)
+                        {
+                            m_gameManagerRef.currentCharacter.stage++;
+                        }
+                    }
+
+
+                    m_gameManagerRef.currentCharacter.currentDialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.dialogues[m_gameManagerRef.currentCharacter.stage];
+                    handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
                 }
                 else
                 {

@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using QuantumTek.QuantumDialogue;
 public class Character : MonoBehaviour
 {
     public SO_Character characterScriptableObject;
+    public int stage = 0;
+
 
     private GameObject m_playerRef;
     private GameManager m_gameManagerRef;
     [HideInInspector] public bool isAvailable;
     [HideInInspector] public bool leaving;
+    [HideInInspector] public QD_Dialogue currentDialogue;
 
     private void Start()
     {
@@ -54,7 +57,7 @@ public class Character : MonoBehaviour
             if (leaving)
             {
                 leaving = false;
-                isAvailable = true; // Change to true/false to allow/disallow stopping after char exit
+                isAvailable = false; // Change to true/false to allow/disallow stopping after char exit
             }
             else
             {
