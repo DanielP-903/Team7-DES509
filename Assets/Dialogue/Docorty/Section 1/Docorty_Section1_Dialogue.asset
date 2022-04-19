@@ -18,10 +18,10 @@ MonoBehaviour:
     FirstMessage: 2
   - ID: 3
     Name: Served_Neutral
-    FirstMessage: -1
+    FirstMessage: 9
   - ID: 4
     Name: Served_Happy
-    FirstMessage: -1
+    FirstMessage: 12
   Speakers:
   - ID: 0
     Name: Docorty
@@ -34,11 +34,114 @@ MonoBehaviour:
     NextMessage: 5
     MessageText: AH-HAH! Greetings!
     Clip: {fileID: 0}
+    Expression: {fileID: 0}
   - ID: 5
     Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 2
-    NextMessage: -1
+    NextMessage: 6
     MessageText: "I do hope you haven\u2019t forgotten about yours truly. HA HAH!"
     Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 6
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 5
+    NextMessage: 7
+    MessageText: Well I saw a couple of regulars coming and going through these doors.
+      You really have used your head start wisely.
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 7
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 6
+    NextMessage: 8
+    MessageText: So now it is time for a true display of skill from you!
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 8
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 7
+    NextMessage: -1
+    MessageText: Bring me your finest beverage!
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 9
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: -1
+    NextMessage: 10
+    MessageText: Hmm well you see.
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 10
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 9
+    NextMessage: 11
+    MessageText: "It\u2019s certainly GOOD but there is something you are perhaps
+      missing."
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 11
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 10
+    NextMessage: -1
+    MessageText: 'Regardless, I have taken my notes. I shall be seeing you again,
+      fellow competitor.
+
+'
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 12
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: -1
+    NextMessage: 13
+    MessageText: Well, well.
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 13
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 12
+    NextMessage: 14
+    MessageText: "You certainly have sharpened your skills haven\u2019t you?\r\n"
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 14
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 13
+    NextMessage: 15
+    MessageText: A rather pleasant blend indeed.
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 15
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 14
+    NextMessage: 16
+    MessageText: VERY WELL! Our rivalry shall be of legends.
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 16
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 15
+    NextMessage: 17
+    MessageText: A battle of brews.
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 17
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 16
+    NextMessage: -1
+    MessageText: Until we meet again my friendly competition.
+    Clip: {fileID: 0}
+    Expression: {fileID: 0}
   Choices: []
