@@ -58,7 +58,7 @@ MonoBehaviour:
     NextMessage: 19
     MessageText: This is new for me... A good new! A great new even! Uhm.
     Clip: {fileID: 0}
-    Expression: {fileID: 2100000, guid: 5e5d03fe800ba8044b1d4874d0a85441, type: 2}
+    Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   - ID: 19
     Speaker: 0
     SpeakerName: Shylo
@@ -66,7 +66,7 @@ MonoBehaviour:
     NextMessage: -1
     MessageText: S-Sorry...
     Clip: {fileID: 0}
-    Expression: {fileID: 2100000, guid: 3bcdfb8a36f91b945ab9a912017f2dbf, type: 2}
+    Expression: {fileID: 2100000, guid: c1481d3bdec9cae45894eafe3b3b3cfc, type: 2}
   - ID: 21
     Speaker: 0
     SpeakerName: Shylo
