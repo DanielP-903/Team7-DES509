@@ -290,6 +290,11 @@ public class PlayerController : MonoBehaviour
         {
             m_mouseDown = true;
             m_inputTimer = m_inputDelayTalking;
+            Material newExpression = handler.GetMessage().Expression;
+            if (newExpression != null)
+            {
+                m_gameManagerRef.currentCharacter.SetExpression(newExpression);
+            }
             // GO TO NEXT DIALOGUE OPTION
             // Don't do anything if the conversation is over
             if (m_dialogueFinished)

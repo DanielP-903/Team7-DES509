@@ -15,6 +15,7 @@ namespace QuantumTek.QuantumDialogue
         public int NextMessage = -1;
         public string MessageText;
         public AudioClip Clip;
+        public Material Expression;
 
         public QD_Message(int id)
         { ID = id; }

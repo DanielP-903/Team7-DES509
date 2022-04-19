@@ -13,7 +13,7 @@ namespace QuantumTek.QuantumDialogue.Editor
         public QD_MessageNode(int id, QD_NodeType type, float x = 0, float y = 0) : base(id, type, x, y)
         {
             Type = QD_NodeType.Message;
-            Window = new Rect(0, 0, 200, 175);
+            Window = new Rect(0, 0, 200, 175);//175);
             Inputs = new List<QD_Knob>
             {
                 new QD_Knob(0, "Speaker", QD_KnobType.Input, 7.5f, false),
@@ -49,15 +49,20 @@ namespace QuantumTek.QuantumDialogue.Editor
             EditorGUI.BeginChangeCheck();
             EditorGUI.LabelField(new Rect(5, 32.5f, 190, 20), "Message", QD_DialogueEditor.skin.label);
             string fMessage = EditorGUI.TextArea(new Rect(5, 55, 190, 65), Data.MessageText, QD_DialogueEditor.skin.textArea);
-            EditorGUI.LabelField(new Rect(5, 125, 190, 20), "Audio Clip", QD_DialogueEditor.skin.label);
-            EditorGUILayout.Space(125);
-            AudioClip fClip = (AudioClip)EditorGUILayout.ObjectField(Data.Clip, typeof(AudioClip), false);
 
+            //EditorGUI.LabelField(new Rect(5, 125, 190, 20), "Audio Clip", QD_DialogueEditor.skin.label);
+            //EditorGUILayout.Space(125);
+            //AudioClip fClip = (AudioClip)EditorGUILayout.ObjectField(Data.Clip, typeof(AudioClip), false);
+
+            EditorGUI.LabelField(new Rect(5, 125, 190, 20), "Expression Material", QD_DialogueEditor.skin.label);
+            EditorGUILayout.Space(125);
+            Material fMat = (Material)EditorGUILayout.ObjectField(Data.Expression, typeof(Material), false);
             if (EditorGUI.EndChangeCheck())
             {
                 EditorUtility.SetDirty(QD_DialogueEditor.db.DataDB);
                 Data.MessageText = fMessage;
-                Data.Clip = fClip;
+                //Data.Clip = fClip;
+                Data.Expression = fMat;
                 QD_DialogueEditor.db.DataDB.SetMessage(Data.ID, Data);
             }
 

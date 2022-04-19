@@ -28,6 +28,11 @@ public class Character : MonoBehaviour
         transform.position = m_gameManagerRef.m_entryPos;
     }
 
+    public void SetExpression(Material mat)
+    {
+        GetComponent<MeshRenderer>().sharedMaterial = mat;
+    }
+
     private void Update()
     {
         GetComponent<BoxCollider>().enabled = isAvailable;
