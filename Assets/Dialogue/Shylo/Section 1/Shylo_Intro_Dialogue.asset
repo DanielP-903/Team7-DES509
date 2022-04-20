@@ -33,15 +33,13 @@ MonoBehaviour:
     PreviousMessage: -1
     NextMessage: 16
     MessageText: H-Hi, my name is Shylo, uhm.
-    Clip: {fileID: 0}
-    Expression: {fileID: 2100000, guid: 3bcdfb8a36f91b945ab9a912017f2dbf, type: 2}
+    Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   - ID: 16
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: 2
     NextMessage: 17
     MessageText: I'd like a tea please...
-    Clip: {fileID: 0}
     Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   - ID: 17
     Speaker: 0
@@ -49,7 +47,6 @@ MonoBehaviour:
     PreviousMessage: 16
     NextMessage: 18
     MessageText: Sorry if that's vague! J-Just you know uhm.
-    Clip: {fileID: 0}
     Expression: {fileID: 2100000, guid: c1481d3bdec9cae45894eafe3b3b3cfc, type: 2}
   - ID: 18
     Speaker: 0
@@ -57,7 +54,6 @@ MonoBehaviour:
     PreviousMessage: 17
     NextMessage: 19
     MessageText: This is new for me... A good new! A great new even! Uhm.
-    Clip: {fileID: 0}
     Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   - ID: 19
     Speaker: 0
@@ -65,7 +61,6 @@ MonoBehaviour:
     PreviousMessage: 18
     NextMessage: -1
     MessageText: S-Sorry...
-    Clip: {fileID: 0}
     Expression: {fileID: 2100000, guid: c1481d3bdec9cae45894eafe3b3b3cfc, type: 2}
   - ID: 21
     Speaker: 0
@@ -74,16 +69,14 @@ MonoBehaviour:
     NextMessage: 23
     MessageText: Woah, this is... Real fancy. You must have put a lot of effort into
       making it.
-    Clip: {fileID: 0}
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 5e5d03fe800ba8044b1d4874d0a85441, type: 2}
   - ID: 23
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: 21
     NextMessage: 24
     MessageText: I-I... Uhm... Y-you see...
-    Clip: {fileID: 0}
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: c1481d3bdec9cae45894eafe3b3b3cfc, type: 2}
   - ID: 24
     Speaker: 0
     SpeakerName: Shylo
@@ -91,23 +84,20 @@ MonoBehaviour:
     NextMessage: 26
     MessageText: I-I'm sorry, so sorry. I didn't want you to go through all of this
       trouble just for me.
-    Clip: {fileID: 0}
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: c1481d3bdec9cae45894eafe3b3b3cfc, type: 2}
   - ID: 26
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: 24
     NextMessage: 27
     MessageText: I would have been happy with something a little more simple honestly.
-    Clip: {fileID: 0}
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   - ID: 27
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: 26
     NextMessage: 28
     MessageText: Not that this isn't nice! O-Or that I'm upset I just, y'know.
-    Clip: {fileID: 0}
     Expression: {fileID: 0}
   - ID: 28
     Speaker: 0
@@ -115,7 +105,6 @@ MonoBehaviour:
     PreviousMessage: 27
     NextMessage: -1
     MessageText: F-Forgive me, nevermind. Thanks you still!
-    Clip: {fileID: 0}
     Expression: {fileID: 0}
   - ID: 30
     Speaker: 0
@@ -123,7 +112,6 @@ MonoBehaviour:
     PreviousMessage: -1
     NextMessage: 31
     MessageText: Mmh, oh my.
-    Clip: {fileID: 0}
     Expression: {fileID: 0}
   - ID: 31
     Speaker: 0
@@ -132,7 +120,6 @@ MonoBehaviour:
     NextMessage: 32
     MessageText: You sure do know how to make a relaxing brew. So calm, no fuss,
       just simple flavour.
-    Clip: {fileID: 0}
     Expression: {fileID: 0}
   - ID: 32
     Speaker: 0
@@ -141,7 +128,6 @@ MonoBehaviour:
     NextMessage: 33
     MessageText: Oh! Ehhm, I hope my approach wasn't too ehhm, startling o-or weird
       y'know.
-    Clip: {fileID: 0}
     Expression: {fileID: 0}
   - ID: 33
     Speaker: 0
@@ -150,7 +136,6 @@ MonoBehaviour:
     NextMessage: 35
     MessageText: It's sort of... Well I guess you could call it my "thing"? It's
       what I do, my job.
-    Clip: {fileID: 0}
     Expression: {fileID: 0}
   - ID: 35
     Speaker: 0
@@ -158,6 +143,5 @@ MonoBehaviour:
     PreviousMessage: 33
     NextMessage: -1
     MessageText: A-Anyway enough of that, thanks again!
-    Clip: {fileID: 0}
     Expression: {fileID: 0}
   Choices: []
