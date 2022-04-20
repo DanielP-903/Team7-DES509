@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using QuantumTek.QuantumDialogue;
 using TMPro;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool m_finishedTalking = false;
     [HideInInspector] public bool m_teaAnimFlag;
+    [HideInInspector] public List<QD_Message> messageList;
     private bool m_mouseDown = false;
     private TextMeshProUGUI m_tooltipText;
     private GameObject m_tooltipObject;
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        messageList = new List<QD_Message>();
         m_inputTimer = 0.1f;
         m_camera = transform.GetChild(0).gameObject;
         handler = transform.GetChild(1).gameObject.GetComponent<QD_DialogueHandler>();
@@ -143,6 +146,12 @@ public class PlayerController : MonoBehaviour
         handler.SetConversation("Ordering");
         SetText();
         dialogueBox.SetActive(false);
+        messageList.Add(handler.GetMessage());
+        Material newExpression = handler.GetMessage().Expression;
+        if (newExpression != null)
+        {
+            m_gameManagerRef.currentCharacter.SetExpression(newExpression);
+        }
     }
 
     // Update is called once per frame
@@ -294,10 +303,14 @@ public class PlayerController : MonoBehaviour
         {
             m_mouseDown = true;
             m_inputTimer = m_inputDelayTalking;
-            Material newExpression = handler.GetMessage().Expression;
-            if (newExpression != null)
+            if (handler.currentMessageInfo.NextID != -1)
             {
-                m_gameManagerRef.currentCharacter.SetExpression(newExpression);
+                int nextID = handler.GetNextID(handler.GetMessage().ID);
+                Material newExpression = handler.dialogue.GetMessage(nextID).Expression;
+                if (newExpression != null)
+                {
+                    m_gameManagerRef.currentCharacter.SetExpression(newExpression);
+                }
             }
             // GO TO NEXT DIALOGUE OPTION
             // Don't do anything if the conversation is over
@@ -333,6 +346,8 @@ public class PlayerController : MonoBehaviour
 
                     m_gameManagerRef.currentCharacter.currentDialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.dialogues[m_gameManagerRef.currentCharacter.stage];
                     handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
+
+                    messageList.Clear();
                 }
                 else
                 {
@@ -579,6 +594,8 @@ public class PlayerController : MonoBehaviour
 
         // Go to the next message
         handler.NextMessage(choice);
+        messageList.Add(handler.GetMessage());
+
         // Set the new text
         SetText();
         // End if there is no next message

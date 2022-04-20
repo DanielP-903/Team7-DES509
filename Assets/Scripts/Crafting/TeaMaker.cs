@@ -73,8 +73,6 @@ public class TeaMaker : MonoBehaviour
         m_recipeText = mainCanvas.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
 
         m_recipeBase = mainCanvas.transform.GetChild(6).transform.GetChild(2).gameObject;
-        //GameObject recipeCanvas = GameObject.FindGameObjectWithTag("RecipeCanvas");
-        //m_recipeBase = recipeCanvas.transform.GetChild(1).gameObject;
 
         m_recipeListRef = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
         m_recipeText.text = "";

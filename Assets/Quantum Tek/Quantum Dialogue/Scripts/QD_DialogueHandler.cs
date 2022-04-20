@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace QuantumTek.QuantumDialogue
 {
@@ -42,6 +43,7 @@ namespace QuantumTek.QuantumDialogue
                 return null;
             return dialogue.GetMessage(currentMessageInfo.ID);
         }
+
 
         /// <summary>
         /// Returns the current choice, if it is a choice node.
@@ -113,6 +115,7 @@ namespace QuantumTek.QuantumDialogue
         /// <returns></returns>
         public QD_MessageInfo NextMessage(int choice = -1)
         {
+
             if (currentMessageInfo.NextID < 0 && choice == -1)
             {
                 currentMessageInfo = new QD_MessageInfo(-1, -1, QD_NodeType.Base);
