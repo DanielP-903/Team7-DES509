@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 m_lockTeaMakePos;
     private Quaternion m_lockTeaMakeRot;
 
+    private GameObject m_recipeBookUI;
+    private bool m_lookingAtBook = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
         dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
         speakerNameTextbox = dialogueBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         messageTextbox = dialogueBox.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+
+        m_recipeBookUI = mainCanvas.transform.GetChild(6).gameObject;
 
         m_tooltipObject = mainCanvas.transform.GetChild(4).gameObject;
         m_tooltipText = m_tooltipObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
@@ -220,37 +224,40 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMouseInput()
     {
-        CheckReleased();
-
-        var mouse = Mouse.current;
-        float mouseX = mouse.delta.x.ReadValue() * MouseSensitivity;
-        float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
-
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        switch (m_mode)
+        if (!m_lookingAtBook)
         {
-            case Mode.Freeroam:
-                {
-                    FreeroamActions();
+            CheckReleased();
+
+            var mouse = Mouse.current;
+            float mouseX = mouse.delta.x.ReadValue() * MouseSensitivity;
+            float mouseY = mouse.delta.y.ReadValue() * MouseSensitivity;
+
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+            switch (m_mode)
+            {
+                case Mode.Freeroam:
+                    {
+                        FreeroamActions();
+                        break;
+                    }
+                case Mode.Talking:
+                    {
+                        TalkingActions();
+                        break;
+                    }
+                case Mode.TeaMaking:
+                    {
+                        TeaMakingActions();
+                        break;
+                    }
+                default:
                     break;
-                }
-            case Mode.Talking:
-                {
-                    TalkingActions();
-                    break;
-                }
-            case Mode.TeaMaking:
-                {
-                    TeaMakingActions();
-                    break;
-                }
-            default:
-                break;
+            }
+            m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            transform.Rotate(Vector3.up * mouseX);
         }
-        m_camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
     }
 
     private void FreeroamActions()
@@ -424,6 +431,17 @@ public class PlayerController : MonoBehaviour
                 m_finishedTalking = false;
                 return;
             }
+
+            if (hit.transform != null && hit.transform.CompareTag("RecipeBook"))
+            {
+                // Display UI
+                m_recipeBookUI.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                m_lookingAtBook = true;
+                return;
+            }
+            
+
         }
         if (mouse.rightButton.IsActuated() && m_inputTimer <= 0)
         {
@@ -519,6 +537,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void ExitBook()
+    {
+        m_recipeBookUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        m_lookingAtBook = false;
+    }
+
 
     // Taken from Quantum Dialogue START -------------------
     private void SetText()

@@ -72,7 +72,7 @@ public class TeaMaker : MonoBehaviour
         m_Text = mainCanvas.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         m_recipeText = mainCanvas.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
 
-        m_recipeBase = mainCanvas.transform.GetChild(6).transform.GetChild(1).gameObject;
+        m_recipeBase = mainCanvas.transform.GetChild(6).transform.GetChild(2).gameObject;
         //GameObject recipeCanvas = GameObject.FindGameObjectWithTag("RecipeCanvas");
         //m_recipeBase = recipeCanvas.transform.GetChild(1).gameObject;
 
@@ -151,9 +151,9 @@ public class TeaMaker : MonoBehaviour
                         m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] = true;
                         m_discoveredRecipesNo++;
                         GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
-                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(-m_discoveredRecipesNo * 50, listTheRecipe.GetComponent<RectTransform>().rect.position.y);
+                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(m_recipeBase.GetComponent<RectTransform>().offsetMax.x + ((m_discoveredRecipesNo-1) * 265.0f), m_recipeBase.GetComponent<RectTransform>().offsetMax.y);
                         listTheRecipe.SetActive(true);
-                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Name: " + m_currentlyCalculatedRecipe.m_name + "\n Description: " + m_currentlyCalculatedRecipe.m_description;
+                        listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Name: " + m_currentlyCalculatedRecipe.m_name + "\nDescription: " + m_currentlyCalculatedRecipe.m_description;
                         foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)
                         {
                             listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n" + item.Key.name + " x " + item.Value;
@@ -192,6 +192,11 @@ public class TeaMaker : MonoBehaviour
                 AddedOrder.Clear();
             }
         }
+    }
+
+    public void BrewTeaFromUI(string RecipeName)
+    {
+        // In case of need for implementation?
     }
 
     public void GiveTea()
