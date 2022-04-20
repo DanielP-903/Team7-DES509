@@ -147,12 +147,10 @@ public class PlayerController : MonoBehaviour
         SetText();
         dialogueBox.SetActive(false);
         messageList.Add(handler.GetMessage());
-        Material newExpression = handler.GetMessage().Expression;
-        if (newExpression != null)
-        {
-            m_gameManagerRef.currentCharacter.SetExpression(newExpression);
-        }
+
     }
+    
+    
 
     // Update is called once per frame
     void Update()
@@ -285,7 +283,11 @@ public class PlayerController : MonoBehaviour
                     m_dialogueFinished = false;
                     handler.SetConversation("Ordering");
                     SetText();
-
+                    Material newExpression = handler.GetMessage().Expression;
+                    if (newExpression != null)
+                    {
+                        m_gameManagerRef.currentCharacter.SetExpression(newExpression);
+                    }
                 }
                 if (hit.transform.CompareTag("Machine") && !GameManager.m_hasBrewedATea && m_finishedTalking == true)
                 {
