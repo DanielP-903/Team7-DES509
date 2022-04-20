@@ -5,9 +5,12 @@ using UnityEngine;
 public class Recipe
 {
     [Tooltip("Name given to the recipe")]
-    [SerializeField] public string m_name;
+    public string m_name;
     [Tooltip("Colour of this recipe's brewed tea")]
-    [SerializeField] public Color m_colour;
+    public Color m_colour;
+    [Tooltip("Description of this recipe")]
+    [TextArea(5, 10)]
+    public string m_description;
 
     [SerializeField]
     public CustomIntDictionary m_ingredients;

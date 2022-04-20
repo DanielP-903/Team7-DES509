@@ -464,26 +464,8 @@ public class PlayerController : MonoBehaviour
             {
                 m_tooltipObject.SetActive(true);
                 Ingredient values = constantHit.transform.gameObject.GetComponent<Ingredient>();
-                m_tooltipText.text = values.m_type.ToString();
-                if (values.m_bitterness > 5)
-                {
-                    m_tooltipText.text += "\n - Bitter";
-                }
-
-                if (values.m_earthiness > 5)
-                {
-                    m_tooltipText.text += "\n - Earthy";
-                }
-
-                if (values.m_fruitiness > 5)
-                {
-                    m_tooltipText.text += "\n - Fruity";
-                }
-
-                if (values.m_sweetness > 5)
-                {
-                    m_tooltipText.text += "\n - Sweet";
-                }
+                //m_tooltipText.text = values.m_type.ToString() + "\n- " + values.m_description;
+                m_tooltipText.text = values.m_name + "\n- " + values.m_description;
             }
             else if (constantHit.transform.CompareTag("Machine") && !m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled && !m_teaMakerRef.hasClickedBrew)
             {
@@ -493,9 +475,11 @@ public class PlayerController : MonoBehaviour
                 {
                     if (item.Value != 0)
                     {
+                        //m_tooltipText.text +=
+                        //    "\n" + m_teaMakerRef.FindIngredient((GameObject) item.Key).GetComponent<Ingredient>().m_type
+                        //        .ToString() + " x " + item.Value.ToString();
                         m_tooltipText.text +=
-                            "\n" + m_teaMakerRef.FindIngredient((GameObject) item.Key).GetComponent<Ingredient>().m_type
-                                .ToString() + " x " + item.Value.ToString();
+                            "\n" + m_teaMakerRef.FindIngredient((GameObject) item.Key).GetComponent<Ingredient>().m_name + " x " + item.Value.ToString();
                     }
                 }
             }
@@ -509,16 +493,18 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    m_tooltipText.text = "Tea";
+                    m_tooltipText.text = "A Regular Tea";
                 }
 
                 foreach (var item in m_teaMakerRef.m_container)
                 {
                     if (item.Value != 0)
                     {
+                        //m_tooltipText.text +=
+                        //    "\n" + m_teaMakerRef.FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_type
+                        //        .ToString() + " x " + item.Value.ToString();
                         m_tooltipText.text +=
-                            "\n" + m_teaMakerRef.FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_type
-                                .ToString() + " x " + item.Value.ToString();
+                            "\n" + m_teaMakerRef.FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_name + " x " + item.Value.ToString();
                     }
                 }
             }
