@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         ActivateDoors();
         currentCharacter = GameObject.FindGameObjectWithTag("Character").GetComponent<Character>();
         currentCharacter.ChangeCharacter(FindCharacter());
-        currentCharacter.currentDialogue = currentCharacter.characterScriptableObject.dialogues[currentCharacter.stage];
+        currentCharacter.currentDialogue = currentCharacter.characterScriptableObject.dialogues[currentCharacter.CharacterStages[currentCharacterName.ToString()]];
     }
 
     void Update()

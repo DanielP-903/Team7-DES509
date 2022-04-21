@@ -347,17 +347,17 @@ public class PlayerController : MonoBehaviour
                     m_gameManagerRef.currentCharacter.isAvailable = false;
 
                     // Go to next dialogue state
-                    if (m_gameManagerRef.currentCharacter.stage == 0 || handler.currentConversation.Name == "Served_Happy")
+                    if (m_gameManagerRef.currentCharacter.CharacterStages[m_gameManagerRef.currentCharacterName.ToString()] == 0 || handler.currentConversation.Name == "Served_Happy")
                     {
-                        if (m_gameManagerRef.currentCharacter.stage < 3)
+                        if (m_gameManagerRef.currentCharacter.CharacterStages[m_gameManagerRef.currentCharacterName.ToString()] < 3)
                         {
-                            m_gameManagerRef.currentCharacter.stage++;
+                            m_gameManagerRef.currentCharacter.CharacterStages[m_gameManagerRef.currentCharacterName.ToString()]++;
                         }
                     }
 
 
-                    m_gameManagerRef.currentCharacter.currentDialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.dialogues[m_gameManagerRef.currentCharacter.stage];
-                    handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
+                    //m_gameManagerRef.currentCharacter.currentDialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.dialogues[m_gameManagerRef.currentCharacter.CharacterStages[m_gameManagerRef.currentCharacterName.ToString()]];
+                    //handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
 
                     messageList.Clear();
                 }

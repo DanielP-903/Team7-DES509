@@ -216,6 +216,7 @@ MonoBehaviour:
   m_characterList:
   - {fileID: 11400000, guid: 91d8dc4d21ff6774dad8611009c870f8, type: 2}
   - {fileID: 11400000, guid: 64ccc546551d4d24db46d78d9f711bef, type: 2}
+  - {fileID: 11400000, guid: 80b0ffedebd5c7a4a94b20c6879ffa25, type: 2}
   currentCharacterName: 0
   currentCharacter: {fileID: 0}
   m_entryPos: {x: -5.93, y: 0.72, z: -7.39}

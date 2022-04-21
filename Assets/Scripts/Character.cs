@@ -1,12 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QuantumTek.QuantumDialogue;
+
+[Serializable]
+public class StringIntDictionary : SerializableDictionary<string, int> { }
+
 public class Character : MonoBehaviour
 {
     public SO_Character characterScriptableObject;
     public int stage = 0;
-
+    [SerializeField]
+    public StringIntDictionary CharacterStages;
+    public IDictionary<string, int> StringIntDictionary
+    {
+        get { return CharacterStages; }
+        set { CharacterStages.CopyFrom(value); }
+    }
 
     private GameObject m_playerRef;
     private GameManager m_gameManagerRef;
@@ -23,6 +34,9 @@ public class Character : MonoBehaviour
         isAvailable = false;
         leaving = false;
         transform.position = m_gameManagerRef.m_entryPos;
+        CharacterStages.Add("Shylo", 0);
+        CharacterStages.Add("Docorty", 0);
+        CharacterStages.Add("Mimi", 0);
     }
 
     public void ChangeCharacter(SO_Character newCharacter)
@@ -60,9 +74,10 @@ public class Character : MonoBehaviour
             {
                 leaving = false;
                 isAvailable = false; // Change to true/false to allow/disallow stopping after char exit
-                m_gameManagerRef.currentCharacterName = CharacterName.Shylo;
+                m_gameManagerRef.currentCharacterName = CharacterName.Docorty;
+                characterScriptableObject = m_gameManagerRef.m_characterList[1];
                 ChangeCharacter(m_gameManagerRef.FindCharacter());
-                currentDialogue = characterScriptableObject.dialogues[stage];
+                currentDialogue = characterScriptableObject.dialogues[CharacterStages[m_gameManagerRef.currentCharacterName.ToString()]];
                 StartCoroutine(CharacterEntryDelay(3.0f));
             }
             else
