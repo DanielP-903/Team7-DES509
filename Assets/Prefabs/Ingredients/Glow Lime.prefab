@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8649589245914461877}
   - component: {fileID: 8649589245914461876}
   m_Layer: 0
-  m_Name: Fruit Slice
+  m_Name: Glow Lime
   m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,11 +64,14 @@ MonoBehaviour:
   m_type: 1
   m_name: 
   m_colour: {r: 0.9245283, g: 0.7217105, b: 0.23113208, a: 0.7607843}
-  m_bitterness: 4
-  m_sweetness: 8
-  m_fruitiness: 2
-  m_earthiness: 7
-  m_specialProperties: 3
+  m_description: 'Legend has it this fruit originated from the battle of two cobra
+    gods. Their fangs formed the seeds and their poison became the acidic juice.
+
+    The
+    slices of glow limes mixed with sour and sweet, presumably the tea brewed can
+    inherit these two flavours.
+
+'
   IsHeld: 0
   occurences: 0
 --- !u!1001 &551911660603425435

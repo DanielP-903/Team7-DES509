@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4210031863557179740}
   - component: {fileID: 8866790078940323774}
   m_Layer: 0
-  m_Name: Ginger
+  m_Name: Cindershard
   m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,10 +111,12 @@ MonoBehaviour:
   m_type: 3
   m_name: 
   m_colour: {r: 0.8773585, g: 0.73807913, b: 0.36832502, a: 0.7647059}
-  m_bitterness: 10
-  m_sweetness: 4
-  m_fruitiness: 7
-  m_earthiness: 2
-  m_specialProperties: 0
+  m_description: 'The tiny flakes left behind after the cinder burns out retain a
+    tiny amount of warm heat.
+
+    It has a sweet taste when boiled, and it feels
+    extra warm when you drink it.
+
+'
   IsHeld: 0
   occurences: 0

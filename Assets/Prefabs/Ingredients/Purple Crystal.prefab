@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1003074986419737997}
   - component: {fileID: 6933471817585291606}
   m_Layer: 0
-  m_Name: Blossoms
+  m_Name: Purple Crystal
   m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,13 +60,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_type: 4
   m_name: 
-  m_description: 
   m_colour: {r: 0.6886792, g: 0.43204877, b: 0.43204877, a: 0.7647059}
-  m_bitterness: 10
-  m_sweetness: 4
-  m_fruitiness: 7
-  m_earthiness: 2
-  m_specialProperties: 0
+  m_description: 'In the past, people believed that this crystal could drive away
+    plagues and bring good luck to people.
+
+    The purple crystal emits a faint
+    floral fragrance.
+
+'
   IsHeld: 0
   occurences: 0
 --- !u!1001 &761738053730681426

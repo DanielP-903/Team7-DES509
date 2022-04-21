@@ -114,7 +114,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8649589245914461875, guid: bdc0b686829b3184a9e8074210aefe4f, type: 3}
       propertyPath: m_Name
-      value: Fruit Slice
+      value: Glow Limes
       objectReference: {fileID: 0}
     - target: {fileID: 8649589245914461896, guid: bdc0b686829b3184a9e8074210aefe4f, type: 3}
       propertyPath: m_RootOrder
@@ -244,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262978996960852449, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
       propertyPath: m_Name
-      value: Ginger
+      value: Cindershard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
@@ -318,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1316446528056111833, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
       propertyPath: m_Name
-      value: Peppermint
+      value: Breezeleaf
       objectReference: {fileID: 0}
     - target: {fileID: 1316446528056111833, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
       propertyPath: m_TagString
@@ -432,7 +432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
       propertyPath: m_Name
-      value: Blossoms
+      value: Purple Crystal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
@@ -652,7 +652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8659158908394372723, guid: 6319d60732f4b774c846c698a3200e59, type: 3}
       propertyPath: m_Name
-      value: Rosehip
+      value: Heart of Rose
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6319d60732f4b774c846c698a3200e59, type: 3}
@@ -726,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653523247350044869, guid: d5d42a92555b8ab4c86855fee71b7b5c, type: 3}
       propertyPath: m_Name
-      value: Licorice
+      value: Ebonstraw
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d42a92555b8ab4c86855fee71b7b5c, type: 3}

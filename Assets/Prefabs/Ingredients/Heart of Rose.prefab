@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8750404212416499406}
   - component: {fileID: 4039602905693427756}
   m_Layer: 0
-  m_Name: Rosehip
+  m_Name: Heart of Rose
   m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,11 +63,14 @@ MonoBehaviour:
   m_type: 2
   m_name: 
   m_colour: {r: 0.6037736, g: 0.16803133, b: 0.16803133, a: 0.79607844}
-  m_bitterness: 10
-  m_sweetness: 4
-  m_fruitiness: 7
-  m_earthiness: 2
-  m_specialProperties: 0
+  m_description: 'A red, heart-shaped fruit. Tthe tree on which it grows is considered
+    one of the oldest plants, and  said to contain the energy of life. Some people
+    say that if you eat this fruit, you can gain God''s blessing.
+
+    It has a
+    slight sweetness, and the taste is no different from ordinary fruit.
+
+'
   IsHeld: 0
   occurences: 0
 --- !u!1001 &795855288707392179
