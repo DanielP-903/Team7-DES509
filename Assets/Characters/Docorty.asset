@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469bdd85d085cd7479b0632915db384a, type: 3}
   m_Name: Docorty
   m_EditorClassIdentifier: 
-  characterName: 0
+  characterName: 2
   material: {fileID: 0}
-  stage: 0
   favouriteRecipe: 
+  dialogues: []

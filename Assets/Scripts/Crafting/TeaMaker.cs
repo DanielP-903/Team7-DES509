@@ -141,7 +141,7 @@ public class TeaMaker : MonoBehaviour
             m_teaModel.transform.GetChild(0).gameObject.SetActive(true);
             if (m_currentlyCalculatedRecipe.m_name != null)
             {
-                m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe.m_name + " tea";
+                m_teaModel.GetComponent<Tea>().m_name = m_currentlyCalculatedRecipe.m_name;
                 if (m_discoveredRecipes.ContainsKey(m_currentlyCalculatedRecipe.m_name))
                 {
                     if (m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] == false)

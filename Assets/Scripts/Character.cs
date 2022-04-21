@@ -14,6 +14,8 @@ public class Character : MonoBehaviour
     [HideInInspector] public bool leaving;
     [HideInInspector] public QD_Dialogue currentDialogue;
 
+    private bool m_characterWait = false;
+
     private void Start()
     {
         m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -41,7 +43,7 @@ public class Character : MonoBehaviour
         GetComponent<BoxCollider>().enabled = isAvailable;
         transform.LookAt(m_playerRef.transform, Vector3.up);
         transform.eulerAngles = new Vector3(90.0f, transform.eulerAngles.y, 0.0f);
-        if (!isAvailable)
+        if (!isAvailable && !m_characterWait)
         {
             MoveIntoPosition();
         }
@@ -58,6 +60,10 @@ public class Character : MonoBehaviour
             {
                 leaving = false;
                 isAvailable = false; // Change to true/false to allow/disallow stopping after char exit
+                m_gameManagerRef.currentCharacterName = CharacterName.Shylo;
+                ChangeCharacter(m_gameManagerRef.FindCharacter());
+                currentDialogue = characterScriptableObject.dialogues[stage];
+                StartCoroutine(CharacterEntryDelay(3.0f));
             }
             else
             {
@@ -70,5 +76,12 @@ public class Character : MonoBehaviour
         {
             m_gameManagerRef.ActivateDoors();
         }
+    }
+
+    private IEnumerator CharacterEntryDelay(float waitTime)
+    {
+        m_characterWait = true;
+        yield return new WaitForSeconds(waitTime);
+        m_characterWait = false;
     }
 }

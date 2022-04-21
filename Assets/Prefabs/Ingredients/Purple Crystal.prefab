@@ -59,10 +59,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_type: 4
-  m_name: 
+  m_name: Purple Crystal
   m_colour: {r: 0.6886792, g: 0.43204877, b: 0.43204877, a: 0.7647059}
   m_description: 'In the past, people believed that this crystal could drive away
     plagues and bring good luck to people.
+
 
     The purple crystal emits a faint
     floral fragrance.

@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         m_doorDelay = m_doorDelay <= 0 ? 0 : m_doorDelay - Time.deltaTime;
     }
 
-    private SO_Character FindCharacter()
+    public SO_Character FindCharacter()
     {
         foreach (var character in m_characterList)
         {
