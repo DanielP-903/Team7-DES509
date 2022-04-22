@@ -407,7 +407,7 @@ public class PlayerController : MonoBehaviour
         {
             m_inputTimer = m_inputDelay;
             Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f);
-            if (hit.transform != null && hit.transform.CompareTag("BrewTea"))
+            if (hit.transform != null && hit.transform.CompareTag("BrewTea") && m_teaMakerRef.Total > 0)
             {
                 // Brew tea
                 m_teaMakerRef.BrewTea();
@@ -481,11 +481,17 @@ public class PlayerController : MonoBehaviour
             Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f);
             if (hit.transform != null && hit.transform.gameObject.GetComponent<Tea>())
             {
-                // Scrap tea
-                m_teaMakerRef.m_teaModel.SetActive(false);
-                m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
-                m_teaMakerRef.ResetTea();
-                return;
+                // Scrap tea (Unused)
+                //m_teaMakerRef.m_teaModel.SetActive(false);
+                //m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
+                //m_teaMakerRef.ResetTea();
+                //return;
+            }
+
+            if (m_heldObject == null && hit.transform != null && hit.transform.gameObject.GetComponent<TeaMaker>() && m_teaMakerRef.Total > 0)
+            {
+                // Remove item from teapot
+                m_teaMakerRef.RemoveIngredient();
             }
             if (m_heldObject != null)
             {
@@ -493,11 +499,6 @@ public class PlayerController : MonoBehaviour
                 m_heldObject.GetComponent<Ingredient>().IsHeld = false;
                 Destroy(m_heldObject.gameObject);
                 m_heldObject = null;
-            }
-            if (m_heldObject == null)
-            {
-                // Remove item from teapot
-                m_teaMakerRef.RemoveIngredient();
             }
         }
 
@@ -551,7 +552,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-            else if (constantHit.transform.CompareTag("BrewTea") && !m_teaMakerRef.hasClickedBrew && m_teaMakerRef.m_container.Count > 0)
+            else if (constantHit.transform.CompareTag("BrewTea") && !m_teaMakerRef.hasClickedBrew && m_teaMakerRef.Total > 0)
             {
                 m_tooltipObject.SetActive(true);
                 m_tooltipText.text = "<size=24><b>Click to brew </b></size>";

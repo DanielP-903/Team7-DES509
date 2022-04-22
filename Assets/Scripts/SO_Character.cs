@@ -8,6 +8,7 @@ public class SO_Character : ScriptableObject
 {
     public CharacterName characterName;
     public Material material;
+    public Material backMaterial;
     public string favouriteRecipe = "";
     public List<QD_Dialogue> dialogues;
 

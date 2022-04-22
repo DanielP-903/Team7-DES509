@@ -44,6 +44,7 @@ public class Character : MonoBehaviour
     {
         characterScriptableObject = newCharacter;
         GetComponent<MeshRenderer>().sharedMaterial = characterScriptableObject.material;
+        transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial = characterScriptableObject.backMaterial;
         isAvailable = false;
         transform.position = m_gameManagerRef.m_entryPos;
     }
@@ -56,8 +57,18 @@ public class Character : MonoBehaviour
     private void Update()
     {
         GetComponent<BoxCollider>().enabled = isAvailable;
-        transform.LookAt(m_playerRef.transform, Vector3.up);
+
+        if (!leaving)
+        {
+            transform.LookAt(m_playerRef.transform, Vector3.up);
+        }
+        else
+        {
+            transform.LookAt(m_gameManagerRef.m_entryPos, Vector3.up);
+        }
+
         transform.eulerAngles = new Vector3(90.0f, transform.eulerAngles.y, 0.0f);
+
         if (!isAvailable && !m_characterWait)
         {
             MoveIntoPosition();
@@ -89,9 +100,6 @@ public class Character : MonoBehaviour
             {
                 leaving = false;
                 isAvailable = false; // Change to true/false to allow/disallow stopping after char exit
-                //m_gameManagerRef.currentCharacterName = CharacterName.Docorty;
-                //characterScriptableObject = m_gameManagerRef.m_characterList[1];
-
                 RandomiseNextCharacter();
                 ChangeCharacter(m_gameManagerRef.FindCharacter());
                 currentDialogue = characterScriptableObject.dialogues[CharacterStages[m_gameManagerRef.currentCharacterName.ToString()]];

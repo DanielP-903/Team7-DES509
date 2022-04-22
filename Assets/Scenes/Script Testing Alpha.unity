@@ -1090,6 +1090,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Recipe List
       objectReference: {fileID: 0}
+    - target: {fileID: 715892237909171798, guid: b952d8b5e56dc5143b945ff25a89077f, type: 3}
+      propertyPath: m_recipes.Array.data[0].m_description
+      value: Fruity, sweet, and full of flavour
+      objectReference: {fileID: 0}
+    - target: {fileID: 715892237909171798, guid: b952d8b5e56dc5143b945ff25a89077f, type: 3}
+      propertyPath: m_recipes.Array.data[1].m_description
+      value: 'The blend of purple crystal and glow limes helps to soothe the day
+        and promote more restful rest
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 715892237909171798, guid: b952d8b5e56dc5143b945ff25a89077f, type: 3}
+      propertyPath: m_recipes.Array.data[2].m_description
+      value: Warm crystal complement cooling breezeleaf for a fresh, lightly floral
+        cup
+      objectReference: {fileID: 0}
+    - target: {fileID: 715892237909171798, guid: b952d8b5e56dc5143b945ff25a89077f, type: 3}
+      propertyPath: m_recipes.Array.data[3].m_description
+      value: Each ingredient is different and boldly creative for a new experience
+      objectReference: {fileID: 0}
+    - target: {fileID: 715892237909171798, guid: b952d8b5e56dc5143b945ff25a89077f, type: 3}
+      propertyPath: m_recipes.Array.data[4].m_description
+      value: One singer began drinking this tea to help keep her voice in perfect
+        condition, so we've named the blend "Sing Your Song" in her honour
+      objectReference: {fileID: 0}
     - target: {fileID: 715892237909171799, guid: b952d8b5e56dc5143b945ff25a89077f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1699,6 +1724,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1546700221212549040, guid: 64f24922a775be74ebc42f02a6407bd2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3100075f267a64a4b875b6f6247008b8, type: 2}
     - target: {fileID: 7814783753685440641, guid: 64f24922a775be74ebc42f02a6407bd2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

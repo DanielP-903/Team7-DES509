@@ -36,7 +36,7 @@ public class TeaMaker : MonoBehaviour
     [HideInInspector] public Recipe m_currentlyCalculatedRecipe;
     
     private RecipeList m_recipeListRef;
-    private int m_total = 0;
+    public int Total = 0;
     private readonly Stack<UnityEngine.Object> AddedOrder = new Stack<UnityEngine.Object>();
 
     public Transform m_cupStartPoint;
@@ -220,7 +220,7 @@ public class TeaMaker : MonoBehaviour
 
     public void AddIngredient(UnityEngine.Object ingredient)
     {
-        if (m_total + 1 <= m_capacity)
+        if (Total + 1 <= m_capacity)
         {
             if (!m_container.ContainsKey(ingredient))
             {
@@ -270,12 +270,12 @@ public class TeaMaker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_total = 0;
+        Total = 0;
         foreach (var item in m_container)
         {
-            m_total += item.Value;
+            Total += item.Value;
         }
-        m_Text.text = m_total + " / " + m_capacity;
+        m_Text.text = Total + " / " + m_capacity;
     }
 
     void SearchForNewRecipes()
