@@ -19,8 +19,8 @@ MonoBehaviour:
     Type: 1
     Window:
       serializedVersion: 2
-      x: 40
-      y: 252.89777
+      x: 43
+      y: 247.89777
       width: 200
       height: 65
     Inputs: []
@@ -1272,7 +1272,7 @@ MonoBehaviour:
       PreviousMessage: -1
       NextMessage: 5
       MessageText: Why hello there!
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 5
     Type: 3
     Window:
@@ -1373,7 +1373,7 @@ MonoBehaviour:
       NextMessage: 7
       MessageText: "My name is Docorty. I see you\u2019ve opened up a little tea
         shop hmmmmmm?"
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 7
     Type: 3
     Window:
@@ -1473,7 +1473,7 @@ MonoBehaviour:
       PreviousMessage: 5
       NextMessage: 8
       MessageText: HAH HAH! Well then, who better than I to be your first customer.
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 8
     Type: 3
     Window:
@@ -1575,7 +1575,7 @@ MonoBehaviour:
       MessageText: 'Do not fret, for I shall be merciful on your first attempt.
 
 '
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 9
     Type: 3
     Window:
@@ -1675,7 +1675,7 @@ MonoBehaviour:
       PreviousMessage: 8
       NextMessage: 10
       MessageText: I trust you know how to use your kitchen hmmmmm?
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 10
     Type: 3
     Window:
@@ -1775,7 +1775,7 @@ MonoBehaviour:
       PreviousMessage: 9
       NextMessage: -1
       MessageText: Show me what you can make. Impress me!
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 13
     Type: 3
     Window:
@@ -1875,7 +1875,7 @@ MonoBehaviour:
       PreviousMessage: -1
       NextMessage: 14
       MessageText: Mmh, I see.
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 14
     Type: 3
     Window:
@@ -1976,7 +1976,7 @@ MonoBehaviour:
       NextMessage: 15
       MessageText: Perhaps there is potential in this place and for you sake I should
         hope so.
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 15
     Type: 3
     Window:
@@ -2079,7 +2079,7 @@ MonoBehaviour:
         competitor is what this business needs!
 
 '
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 16
     Type: 3
     Window:
@@ -2181,7 +2181,7 @@ MonoBehaviour:
       MessageText: 'Though I shall give you your head start.
 
 '
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   - ID: 17
     Type: 3
     Window:
@@ -2281,7 +2281,7 @@ MonoBehaviour:
       PreviousMessage: 16
       NextMessage: -1
       MessageText: Do enjoy.
-      Clip: {fileID: 0}
+      Expression: {fileID: 0}
   ConversationNodes:
   - ID: 0
     Type: 1

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QuantumTek.QuantumDialogue;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class StringIntDictionary : SerializableDictionary<string, int> { }
@@ -63,6 +64,20 @@ public class Character : MonoBehaviour
         }
     }
 
+    private void RandomiseNextCharacter()
+    {
+        CharacterName newCharacterName = m_gameManagerRef.currentCharacterName;
+        while (newCharacterName == m_gameManagerRef.currentCharacterName)
+        {
+            int random = Random.Range(0, 2);
+            newCharacterName = m_gameManagerRef.m_characterList[random].characterName;
+            characterScriptableObject = m_gameManagerRef.m_characterList[random];
+        }
+
+        m_gameManagerRef.currentCharacterName = newCharacterName;
+    }
+
+
     private void MoveIntoPosition()
     {
         Vector3 destination = leaving ? m_gameManagerRef.m_entryPos : m_gameManagerRef.m_exitPos;
@@ -74,8 +89,10 @@ public class Character : MonoBehaviour
             {
                 leaving = false;
                 isAvailable = false; // Change to true/false to allow/disallow stopping after char exit
-                m_gameManagerRef.currentCharacterName = CharacterName.Docorty;
-                characterScriptableObject = m_gameManagerRef.m_characterList[1];
+                //m_gameManagerRef.currentCharacterName = CharacterName.Docorty;
+                //characterScriptableObject = m_gameManagerRef.m_characterList[1];
+
+                RandomiseNextCharacter();
                 ChangeCharacter(m_gameManagerRef.FindCharacter());
                 currentDialogue = characterScriptableObject.dialogues[CharacterStages[m_gameManagerRef.currentCharacterName.ToString()]];
                 StartCoroutine(CharacterEntryDelay(3.0f));

@@ -157,6 +157,10 @@ public class PlayerController : MonoBehaviour
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
         HandleInput();
 
+        if (m_gameManagerRef.currentCharacter.characterScriptableObject.characterName != CharacterName.Docorty)
+        {
+            Debug.Log("HA!");
+        }
 
         if (m_walkToLock)
         {
@@ -290,6 +294,7 @@ public class PlayerController : MonoBehaviour
                     m_playerLockTurn = true;
                     m_goToMode = Mode.Talking;
                     m_dialogueFinished = false;
+                    handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
                     handler.SetConversation("Ordering");
                     SetText();
                     Material newExpression = handler.GetMessage().Expression;

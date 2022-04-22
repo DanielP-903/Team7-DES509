@@ -16,7 +16,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 222967581d7ec3140b70633573bba1cd, type: 2}
   favouriteRecipe: Raspberry Lemonade
   dialogues:
-  - {fileID: 11400000, guid: 0ce7389196cfca54db69840b41753ad7, type: 2}
+  - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
   - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
   - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
   - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
