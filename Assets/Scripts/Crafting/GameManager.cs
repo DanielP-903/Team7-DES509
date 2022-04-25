@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour
     // Game Flags
     public static bool m_hasBrewedATea = false;
 
-    public CharacterName currentCharacterName = CharacterName.Shylo;
+    public CharacterName currentCharacterName = CharacterName.Docorty;
     public Character currentCharacter;
     public Vector3 m_entryPos;
     public Vector3 m_exitPos;
 
     private float m_doorDelay;
-
-    [SerializeField] private Animator m_doors;
+    public GameObject doorObject;
+    private Animator m_doors;
 
     void OnDrawGizmos()
     {
@@ -36,9 +36,14 @@ public class GameManager : MonoBehaviour
         Gizmos.DrawSphere(m_exitPos, 1);
     }
 
+    void Awake()
+    {
+        m_doors = doorObject.GetComponent<Animator>();
+    }
+
     void Start()
     {
-        ActivateDoors();
+        //ActivateDoors();
         currentCharacter = GameObject.FindGameObjectWithTag("Character").GetComponent<Character>();
         currentCharacter.ChangeCharacter(FindCharacter());
         currentCharacter.currentDialogue = currentCharacter.characterScriptableObject.dialogues[currentCharacter.CharacterStages[currentCharacterName.ToString()]];
@@ -72,8 +77,9 @@ public class GameManager : MonoBehaviour
     {
         if (m_doorDelay <= 0)
         {
-            m_doors.SetTrigger("Open");
-            m_doorDelay = 1.0f;
+            //m_doors.SetTrigger("Open");
+            m_doors.Play("DoorOpen");
+            m_doorDelay = 0.3f;
         }
     }
 }

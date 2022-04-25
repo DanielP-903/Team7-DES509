@@ -48,21 +48,21 @@ MonoBehaviour:
     PreviousMessage: -1
     NextMessage: 3
     MessageText: Why hello there!
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 6
     Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 5
     NextMessage: -1
     MessageText: Show me what you can make, impress me!
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 7
     Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: -1
     NextMessage: 11
     MessageText: Mmh, I see.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 4
     Speaker: 0
     SpeakerName: Docorty
@@ -70,14 +70,14 @@ MonoBehaviour:
     NextMessage: 5
     MessageText: The name is Docorty and fret not for I shall be merciful on your
       first attempt.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 5
     Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 4
     NextMessage: 6
     MessageText: I trust you know your way around your station hmmmmm?
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 7
     Speaker: 1
     SpeakerName: Docorty
@@ -107,21 +107,21 @@ MonoBehaviour:
     PreviousMessage: -1
     NextMessage: 15
     MessageText: Mmh, I see.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 13
     Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 12
     NextMessage: 14
     MessageText: Though I shall give you yor head start.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 14
     Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 13
     NextMessage: -1
     MessageText: Do enjoy.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 15
     Speaker: 0
     SpeakerName: Docorty
@@ -129,7 +129,7 @@ MonoBehaviour:
     NextMessage: 16
     MessageText: Perhaps there is potential in this place and for your sake I should
       hope so.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 16
     Speaker: 0
     SpeakerName: Docorty
@@ -137,14 +137,14 @@ MonoBehaviour:
     NextMessage: 17
     MessageText: For I, Docorty will study this place and create my own! A true competitor
       is what this business needs!
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 17
     Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 16
     NextMessage: 18
     MessageText: Though I shall give you yor head start.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 1
     Speaker: 0
     SpeakerName: Docorty
@@ -159,7 +159,7 @@ MonoBehaviour:
     NextMessage: 4
     MessageText: I see you've opened up a little tea shop hmmmmm? Well then who better
       than I to be your first customer.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 4
     Speaker: 0
     SpeakerName: Docorty
@@ -203,7 +203,7 @@ MonoBehaviour:
     NextMessage: 12
     MessageText: Perhaps there is potential in this place and for your sake I should
       hope so.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 12
     Speaker: 0
     SpeakerName: Docorty
@@ -211,7 +211,7 @@ MonoBehaviour:
     NextMessage: 13
     MessageText: For I, Docorty will study this place and create my own! A true competitor
       is what this business needs!
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   - ID: 13
     Speaker: 0
     SpeakerName: Docorty
@@ -255,7 +255,7 @@ MonoBehaviour:
     PreviousMessage: 17
     NextMessage: -1
     MessageText: Do enjoy.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   Choices:
   - ID: 4
     Choices:
