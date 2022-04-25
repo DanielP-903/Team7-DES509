@@ -3269,6 +3269,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1829450780857104314, guid: df90a5068d62e764296bb8e603730c47, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829450780857104314, guid: df90a5068d62e764296bb8e603730c47, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829450780857104314, guid: df90a5068d62e764296bb8e603730c47, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4501938302371497416, guid: df90a5068d62e764296bb8e603730c47, type: 3}
       propertyPath: m_Name
       value: Ingredient Instances
