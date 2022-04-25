@@ -28,16 +28,21 @@ public class Character : MonoBehaviour
 
     private bool m_characterWait = false;
 
-    private void Start()
+    private void Awake()
     {
         m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         m_playerRef = GameObject.FindGameObjectWithTag("Player");
-        isAvailable = false;
-        leaving = false;
-        transform.position = m_gameManagerRef.m_entryPos;
         CharacterStages.Add("Shylo", 0);
         CharacterStages.Add("Docorty", 0);
         CharacterStages.Add("Mimi", 0);
+    }
+
+    private void Start()
+    {
+        isAvailable = false;
+        leaving = false;
+        transform.position = m_gameManagerRef.m_entryPos;
+
     }
 
     public void ChangeCharacter(SO_Character newCharacter)
@@ -110,12 +115,29 @@ public class Character : MonoBehaviour
                 isAvailable = true;
             }
         }
-        
-        if (leaving && Vector3.Distance(transform.position, destination) < 3.6f &&
-            Vector3.Distance(transform.position, destination) > 3.55f)
+
+        if (leaving)
         {
-            m_gameManagerRef.ActivateDoors();
+            if (Vector3.Distance(transform.position, destination) < 6.8f &&
+                Vector3.Distance(transform.position, destination) > 6.75f)
+            {
+                m_gameManagerRef.ActivateDoors();
+            }
         }
+        else
+        {
+            if (Vector3.Distance(transform.position, destination) < 5.8f &&
+                Vector3.Distance(transform.position, destination) > 5.75f)
+            {
+                m_gameManagerRef.ActivateDoors();
+            }
+        }
+
+        //if (Vector3.Distance(transform.position, m_gameManagerRef.doorObject.transform.position) < 0.5f)
+        //{
+        //    m_gameManagerRef.ActivateDoors();
+        //    m_gameManagerRef.doorObject.GetComponent<Animator>().Play("DoorOpen");
+        //}
     }
 
     private IEnumerator CharacterEntryDelay(float waitTime)

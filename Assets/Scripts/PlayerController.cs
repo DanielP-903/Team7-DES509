@@ -157,10 +157,10 @@ public class PlayerController : MonoBehaviour
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
         HandleInput();
 
-        if (m_gameManagerRef.currentCharacter.characterScriptableObject.characterName != CharacterName.Docorty)
-        {
-            Debug.Log("HA!");
-        }
+        //if (m_gameManagerRef.currentCharacter.characterScriptableObject.characterName != CharacterName.Docorty)
+        //{
+        //    Debug.Log("HA!");
+        //}
 
         if (m_walkToLock)
         {
@@ -297,9 +297,10 @@ public class PlayerController : MonoBehaviour
                     handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
                     handler.SetConversation("Ordering");
                     SetText();
-                    Material newExpression = handler.GetMessage().Expression;
-                    if (newExpression != null)
+                    QD_Message currMessage = handler.GetMessage();
+                    if (currMessage != null)
                     {
+                        Material newExpression = currMessage.Expression;
                         m_gameManagerRef.currentCharacter.SetExpression(newExpression);
                     }
                 }
@@ -472,8 +473,7 @@ public class PlayerController : MonoBehaviour
                 m_lookingAtBook = true;
                 return;
             }
-            
-
+           
         }
         if (mouse.rightButton.IsActuated() && m_inputTimer <= 0)
         {

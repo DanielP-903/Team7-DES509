@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Docorty
   m_EditorClassIdentifier: 
   characterName: 2
-  material: {fileID: 2100000, guid: 222967581d7ec3140b70633573bba1cd, type: 2}
+  material: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
+  backMaterial: {fileID: 2100000, guid: e9cff51edeef3ff46bb555d33e3c0a13, type: 2}
   favouriteRecipe: Raspberry Lemonade
   dialogues:
-  - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
+  - {fileID: 11400000, guid: 654c714b4f518c944a64ec42a2a5d648, type: 2}
   - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
   - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
   - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}

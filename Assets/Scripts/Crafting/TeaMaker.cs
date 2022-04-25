@@ -146,10 +146,21 @@ public class TeaMaker : MonoBehaviour
                 {
                     if (m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] == false)
                     {
+                        // UPDATE RECIPE BOOK UI
                         m_discoveredRecipes[m_currentlyCalculatedRecipe.m_name] = true;
                         m_discoveredRecipesNo++;
                         GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
-                        listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(m_recipeBase.GetComponent<RectTransform>().offsetMax.x + ((m_discoveredRecipesNo-1) * 265.0f), m_recipeBase.GetComponent<RectTransform>().offsetMax.y);
+
+                        listTheRecipe.GetComponent<RectTransform>().position = new Vector3(
+                            m_recipeBase.GetComponent<RectTransform>().position.x + (m_discoveredRecipesNo > 3 ? (m_discoveredRecipesNo-4) * 260.0f : (m_discoveredRecipesNo-1) * 260.0f),
+                            m_recipeBase.GetComponent<RectTransform>().position.y +((m_discoveredRecipesNo > 3 ? 1 : 0) * -150.0f), 
+                            m_recipeBase.GetComponent<RectTransform>().position.z);
+
+                        //m_recipeBase.GetComponent<RectTransform>().position.x +((m_discoveredRecipesNo - 1 * (-maxHorizontalSpread * (int)((m_discoveredRecipesNo - 1) / maxHorizontalSpread))) * 220.0f),
+                        //m_recipeBase.GetComponent<RectTransform>().position.y +((int)((m_discoveredRecipesNo-1)/maxHorizontalSpread) * -150.0f), 
+                        //listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(
+                        //    m_recipeBase.GetComponent<RectTransform>().offsetMax.x + Mathf.Abs(((m_discoveredRecipesNo-1 * (-maxHorizontalSpread *(int)((m_discoveredRecipesNo-1)/maxHorizontalSpread)))) * 515.0f),
+                        //    m_recipeBase.GetComponent<RectTransform>().offsetMin.y + Mathf.Abs((int)((m_discoveredRecipesNo-1)/maxHorizontalSpread) * -420.0f));
                         listTheRecipe.SetActive(true);
                         listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Name: " + m_currentlyCalculatedRecipe.m_name + "\nDescription: " + m_currentlyCalculatedRecipe.m_description;
                         foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)

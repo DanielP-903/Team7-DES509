@@ -46,6 +46,9 @@ MonoBehaviour:
   m_recipes:
   - m_name: Apples to Oranges
     m_colour: {r: 1, g: 0.29309148, b: 0, a: 1}
+    m_description: 'Fruity, sweet, and full of flavour
+
+'
     m_ingredients:
       m_keys:
       - {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
@@ -54,6 +57,10 @@ MonoBehaviour:
       m_values: 010000000200000001000000
   - m_name: Lavender Lullaby
     m_colour: {r: 0.46616024, g: 0.23451404, b: 0.5849056, a: 1}
+    m_description: 'The blend of purple crystal and glow limes helps to soothe the
+      day and promote more restful rest
+
+'
     m_ingredients:
       m_keys:
       - {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
@@ -61,6 +68,10 @@ MonoBehaviour:
       m_values: 0200000001000000
   - m_name: Lavender Mint
     m_colour: {r: 0.6392157, g: 0.7294118, b: 0.80784315, a: 1}
+    m_description: 'Warm crystal complement cooling breezeleaf for a fresh, lightly
+      floral cup
+
+'
     m_ingredients:
       m_keys:
       - {fileID: 1316446528056111833, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
@@ -68,6 +79,9 @@ MonoBehaviour:
       m_values: 0100000001000000
   - m_name: Raspberry Lemonade
     m_colour: {r: 0.5471698, g: 0.14195444, b: 0.3042445, a: 1}
+    m_description: 'Each ingredient is different and boldly creative for a new experience
+
+'
     m_ingredients:
       m_keys:
       - {fileID: 4497017059138753670, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
@@ -77,6 +91,10 @@ MonoBehaviour:
       m_values: 01000000010000000100000001000000
   - m_name: Sing Your Song
     m_colour: {r: 1, g: 1, b: 0, a: 1}
+    m_description: 'One singer began drinking this tea to help keep her voice in
+      perfect condition, so we''ve named the blend "Sing Your Song" in her honour
+
+'
     m_ingredients:
       m_keys:
       - {fileID: 4262978996960852449, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
