@@ -43,11 +43,12 @@ public class PlayerController : MonoBehaviour
     private bool m_moveBackward;
     private bool m_moveLeft;
     private bool m_moveRight;
+    private bool m_quit;
     private CharacterController m_characterController;
     private GameObject m_heldObject;
     private GameManager m_gameManagerRef;
     private readonly float m_inputDelay = 0.1f;
-
+    private float m_quitTimer = 2.0f;
     private float m_inputTimer;
     private bool m_walkToLock = false;
     private TeaMaker m_teaMakerRef;
@@ -58,6 +59,9 @@ public class PlayerController : MonoBehaviour
     private bool m_playerLockTurn = false;
     private GameObject m_recipeBookUI;
     private bool m_lookingAtBook = false;
+
+    public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +69,11 @@ public class PlayerController : MonoBehaviour
         m_inputTimer = 0.1f;
         m_camera = transform.GetChild(0).gameObject;
         handler = transform.GetChild(1).gameObject.GetComponent<QD_DialogueHandler>();
+
+        sfx_pouring = m_camera.transform.GetChild(2).GetComponent<AudioSource>();
+        sfx_remove = m_camera.transform.GetChild(3).GetComponent<AudioSource>();
+        sfx_normal = m_camera.transform.GetChild(4).GetComponent<AudioSource>();
+        sfx_newRecipe = m_camera.transform.GetChild(5).GetComponent<AudioSource>();
 
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
         dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
@@ -238,6 +247,20 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (m_quit)
+        {
+            m_quitTimer -= Time.deltaTime;
+            if (m_quitTimer < 0)
+            {
+                Debug.Log("QUIT!");
+                Application.Quit();
+            }
+        }
+        else
+        {
+            m_quitTimer = 2.0f;
+        }
+
         HandleMouseInput();
     }
 
@@ -301,7 +324,18 @@ public class PlayerController : MonoBehaviour
                     if (currMessage != null)
                     {
                         Material newExpression = currMessage.Expression;
-                        m_gameManagerRef.currentCharacter.SetExpression(newExpression);
+                        if (newExpression != null)
+                        {
+                            m_gameManagerRef.currentCharacter.SetExpression(newExpression);
+                        }
+                        else
+                        {
+                            m_gameManagerRef.currentCharacter.SetExpression(m_gameManagerRef.currentCharacter.characterScriptableObject.material);
+                        }
+                    }
+                    else
+                    {
+                        m_gameManagerRef.currentCharacter.SetExpression(m_gameManagerRef.currentCharacter.characterScriptableObject.material);
                     }
                 }
                 if (hit.transform.CompareTag("Machine") && !GameManager.m_hasBrewedATea && m_finishedTalking == true)
@@ -492,9 +526,11 @@ public class PlayerController : MonoBehaviour
             {
                 // Remove item from teapot
                 m_teaMakerRef.RemoveIngredient();
+                sfx_remove.Play();
             }
             if (m_heldObject != null)
             {
+                sfx_remove.Play();
                 // Discard held object
                 m_heldObject.GetComponent<Ingredient>().IsHeld = false;
                 Destroy(m_heldObject.gameObject);
@@ -642,6 +678,13 @@ public class PlayerController : MonoBehaviour
     {
         float value = context.ReadValue<float>();
         m_moveRight = value > 0;
+        //Debug.Log("Right detected");
+    }
+    // Escape
+    public void Quit(InputAction.CallbackContext context)
+    {
+        float value = context.ReadValue<float>();
+        m_quit = value > 0;
         //Debug.Log("Right detected");
     }
 }

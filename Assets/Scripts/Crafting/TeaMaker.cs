@@ -46,6 +46,9 @@ public class TeaMaker : MonoBehaviour
     public CustomIntDictionary m_container;
 
     public bool hasClickedBrew = false;
+
+    private PlayerController m_playerRef;
+
     public IDictionary<UnityEngine.Object, int> CustomIntDictionary
     {
         get { return m_container; }
@@ -66,6 +69,7 @@ public class TeaMaker : MonoBehaviour
     void Start()
     {
         m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        m_playerRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         m_lid = transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
         m_lidDestination = transform.GetChild(1).gameObject.transform.GetChild(1).gameObject;
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
@@ -136,6 +140,7 @@ public class TeaMaker : MonoBehaviour
     {
         if (m_container.Count > 0 && AddedOrder.Count > 0)
         {
+            m_playerRef.sfx_pouring.Play();
             hasClickedBrew = true;
             m_teaModel.SetActive(true);
             m_teaModel.transform.GetChild(0).gameObject.SetActive(true);
@@ -172,6 +177,12 @@ public class TeaMaker : MonoBehaviour
                         m_foundText.text = "New Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name;
                         StartCoroutine(displayNewRecipeFoundPopup(5.0f));
                         m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
+
+                        m_playerRef.sfx_newRecipe.Play();
+                    }
+                    else
+                    {
+                        m_playerRef.sfx_normal.Play();
                     }
 
                     m_currentlyCalculatedRecipe = null;
@@ -179,6 +190,8 @@ public class TeaMaker : MonoBehaviour
                     m_lidDestination.SetActive(true);
                     m_container.Clear();
                     AddedOrder.Clear();
+
+                    
                 }
                 else
                 {
@@ -188,7 +201,7 @@ public class TeaMaker : MonoBehaviour
             else
             {
                 // Not a defined tea but that's a-ok!
-                m_teaModel.GetComponent<Tea>().m_name = "A normal tea";
+                m_teaModel.GetComponent<Tea>().m_name = "regular";
                 Color combinedColour = new Color(0, 0, 0, 1);
                 foreach (var item in m_container)
                 {
@@ -199,6 +212,9 @@ public class TeaMaker : MonoBehaviour
                 m_lidDestination.SetActive(true);
                 m_container.Clear();
                 AddedOrder.Clear();
+
+                m_playerRef.sfx_normal.Play();
+                
             }
         }
     }
