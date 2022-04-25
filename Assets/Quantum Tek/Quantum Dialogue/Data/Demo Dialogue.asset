@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversations:
   - ID: 2
-    Name: Meeting with Mama
+    Name: Ordering
     FirstMessage: 1
   - ID: 0
     Name: Ordering
@@ -22,57 +22,69 @@ MonoBehaviour:
   - ID: 11
     Name: Served
     FirstMessage: 13
+  - ID: 2
+    Name: Ordering
+    FirstMessage: 1
+  - ID: 8
+    Name: Served_Neutral
+    FirstMessage: 7
+  - ID: 9
+    Name: Served_Happy
+    FirstMessage: 10
   Speakers:
   - ID: 0
-    Name: Mama Demo
+    Name: Docorty
     Icon: {fileID: 0}
   - ID: 1
+    Name: Docorty
+    Icon: {fileID: 0}
+  - ID: 0
     Name: Docorty
     Icon: {fileID: 0}
   Messages:
   - ID: 1
     Speaker: 0
-    SpeakerName: Mama Demo
+    SpeakerName: Docorty
     PreviousMessage: -1
-    NextMessage: 4
-    MessageText: Hi, I'm Mama Demo! How are you?
-    Clip: {fileID: 0}
+    NextMessage: 3
+    MessageText: Why hello there!
+    Expression: {fileID: 0}
   - ID: 6
     Speaker: 0
-    SpeakerName: Bob
-    PreviousMessage: -1
-    NextMessage: -1
-    MessageText: Good to hear.
-    Clip: {fileID: 0}
-  - ID: 7
-    Speaker: 1
     SpeakerName: Docorty
     PreviousMessage: 5
-    NextMessage: 8
-    MessageText: HAH HAH! Well then, who better than I to be your first customer.
-    Clip: {fileID: 0}
-  - ID: 4
-    Speaker: 1
+    NextMessage: -1
+    MessageText: Show me what you can make, impress me!
+    Expression: {fileID: 0}
+  - ID: 7
+    Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: -1
+    NextMessage: 11
+    MessageText: Mmh, I see.
+    Expression: {fileID: 0}
+  - ID: 4
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 3
     NextMessage: 5
-    MessageText: Why hello there!
-    Clip: {fileID: 0}
+    MessageText: The name is Docorty and fret not for I shall be merciful on your
+      first attempt.
+    Expression: {fileID: 0}
   - ID: 5
-    Speaker: 1
+    Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 4
-    NextMessage: 7
-    MessageText: "My name is Docorty. I see you\u2019ve opened up a little tea shop
-      hmmmmmm?"
-    Clip: {fileID: 0}
+    NextMessage: 6
+    MessageText: I trust you know your way around your station hmmmmm?
+    Expression: {fileID: 0}
   - ID: 7
     Speaker: 1
     SpeakerName: Docorty
     PreviousMessage: 5
     NextMessage: 8
     MessageText: HAH HAH! Well then, who better than I to be your first customer.
-    Clip: {fileID: 0}
+    Expression: {fileID: 0}
   - ID: 8
     Speaker: 1
     SpeakerName: Docorty
@@ -81,62 +93,169 @@ MonoBehaviour:
     MessageText: 'Do not fret, for I shall be merciful on your first attempt.
 
 '
-    Clip: {fileID: 0}
+    Expression: {fileID: 0}
   - ID: 9
     Speaker: 1
     SpeakerName: Docorty
     PreviousMessage: 8
     NextMessage: 10
     MessageText: I trust you know how to use your kitchen hmmmmm?
-    Clip: {fileID: 0}
+    Expression: {fileID: 0}
   - ID: 10
-    Speaker: 1
-    SpeakerName: Docorty
-    PreviousMessage: 9
-    NextMessage: -1
-    MessageText: Show me what you can make. Impress me!
-    Clip: {fileID: 0}
-  - ID: 13
-    Speaker: 1
+    Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: -1
-    NextMessage: 14
+    NextMessage: 15
     MessageText: Mmh, I see.
-    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 13
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 12
+    NextMessage: 14
+    MessageText: Though I shall give you yor head start.
+    Expression: {fileID: 0}
   - ID: 14
-    Speaker: 1
+    Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 13
-    NextMessage: 15
-    MessageText: Perhaps there is potential in this place and for you sake I should
-      hope so.
-    Clip: {fileID: 0}
+    NextMessage: -1
+    MessageText: Do enjoy.
+    Expression: {fileID: 0}
   - ID: 15
-    Speaker: 1
+    Speaker: 0
     SpeakerName: Docorty
-    PreviousMessage: 14
+    PreviousMessage: 10
     NextMessage: 16
-    MessageText: 'For I, Docorty will study this place and create my own! A true
-      competitor is what this business needs!
-
-'
-    Clip: {fileID: 0}
+    MessageText: Perhaps there is potential in this place and for your sake I should
+      hope so.
+    Expression: {fileID: 0}
   - ID: 16
-    Speaker: 1
+    Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 15
     NextMessage: 17
-    MessageText: 'Though I shall give you your head start.
-
-'
-    Clip: {fileID: 0}
+    MessageText: For I, Docorty will study this place and create my own! A true competitor
+      is what this business needs!
+    Expression: {fileID: 0}
   - ID: 17
-    Speaker: 1
+    Speaker: 0
     SpeakerName: Docorty
     PreviousMessage: 16
+    NextMessage: 18
+    MessageText: Though I shall give you yor head start.
+    Expression: {fileID: 0}
+  - ID: 1
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: -1
+    NextMessage: 3
+    MessageText: Why hello there!
+    Expression: {fileID: 0}
+  - ID: 3
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 1
+    NextMessage: 4
+    MessageText: I see you've opened up a little tea shop hmmmmm? Well then who better
+      than I to be your first customer.
+    Expression: {fileID: 0}
+  - ID: 4
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 3
+    NextMessage: 5
+    MessageText: The name is Docorty and fret not for I shall be merciful on your
+      first attempt.
+    Expression: {fileID: 0}
+  - ID: 5
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 4
+    NextMessage: 6
+    MessageText: I trust you know your way around your station hmmmmm?
+    Expression: {fileID: 0}
+  - ID: 6
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 5
+    NextMessage: -1
+    MessageText: Show me what you can make, impress me!
+    Expression: {fileID: 0}
+  - ID: 7
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: -1
+    NextMessage: 11
+    MessageText: Mmh, I see.
+    Expression: {fileID: 0}
+  - ID: 10
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: -1
+    NextMessage: 15
+    MessageText: Mmh, I see.
+    Expression: {fileID: 0}
+  - ID: 11
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 7
+    NextMessage: 12
+    MessageText: Perhaps there is potential in this place and for your sake I should
+      hope so.
+    Expression: {fileID: 0}
+  - ID: 12
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 11
+    NextMessage: 13
+    MessageText: For I, Docorty will study this place and create my own! A true competitor
+      is what this business needs!
+    Expression: {fileID: 0}
+  - ID: 13
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 12
+    NextMessage: 14
+    MessageText: Though I shall give you yor head start.
+    Expression: {fileID: 0}
+  - ID: 14
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 13
     NextMessage: -1
     MessageText: Do enjoy.
-    Clip: {fileID: 0}
+    Expression: {fileID: 0}
+  - ID: 15
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 10
+    NextMessage: 16
+    MessageText: Perhaps there is potential in this place and for your sake I should
+      hope so.
+    Expression: {fileID: 0}
+  - ID: 16
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 15
+    NextMessage: 17
+    MessageText: For I, Docorty will study this place and create my own! A true competitor
+      is what this business needs!
+    Expression: {fileID: 0}
+  - ID: 17
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 16
+    NextMessage: 18
+    MessageText: Though I shall give you yor head start.
+    Expression: {fileID: 0}
+  - ID: 18
+    Speaker: 0
+    SpeakerName: Docorty
+    PreviousMessage: 17
+    NextMessage: -1
+    MessageText: Do enjoy.
+    Expression: {fileID: 0}
   Choices:
   - ID: 4
     Choices:

@@ -98,21 +98,21 @@ MonoBehaviour:
     PreviousMessage: 26
     NextMessage: 28
     MessageText: Not that this isn't nice! O-Or that I'm upset I just, y'know.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 5e5d03fe800ba8044b1d4874d0a85441, type: 2}
   - ID: 28
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: 27
     NextMessage: -1
     MessageText: F-Forgive me, nevermind. Thanks you still!
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: c1481d3bdec9cae45894eafe3b3b3cfc, type: 2}
   - ID: 30
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: -1
     NextMessage: 31
     MessageText: Mmh, oh my.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   - ID: 31
     Speaker: 0
     SpeakerName: Shylo
@@ -120,7 +120,7 @@ MonoBehaviour:
     NextMessage: 32
     MessageText: You sure do know how to make a relaxing brew. So calm, no fuss,
       just simple flavour.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 3bcdfb8a36f91b945ab9a912017f2dbf, type: 2}
   - ID: 32
     Speaker: 0
     SpeakerName: Shylo
@@ -128,20 +128,20 @@ MonoBehaviour:
     NextMessage: 33
     MessageText: Oh! Ehhm, I hope my approach wasn't too ehhm, startling o-or weird
       y'know.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   - ID: 33
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: 32
     NextMessage: 35
-    MessageText: It's sort of... Well I guess you could call it my "thing"? It's
+    MessageText: It's sort of... Well I guess you could call it my 'thing'? It's
       what I do, my job.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 5e5d03fe800ba8044b1d4874d0a85441, type: 2}
   - ID: 35
     Speaker: 0
     SpeakerName: Shylo
     PreviousMessage: 33
     NextMessage: -1
     MessageText: A-Anyway enough of that, thanks again!
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
   Choices: []

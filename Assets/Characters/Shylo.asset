@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 0
   material: {fileID: 2100000, guid: d364fd1e1bb53a24dba71eb2f0b4f216, type: 2}
-  stage: 0
+  backMaterial: {fileID: 2100000, guid: 1b9aa055740573f4eac0e59373c86850, type: 2}
   favouriteRecipe: Lavender Mint
   dialogues:
   - {fileID: 11400000, guid: a97e30e53ebd7774c884c2d3cf109efa, type: 2}

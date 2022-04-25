@@ -47,6 +47,10 @@ public class Ingredient : MonoBehaviour
     void Start()
     {
         m_heldLocationRef = GameObject.FindGameObjectWithTag("HoldLocation");
+        if (m_name == "")
+        {
+            m_name = m_type.ToString();
+        }
     }
 
     void Update()

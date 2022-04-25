@@ -62,10 +62,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_type: 1
-  m_name: 
+  m_name: Glow Lime
   m_colour: {r: 0.9245283, g: 0.7217105, b: 0.23113208, a: 0.7607843}
   m_description: 'Legend has it this fruit originated from the battle of two cobra
     gods. Their fangs formed the seeds and their poison became the acidic juice.
+
 
     The
     slices of glow limes mixed with sour and sweet, presumably the tea brewed can

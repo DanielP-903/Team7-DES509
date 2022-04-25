@@ -1,18 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QuantumTek.QuantumDialogue;
+using Random = UnityEngine.Random;
+
+[Serializable]
+public class StringIntDictionary : SerializableDictionary<string, int> { }
+
 public class Character : MonoBehaviour
 {
     public SO_Character characterScriptableObject;
     public int stage = 0;
-
+    [SerializeField]
+    public StringIntDictionary CharacterStages;
+    public IDictionary<string, int> StringIntDictionary
+    {
+        get { return CharacterStages; }
+        set { CharacterStages.CopyFrom(value); }
+    }
 
     private GameObject m_playerRef;
     private GameManager m_gameManagerRef;
     [HideInInspector] public bool isAvailable;
     [HideInInspector] public bool leaving;
     [HideInInspector] public QD_Dialogue currentDialogue;
+
+    private bool m_characterWait = false;
 
     private void Start()
     {
@@ -21,12 +35,16 @@ public class Character : MonoBehaviour
         isAvailable = false;
         leaving = false;
         transform.position = m_gameManagerRef.m_entryPos;
+        CharacterStages.Add("Shylo", 0);
+        CharacterStages.Add("Docorty", 0);
+        CharacterStages.Add("Mimi", 0);
     }
 
     public void ChangeCharacter(SO_Character newCharacter)
     {
         characterScriptableObject = newCharacter;
         GetComponent<MeshRenderer>().sharedMaterial = characterScriptableObject.material;
+        transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial = characterScriptableObject.backMaterial;
         isAvailable = false;
         transform.position = m_gameManagerRef.m_entryPos;
     }
@@ -39,13 +57,37 @@ public class Character : MonoBehaviour
     private void Update()
     {
         GetComponent<BoxCollider>().enabled = isAvailable;
-        transform.LookAt(m_playerRef.transform, Vector3.up);
+
+        if (!leaving)
+        {
+            transform.LookAt(m_playerRef.transform, Vector3.up);
+        }
+        else
+        {
+            transform.LookAt(m_gameManagerRef.m_entryPos, Vector3.up);
+        }
+
         transform.eulerAngles = new Vector3(90.0f, transform.eulerAngles.y, 0.0f);
-        if (!isAvailable)
+
+        if (!isAvailable && !m_characterWait)
         {
             MoveIntoPosition();
         }
     }
+
+    private void RandomiseNextCharacter()
+    {
+        CharacterName newCharacterName = m_gameManagerRef.currentCharacterName;
+        while (newCharacterName == m_gameManagerRef.currentCharacterName)
+        {
+            int random = Random.Range(0, 2);
+            newCharacterName = m_gameManagerRef.m_characterList[random].characterName;
+            characterScriptableObject = m_gameManagerRef.m_characterList[random];
+        }
+
+        m_gameManagerRef.currentCharacterName = newCharacterName;
+    }
+
 
     private void MoveIntoPosition()
     {
@@ -58,6 +100,10 @@ public class Character : MonoBehaviour
             {
                 leaving = false;
                 isAvailable = false; // Change to true/false to allow/disallow stopping after char exit
+                RandomiseNextCharacter();
+                ChangeCharacter(m_gameManagerRef.FindCharacter());
+                currentDialogue = characterScriptableObject.dialogues[CharacterStages[m_gameManagerRef.currentCharacterName.ToString()]];
+                StartCoroutine(CharacterEntryDelay(3.0f));
             }
             else
             {
@@ -70,5 +116,12 @@ public class Character : MonoBehaviour
         {
             m_gameManagerRef.ActivateDoors();
         }
+    }
+
+    private IEnumerator CharacterEntryDelay(float waitTime)
+    {
+        m_characterWait = true;
+        yield return new WaitForSeconds(waitTime);
+        m_characterWait = false;
     }
 }

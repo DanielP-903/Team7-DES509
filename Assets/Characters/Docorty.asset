@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469bdd85d085cd7479b0632915db384a, type: 3}
   m_Name: Docorty
   m_EditorClassIdentifier: 
-  characterName: 0
-  material: {fileID: 0}
-  stage: 0
-  favouriteRecipe: 
+  characterName: 2
+  material: {fileID: 2100000, guid: 222967581d7ec3140b70633573bba1cd, type: 2}
+  favouriteRecipe: Raspberry Lemonade
+  dialogues:
+  - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
+  - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
+  - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
+  - {fileID: 11400000, guid: 75c60ba86bc046f48a47970d89f082ae, type: 2}
