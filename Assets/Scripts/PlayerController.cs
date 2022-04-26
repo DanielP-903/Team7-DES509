@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     private GameObject m_recipeBookUI;
     private bool m_lookingAtBook = false;
 
-    public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe;
+    [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe;
 
     // Start is called before the first frame update
     void Start()
@@ -87,13 +87,13 @@ public class PlayerController : MonoBehaviour
 
         float defaultY = transform.position.y;
         
-        m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
-        m_lockTalkRot = transform.rotation;
+        //m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
+        //m_lockTalkRot = transform.rotation;
 
-        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
-        m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
-        m_lockTeaMakeRot = transform.rotation;
-        m_lockTeaMakeRot.Set(m_lockTeaMakeRot.x, 0, m_lockTeaMakeRot.z,1);
+        //m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
+        //m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
+        //m_lockTeaMakeRot = transform.rotation;
+        //m_lockTeaMakeRot.Set(m_lockTeaMakeRot.x, 0, m_lockTeaMakeRot.z,1);
 
         if (GameObject.FindGameObjectWithTag("GameManager"))
         {
@@ -136,14 +136,14 @@ public class PlayerController : MonoBehaviour
         var color = Color.cyan;
         color.a = 0.5f;
         Gizmos.color = color;
-        m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
-        m_lockTalkRot = transform.rotation;
+        //m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
+        //m_lockTalkRot = transform.rotation;
 
         Gizmos.DrawSphere(m_lockTalkPos, 0.5f);
 
-        m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
-        m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
-        m_lockTeaMakeRot = transform.rotation;
+        //m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
+        //m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
+        //m_lockTeaMakeRot = transform.rotation;
         color = Color.magenta;
         color.a = 0.5f;
         Gizmos.color = color;
@@ -472,7 +472,7 @@ public class PlayerController : MonoBehaviour
                 }
                 return;
             }
-            if (hit.transform != null && hit.transform.gameObject.GetComponent<Tea>())
+            if (hit.transform != null && hit.transform.gameObject.GetComponent<Tea>() && m_teaMakerRef.hasClickedBrew)
             {
                 m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled = false;
                 // Give Tea

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a74e3a65cc4b487bb14b164cb3ec0e7, type: 3}
-  m_Name: Mimi
+  m_Name: Mimi_0_Reputation DB
   m_EditorClassIdentifier: 
   DataDB: {fileID: 11400000, guid: 094e042eaa27946b383320a39f4ca1b0, type: 2}
   NextID: 0
