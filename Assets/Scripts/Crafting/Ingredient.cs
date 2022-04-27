@@ -23,7 +23,6 @@ public class Ingredient : MonoBehaviour
     [TextArea(5, 10)]
     public string m_description;
 
-
     //[Tooltip("Change bitterness rating")]
     //[Range(0, 10)]
     //public int m_bitterness;

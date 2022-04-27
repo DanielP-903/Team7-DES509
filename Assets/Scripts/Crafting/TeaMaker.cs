@@ -35,7 +35,7 @@ public class TeaMaker : MonoBehaviour
     private int m_discoveredRecipesNo = 0;
     [HideInInspector] public Recipe m_currentlyCalculatedRecipe;
     
-    private RecipeList m_recipeListRef;
+    public RecipeList m_recipeListRef;
     public int Total = 0;
     private readonly Stack<UnityEngine.Object> AddedOrder = new Stack<UnityEngine.Object>();
 
@@ -203,18 +203,18 @@ public class TeaMaker : MonoBehaviour
                 // Not a defined tea but that's a-ok!
                 m_teaModel.GetComponent<Tea>().m_name = "regular";
                 Color combinedColour = new Color(0, 0, 0, 1);
+                m_teaModel.GetComponent<Tea>().ingredients.Clear();
                 foreach (var item in m_container)
                 {
                     combinedColour += FindIngredient((GameObject)item.Key).GetComponent<Ingredient>().m_colour;
+                    m_teaModel.GetComponent<Tea>().ingredients.Add(item.Key, item.Value);
                 }
-                m_teaModel.GetComponent<Tea>().SetColour(combinedColour);            
+                m_teaModel.GetComponent<Tea>().SetColour(combinedColour);
                 m_lid.SetActive(false);
                 m_lidDestination.SetActive(true);
                 m_container.Clear();
                 AddedOrder.Clear();
-
-                m_playerRef.sfx_normal.Play();
-                
+                m_playerRef.sfx_normal.Play();            
             }
         }
     }
