@@ -39,8 +39,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Dissolve_: 0.68
-    - Vector1_2210cedf919a46eab0f3e30b5e77c90c: 5
-    - Vector1_65564c3d5b364ef0b4c9cac149a0d24a: 20
+    - Vector1_2210cedf919a46eab0f3e30b5e77c90c: 9.4
+    - Vector1_65564c3d5b364ef0b4c9cac149a0d24a: 20.66
     - Vector1_aebadbab54f0425ab00676d80f73a05e: 0.41
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
@@ -86,6 +86,7 @@ Material:
     m_Colors:
     - Color_: {r: 22.627417, g: 22.627417, b: 22.627417, a: 0}
     - Vector2_149010175d3248a999ad6e7dc319ecf4: {r: 0, g: 0.5, b: 0, a: 0}
+    - Vector2_161120506ac94474b27c20a24719f95e: {r: 0.5, g: -0.5, b: 0, a: 0}
     - Vector2_8ead3aeb84c546e49ab1900da493fb83: {r: 5, g: 5, b: 5, a: 5}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

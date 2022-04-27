@@ -3,7 +3,22 @@ guid: cf8b47063edab8f42b06f0c041260f46
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 3768279896bbd3b4aabfe813d7df2fcc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Water
+    second: {fileID: 2100000, guid: 15202ae49061e1c4d9a7dbea62865b93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Waterfall
+    second: {fileID: 2100000, guid: 3608b3735b3883f40a7e4b87fbc43bab, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

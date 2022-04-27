@@ -165,7 +165,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 1
-    m_Value: 116
+    m_Value: 68
     min: 0
     max: 360
   skyIntensityMode:
@@ -203,10 +203,10 @@ MonoBehaviour:
     m_Value: {fileID: 8900000, guid: 54a3a0570aebe8949bec4966f1376581, type: 3}
   enableDistortion:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
   procedural:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 0
   flowmap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -466,22 +466,22 @@ MonoBehaviour:
   m_AdvancedMode: 1
   quality:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   enabled:
     m_OverrideState: 1
     m_Value: 1
   colorMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   color:
     m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    m_Value: {r: 823.2157, g: 0, b: 0, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   tint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.42779446, g: 0, b: 1, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -507,17 +507,17 @@ MonoBehaviour:
     m_Value: 0
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 500
+    m_Value: 1715
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 5000
+    m_Value: 4000
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   albedo:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.6847383, g: 0.36320752, b: 1, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
@@ -558,7 +558,7 @@ MonoBehaviour:
     max: 1024
   m_VolumetricFogBudget:
     m_OverrideState: 1
-    m_Value: 0.333
+    m_Value: 0.666
     min: 0
     max: 1
   m_ResolutionDepthRatio:
@@ -911,7 +911,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 2
   toeStrength:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
     min: 0
     max: 1

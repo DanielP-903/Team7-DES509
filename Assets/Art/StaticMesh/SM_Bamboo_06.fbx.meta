@@ -3,7 +3,17 @@ guid: 6b3086ec74d40d54b808cd7ae5eab487
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bamboo
+    second: {fileID: 2100000, guid: 6c2339237b6a76140a29c17f9fb49986, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stem
+    second: {fileID: 2100000, guid: 3768279896bbd3b4aabfe813d7df2fcc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
