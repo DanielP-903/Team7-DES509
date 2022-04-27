@@ -6,7 +6,12 @@ public class Tea : MonoBehaviour
 {
     public string m_name;
     private Color m_colour = Color.magenta;
-
+    public CustomIntDictionary ingredients;
+    public IDictionary<UnityEngine.Object, int> CustomIntDictionary
+    {
+        get { return ingredients; }
+        set { ingredients.CopyFrom(value); }
+    }
     public void SetColour(Color colour)
     {
         m_colour = colour;

@@ -378,6 +378,10 @@ public class PlayerController : MonoBehaviour
                 m_goToMode = Mode.Freeroam;
                 if (handler.currentConversation.Name != "Ordering")
                 {
+                    // TODO
+                    // Set neutral convo next after a narrative response!
+                    //handler.SetConversation("Served_Neutral");
+
                     m_finishedTalking = false;
                     m_teaMakerRef.ResetTea();
                     m_teaAnimFlag = true;
@@ -423,13 +427,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private GameObject FindIngredient()
+    public GameObject FindIngredient()
     {
         foreach (var ingredient in m_gameManagerRef.m_ingredientList)
         {
             if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<Ingredient>().m_type)
             {
                return ingredient;
+            }
+        }
+        return null;
+    }
+
+    public GameObject FindIngredient(string name)
+    {
+        foreach (var ingredient in m_gameManagerRef.m_ingredientList)
+        {
+            if (ingredient.GetComponent<Ingredient>().m_type.ToString() == name)
+            {
+                return ingredient;
             }
         }
         return null;
@@ -479,11 +495,15 @@ public class PlayerController : MonoBehaviour
                 m_teaMakerRef.GiveTea();
                 if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().characterScriptableObject.favouriteRecipe)
                 {
-
-
-
-                   // handler.SetConversation("Served_Neutral");
-                    handler.SetConversation(GetQuip());
+                    if (m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue != null)
+                    {
+                        handler.dialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue;
+                        handler.SetConversation(GetQuip());
+                    }
+                    else
+                    {
+                        handler.SetConversation("Served_Neutral");
+                    }
                     handler.SetMessage(handler.currentConversation.FirstMessage);
                     handler.dialogue.SetMessage(handler.currentConversation.FirstMessage, handler.GetMessage());
                     SetText();
@@ -611,23 +631,24 @@ public class PlayerController : MonoBehaviour
 
         Recipe recipe = FindRecipe(GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().characterScriptableObject.favouriteRecipe);
 
-        foreach (var item in m_teaMakerRef.m_container)
+        //foreach (var item in m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients)
+        foreach (var item in recipe.m_ingredients)
         {
             string quip;
             if (item.Value != 0)
             {
-                if (recipe.m_ingredients.ContainsKey(item.Key) )
+                if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients.ContainsKey(item.Key) )
                 {
-                    if (recipe.m_ingredients[item.Key] != item.Value)
+                    if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] != item.Value)
                     {
-                        if (recipe.m_ingredients[item.Key] > item.Value)
+                        if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] > item.Value)
                         {
                             // TOO MUCH of ...
                             quip = DetermineQuip((item.Key as Ingredient).m_type);
                             quip += "_TooMuch";
                             quips.Add(quip);
                         }
-                        if (recipe.m_ingredients[item.Key] < item.Value)
+                        if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] < item.Value)
                         {
                             // TOO LITTLE of...
                             quip = DetermineQuip((item.Key as Ingredient).m_type);
@@ -639,7 +660,9 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     // Does not contain ingredient at all so: TOO LITTLE OF ...
-                    quip = DetermineQuip((item.Key as Ingredient).m_type);
+                    //GameObject ing = ((GameObject)GameObject.FindObjectOfType(item.Key.GetType())).transform.parent.gameObject;
+                    GameObject ing = FindIngredient(item.Key.name);
+                    quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
                     quip += "_TooLittle";
                     quips.Add(quip);
                 }
@@ -666,27 +689,27 @@ public class PlayerController : MonoBehaviour
         {
             case IngredientType.Breezeleaf:
                 {
-                    return "Cool_TooMuch";
+                    return "Cool";
                 }
             case IngredientType.Cindershard:
                 {
-                    return "Warm_TooMuch";
+                    return "Warm";
                 }
             case IngredientType.Ebonstraw:
                 {
-                    return "_TooMuch";
+                    return "Sweet";
                 }
             case IngredientType.GlowLime:
                 {
-                    return "Cool_TooMuch";
+                    return "Sour";
                 }
             case IngredientType.HeartOfRose:
                 {
-                    return "Cool_TooMuch";
+                    return "Aromatic";
                 }
             case IngredientType.PurpleCrystal:
                 {
-                    return "Cool_TooMuch";
+                    return "Aromatic";
                 }
             default:
                 return "NONE";
