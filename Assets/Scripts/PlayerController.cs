@@ -479,10 +479,15 @@ public class PlayerController : MonoBehaviour
                 m_teaMakerRef.GiveTea();
                 if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name != GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().characterScriptableObject.favouriteRecipe)
                 {
-                    handler.SetConversation("Served_Neutral");
+
+
+
+                   // handler.SetConversation("Served_Neutral");
+                    handler.SetConversation(GetQuip());
                     handler.SetMessage(handler.currentConversation.FirstMessage);
                     handler.dialogue.SetMessage(handler.currentConversation.FirstMessage, handler.GetMessage());
                     SetText();
+
                 }
                 else
                 {
@@ -598,6 +603,109 @@ public class PlayerController : MonoBehaviour
                 m_tooltipObject.SetActive(false);
             }
         }
+    }
+
+    private string GetQuip()
+    {
+        List<string> quips = new List<string>();
+
+        Recipe recipe = FindRecipe(GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().characterScriptableObject.favouriteRecipe);
+
+        foreach (var item in m_teaMakerRef.m_container)
+        {
+            string quip;
+            if (item.Value != 0)
+            {
+                if (recipe.m_ingredients.ContainsKey(item.Key) )
+                {
+                    if (recipe.m_ingredients[item.Key] != item.Value)
+                    {
+                        if (recipe.m_ingredients[item.Key] > item.Value)
+                        {
+                            // TOO MUCH of ...
+                            quip = DetermineQuip((item.Key as Ingredient).m_type);
+                            quip += "_TooMuch";
+                            quips.Add(quip);
+                        }
+                        if (recipe.m_ingredients[item.Key] < item.Value)
+                        {
+                            // TOO LITTLE of...
+                            quip = DetermineQuip((item.Key as Ingredient).m_type);
+                            quip += "_TooLittle";
+                            quips.Add(quip);
+                        }
+                    }
+                }
+                else
+                {
+                    // Does not contain ingredient at all so: TOO LITTLE OF ...
+                    quip = DetermineQuip((item.Key as Ingredient).m_type);
+                    quip += "_TooLittle";
+                    quips.Add(quip);
+                }
+            }
+        }
+
+        // Got the list of available discrepencies between fav recipe and tea
+        // Now return the first one
+
+        if (quips.Count > 0)
+        {
+            return quips[0];
+        }
+        else
+        {
+            Debug.LogError("No quips found");
+            return "";
+        }
+    }
+
+    private string DetermineQuip(IngredientType type)
+    {
+        switch (type)
+        {
+            case IngredientType.Breezeleaf:
+                {
+                    return "Cool_TooMuch";
+                }
+            case IngredientType.Cindershard:
+                {
+                    return "Warm_TooMuch";
+                }
+            case IngredientType.Ebonstraw:
+                {
+                    return "_TooMuch";
+                }
+            case IngredientType.GlowLime:
+                {
+                    return "Cool_TooMuch";
+                }
+            case IngredientType.HeartOfRose:
+                {
+                    return "Cool_TooMuch";
+                }
+            case IngredientType.PurpleCrystal:
+                {
+                    return "Cool_TooMuch";
+                }
+            default:
+                return "NONE";
+        }
+    }
+
+
+    private Recipe FindRecipe(string name)
+    {
+
+        foreach (var item in m_teaMakerRef.m_recipeListRef.m_recipes)
+        {
+            if (item.m_name == name)
+            {
+                return item;
+            }
+        }
+
+        return null;
     }
 
     public void ExitBook()
