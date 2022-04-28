@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 100e8e2a0686a634180eb0987ed919a1, type: 2}
   - {fileID: 11400000, guid: efe284a6f0910e44eb683dda0235e64e, type: 2}
   - {fileID: 11400000, guid: 84d1be85e197e864f852c0e1c331ea30, type: 2}
+  quipDialogue: {fileID: 11400000, guid: 42acf97e69184d34a9058b65e8cdfb9f, type: 2}

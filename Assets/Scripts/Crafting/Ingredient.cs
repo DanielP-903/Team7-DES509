@@ -5,11 +5,6 @@ public enum IngredientType
     Breezeleaf, GlowLime, HeartOfRose, Cindershard, PurpleCrystal, Ebonstraw  // Needs to be updated
 }
 
-enum SpecialProperties
-{
-    None, Energy, Calming, Soothing, Healing  // Needs to be updated
-}
-
 public class Ingredient : MonoBehaviour
 {
     [Header("Properties")]
@@ -23,25 +18,8 @@ public class Ingredient : MonoBehaviour
     [TextArea(5, 10)]
     public string m_description;
 
-    //[Tooltip("Change bitterness rating")]
-    //[Range(0, 10)]
-    //public int m_bitterness;
-    //[Tooltip("Change sweetness rating")]
-    //[Range(0, 10)]
-    //public int m_sweetness;
-    //[Tooltip("Change fruitiness rating")]
-    //[Range(0, 10)]
-    //public int m_fruitiness;
-    //[Tooltip("Change earthiness rating")]
-    //[Range(0, 10)]
-    //public int m_earthiness;
-    //[Tooltip("UNUSED! Any special properties that occur when mixed (NOTE: this may only impact the output when mixed as part of a recipe)")]
-    //[SerializeField] private SpecialProperties m_specialProperties;
-
     [HideInInspector] public bool IsHeld = false;
     private GameObject m_heldLocationRef;
-
-    [HideInInspector] public int occurences = 0;
 
     void Start()
     {
