@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     private bool m_playerLockTurn = false;
     private GameObject m_recipeBookUI;
     private bool m_lookingAtBook = false;
-
+    private float m_lockTimer = 2.5f;
     [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe;
 
     // Start is called before the first frame update
@@ -214,7 +214,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (m_goToMode == Mode.TeaMaking)
             {
-                if (Quaternion.Angle(transform.rotation, offsetRot) > 0.5f && m_playerLockTurn == true)
+                m_lockTimer = m_lockTimer <= 0 ? 0 : m_lockTimer - Time.deltaTime;
+                if (Quaternion.Angle(transform.rotation, offsetRot) > 0.5f && m_playerLockTurn == true && m_lockTimer > 0)
                 {
                     transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 3.0f);
                 }
@@ -224,6 +225,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (distance < 0.05f)
                 {
+                    m_lockTimer = 2.5f;
                     m_mode = Mode.TeaMaking;
                     m_walkToLock = false;
                     m_playerLockTurn = false;

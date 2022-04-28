@@ -20,6 +20,8 @@ public class Ingredient : MonoBehaviour
 
     [HideInInspector] public bool IsHeld = false;
     private GameObject m_heldLocationRef;
+    private GameManager m_gameManagerRef;
+    private TeaMaker m_teaMakerRef;
 
     void Start()
     {
@@ -28,6 +30,25 @@ public class Ingredient : MonoBehaviour
         {
             m_name = m_type.ToString();
         }
+        if (GameObject.FindGameObjectWithTag("GameManager"))
+        {
+            m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        }
+        else
+        {
+            Debug.LogError("ERROR: Game Manager has no tag assigned!");
+            Debug.DebugBreak();
+        }
+        if (GameObject.FindGameObjectWithTag("Machine"))
+        {
+            m_teaMakerRef = GameObject.FindGameObjectWithTag("Machine").GetComponent<TeaMaker>();
+        }
+        else
+        {
+            Debug.LogError("ERROR: Tea Machine has no tag assigned!");
+            Debug.DebugBreak();
+        }
+
     }
 
     void Update()
@@ -41,6 +62,15 @@ public class Ingredient : MonoBehaviour
         else
         {
             transform.parent = null;
+        }
+
+        if (m_teaMakerRef.hasClickedBrew)
+        {
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            GetComponent<BoxCollider>().enabled = true;
         }
     }
 }
