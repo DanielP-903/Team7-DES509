@@ -173,21 +173,21 @@ MonoBehaviour:
     m_Value: 0
   exposure:
     m_OverrideState: 1
-    m_Value: 13.09
+    m_Value: 12.7
   multiplier:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 9899.6
     min: 0
   upperHemisphereLuxValue:
     m_OverrideState: 0
-    m_Value: 0.4660715
+    m_Value: 0.46607146
     min: 0
   upperHemisphereLuxColor:
     m_OverrideState: 0
-    m_Value: {x: 0.18750614, y: 0.29181972, z: 0.5}
+    m_Value: {x: 0.18750611, y: 0.29181966, z: 0.5}
   desiredLuxValue:
     m_OverrideState: 1
-    m_Value: 25000
+    m_Value: 7543
   updateMode:
     m_OverrideState: 0
     m_Value: 0
@@ -331,6 +331,7 @@ MonoBehaviour:
   - {fileID: 747098994415714109}
   - {fileID: 4566301752631259820}
   - {fileID: -5688606901432396813}
+  - {fileID: 5734472851007845331}
 --- !u!114 &747098994415714109
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -474,14 +475,14 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   color:
-    m_OverrideState: 0
-    m_Value: {r: 823.2157, g: 0, b: 0, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 492.50208, g: 1056.677, b: 1099.0573, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.42779446, g: 0, b: 1, a: 1}
+    m_Value: {r: 5.5143795, g: 8.876806, b: 12.844469, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -507,35 +508,35 @@ MonoBehaviour:
     m_Value: 0
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 1715
+    m_Value: 110.1
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 4000
+    m_Value: 50
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 0.6847383, g: 0.36320752, b: 1, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
   globalLightProbeDimmer:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
     min: 0
     max: 1
   depthExtent:
     m_OverrideState: 1
-    m_Value: 50
+    m_Value: 41.4
     min: 0.1
   denoisingMode:
     m_OverrideState: 1
     m_Value: 3
   anisotropy:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
     min: -1
     max: 1
   sliceDistributionUniformity:
@@ -704,6 +705,76 @@ MonoBehaviour:
     m_Value: 0.65
     min: 0.001
     max: 1
+--- !u!114 &5734472851007845331
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a81bcacc415a1f743bfdf703afc52027, type: 3}
+  m_Name: GradientSky
+  m_EditorClassIdentifier: 
+  active: 0
+  m_AdvancedMode: 0
+  rotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  skyIntensityMode:
+    m_OverrideState: 1
+    m_Value: 0
+  exposure:
+    m_OverrideState: 1
+    m_Value: 11.5
+  multiplier:
+    m_OverrideState: 1
+    m_Value: 2501.8
+    min: 0
+  upperHemisphereLuxValue:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  upperHemisphereLuxColor:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0, z: 0}
+  desiredLuxValue:
+    m_OverrideState: 0
+    m_Value: 20000
+  updateMode:
+    m_OverrideState: 0
+    m_Value: 0
+  updatePeriod:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  includeSunInBaking:
+    m_OverrideState: 0
+    m_Value: 0
+  top:
+    m_OverrideState: 1
+    m_Value: {r: 0.8066038, g: 1, b: 0.939053, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  middle:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0.8480973, b: 1, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  bottom:
+    m_OverrideState: 1
+    m_Value: {r: 0.990566, g: 0.5093005, b: 0.8089415, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  gradientDiffusion:
+    m_OverrideState: 1
+    m_Value: 3.01
 --- !u!114 &6640133647794636954
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -912,26 +983,26 @@ MonoBehaviour:
     m_Value: 2
   toeStrength:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.07
     min: 0
     max: 1
   toeLength:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 0.334
     min: 0
     max: 1
   shoulderStrength:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
     min: 0
     max: 1
   shoulderLength:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 0.79
     min: 0
   shoulderAngle:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.262
     min: 0
     max: 1
   gamma:
