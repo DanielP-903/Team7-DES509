@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Character currentCharacter;
     public Vector3 m_entryPos;
     public Vector3 m_exitPos;
+    public Sprite MessageBox;
+    public Sprite MessageBoxNoName;
 
     private float m_doorDelay;
     public GameObject doorObject;

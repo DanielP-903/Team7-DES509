@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 1
   material: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
+  backMaterial: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   favouriteRecipe: Apples to Oranges
   dialogues:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 82ba6bf9b43047a45b7d8b8a7ae1749f, type: 2}
+  - {fileID: 11400000, guid: 5dcf71e52568c134b8aab4611fb3ac53, type: 2}
+  - {fileID: 11400000, guid: aec4a1a872b052343939f6174919de4f, type: 2}
+  - {fileID: 11400000, guid: 7d18ebd3614e47c4b9311b3c2d55b9b2, type: 2}
+  quipDialogue: {fileID: 0}

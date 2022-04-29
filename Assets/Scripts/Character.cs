@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public QD_Dialogue currentDialogue;
 
     private bool m_characterWait = false;
-
+    private float m_turnTimer = 0.0f;
     private void Awake()
     {
         m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -61,18 +61,25 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
+        m_turnTimer = m_turnTimer <= 0 ? 0 : m_turnTimer - Time.deltaTime;
+
         GetComponent<BoxCollider>().enabled = isAvailable;
 
         if (!leaving)
         {
             transform.LookAt(m_playerRef.transform, Vector3.up);
+            transform.eulerAngles = new Vector3(90.0f, transform.eulerAngles.y, 0.0f);
         }
         else
         {
-            transform.LookAt(m_gameManagerRef.m_entryPos, Vector3.up);
+            if (m_turnTimer <= 0)
+            {
+                m_turnTimer = 10.0f;
+                GetComponent<Animator>().Play("CharTurn");
+            }
+            //transform.LookAt(m_gameManagerRef.m_entryPos, Vector3.up);
         }
 
-        transform.eulerAngles = new Vector3(90.0f, transform.eulerAngles.y, 0.0f);
 
         if (!isAvailable && !m_characterWait)
         {

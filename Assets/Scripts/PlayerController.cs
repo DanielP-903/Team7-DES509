@@ -4,6 +4,8 @@ using QuantumTek.QuantumDialogue;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using Cursor = UnityEngine.Cursor;
 
 enum Mode
 {
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
     private bool m_playerLockTurn = false;
     private GameObject m_recipeBookUI;
     private bool m_lookingAtBook = false;
-
+    private float m_lockTimer = 2.5f;
     [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe;
 
     // Start is called before the first frame update
@@ -212,7 +214,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (m_goToMode == Mode.TeaMaking)
             {
-                if (Quaternion.Angle(transform.rotation, offsetRot) > 0.5f && m_playerLockTurn == true)
+                m_lockTimer = m_lockTimer <= 0 ? 0 : m_lockTimer - Time.deltaTime;
+                if (Quaternion.Angle(transform.rotation, offsetRot) > 0.5f && m_playerLockTurn == true && m_lockTimer > 0)
                 {
                     transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 3.0f);
                 }
@@ -222,6 +225,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (distance < 0.05f)
                 {
+                    m_lockTimer = 2.5f;
                     m_mode = Mode.TeaMaking;
                     m_walkToLock = false;
                     m_playerLockTurn = false;
@@ -373,15 +377,23 @@ public class PlayerController : MonoBehaviour
             }
             if (handler.currentMessageInfo.NextID == -1)
             {
-                dialogueBox.SetActive(false);
-                m_mode = Mode.Freeroam;
-                m_goToMode = Mode.Freeroam;
+
                 if (handler.currentConversation.Name != "Ordering")
                 {
                     // TODO
                     // Set neutral convo next after a narrative response!
                     //handler.SetConversation("Served_Neutral");
-
+                    if (IsQuips())
+                    {
+                        dialogueBox.transform.GetChild(0).GetComponent<Image>().sprite = m_gameManagerRef.MessageBox;
+                        messageTextbox.fontSize = 16;
+                        handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
+                        handler.SetConversation("Served_Neutral");
+                        handler.SetMessage(handler.currentConversation.FirstMessage);
+                        handler.dialogue.SetMessage(handler.currentConversation.FirstMessage, handler.GetMessage());
+                        SetText();
+                        return;
+                    }
                     m_finishedTalking = false;
                     m_teaMakerRef.ResetTea();
                     m_teaAnimFlag = true;
@@ -411,6 +423,9 @@ public class PlayerController : MonoBehaviour
                     m_teaAnimFlag = false;
                     GameManager.m_hasBrewedATea = false;
                 }
+                dialogueBox.SetActive(false);
+                m_mode = Mode.Freeroam;
+                m_goToMode = Mode.Freeroam;
             }
             else
             {
@@ -418,7 +433,56 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    private bool IsQuips()
+    {
+        switch (handler.currentConversation.Name)
+        {
+            case "Cool_TooMuch":
+            {
+                return true;
+            }
+            case "Sour_TooMuch":
+            {
+                return true;
+            }
+            case "Aromatic_TooMuch":
+            {
+                return true;
+            }
+            case "Warm_TooMuch":
+            {
+                return true;
+            }
+            case "Sweet_TooMuch":
+            {
+                return true;
+            }
+            case "Aromatic_TooLittle":
+            {
+                return true;
+            }
+            case "Cool_TooLittle":
+            {
+                return true;
+            }
+            case "Warm_TooLittle":
+            {
+                return true;
+            }
+            case "Sour_TooLittle":
+            {
+                return true;
+            }
+            case "Sweet_TooLittle":
+            {
+                return true;
+            }
+            default:
+            {
+                return false;
+            }
+        }
+    }
     private void CheckReleased()
     {
         if (m_mouseDown && Mouse.current.leftButton.wasReleasedThisFrame)
@@ -497,6 +561,8 @@ public class PlayerController : MonoBehaviour
                 {
                     if (m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue != null)
                     {
+                        dialogueBox.transform.GetChild(0).GetComponent<Image>().sprite = m_gameManagerRef.MessageBoxNoName;
+                        messageTextbox.fontSize = 12.0f;
                         handler.dialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue;
                         handler.SetConversation(GetQuip());
                     }
@@ -662,9 +728,12 @@ public class PlayerController : MonoBehaviour
                     // Does not contain ingredient at all so: TOO LITTLE OF ...
                     //GameObject ing = ((GameObject)GameObject.FindObjectOfType(item.Key.GetType())).transform.parent.gameObject;
                     GameObject ing = FindIngredient(item.Key.name);
-                    quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
-                    quip += "_TooLittle";
-                    quips.Add(quip);
+                    if (ing != null)
+                    {
+                        quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
+                        quip += "_TooLittle";
+                        quips.Add(quip);
+                    }
                 }
             }
         }
@@ -751,18 +820,28 @@ public class PlayerController : MonoBehaviour
         if (m_dialogueFinished)
             return;
 
+        if (IsQuips())
+        {
+            messageTextbox.text += "[";
+        }
+       
         // Generate choices if a choice, otherwise display the message
         if (handler.currentMessageInfo.Type == QD_NodeType.Message)
         {
             QD_Message message = handler.GetMessage();
             speakerNameTextbox.text = message.SpeakerName;
-            messageTextbox.text = message.MessageText;
+            messageTextbox.text += message.MessageText;
             messageTextbox.gameObject.SetActive(true);
 
         }
         else if (handler.currentMessageInfo.Type == QD_NodeType.Choice)
         {
             speakerNameTextbox.text = "Player";
+        }
+
+        if (IsQuips())
+        {
+            messageTextbox.text += "]";
         }
     }
     public void Next(int choice = -1)
