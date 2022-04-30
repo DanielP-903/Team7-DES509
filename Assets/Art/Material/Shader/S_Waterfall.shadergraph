@@ -17,6 +17,9 @@
         },
         {
             "m_Id": "f117565a1f4546a4a09568db15e346a6"
+        },
+        {
+            "m_Id": "ebb061b5e4df4594afd22e82a97dbc3b"
         }
     ],
     "m_Keywords": [],
@@ -92,6 +95,9 @@
         },
         {
             "m_Id": "8e8ff3c28ff04989bfcc8b1263bb4381"
+        },
+        {
+            "m_Id": "b5857f3e81564b2c8f8d128b8b51e499"
         }
     ],
     "m_GroupDatas": [],
@@ -221,6 +227,20 @@
                     "m_Id": "e358c02b3242467fa8fcbbe43b4680c5"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "b5857f3e81564b2c8f8d128b8b51e499"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "60c06af5436047ee8874faaf0a5b0300"
+                },
+                "m_SlotId": 1
             }
         },
         {
@@ -1552,6 +1572,19 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
+    "m_ObjectId": "74b2b48966e7458ba25c6f4f0c453212",
+    "m_Id": 0,
+    "m_DisplayName": "NoiseMap",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_BareResource": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "776e227fd76b4191bccf3bf17c700214",
     "m_Id": 0,
@@ -2053,6 +2086,41 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "b5857f3e81564b2c8f8d128b8b51e499",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1421.0,
+            "y": 271.0,
+            "width": 138.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "74b2b48966e7458ba25c6f4f0c453212"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "ebb061b5e4df4594afd22e82a97dbc3b"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.TangentMaterialSlot",
     "m_ObjectId": "be008011804d466cbd32c667f9988dd4",
     "m_Id": 0,
@@ -2382,6 +2450,29 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "ebb061b5e4df4594afd22e82a97dbc3b",
+    "m_Guid": {
+        "m_GuidSerialized": "2ddd0c64-d3b2-4d02-a43f-2ee2775cfa2e"
+    },
+    "m_Name": "NoiseMap",
+    "m_DefaultReferenceName": "Texture2D_ebb061b5e4df4594afd22e82a97dbc3b",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"d45c2d2458bb3ef40a173fdce63a19a8\",\"type\":3}}",
+        "m_Guid": ""
+    },
+    "m_Modifiable": true,
+    "m_DefaultType": 0
 }
 
 {
