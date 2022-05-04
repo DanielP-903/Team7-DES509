@@ -4,6 +4,7 @@ using QuantumTek.QuantumDialogue;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Cursor = UnityEngine.Cursor;
 
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
     private GameObject m_recipeBookUI;
     private bool m_lookingAtBook = false;
     private float m_lockTimer = 2.5f;
+    private TextMeshProUGUI m_quitText;
     [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe;
 
     // Start is called before the first frame update
@@ -86,6 +88,9 @@ public class PlayerController : MonoBehaviour
 
         m_tooltipObject = mainCanvas.transform.GetChild(4).gameObject;
         m_tooltipText = m_tooltipObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+        m_tooltipText = m_tooltipObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+
+        m_quitText = mainCanvas.transform.GetChild(7).gameObject.GetComponent<TextMeshProUGUI>();
 
         float defaultY = transform.position.y;
         
@@ -249,15 +254,20 @@ public class PlayerController : MonoBehaviour
         if (m_quit)
         {
             m_quitTimer -= Time.deltaTime;
+            m_quitText.color = new Color(m_quitText.color.r, m_quitText.color.g, m_quitText.color.b,  1 - (m_quitTimer / 2));
             if (m_quitTimer < 0)
             {
                 Debug.Log("QUIT!");
-                Application.Quit();
+                Cursor.lockState = CursorLockMode.None;
+                SceneManager.LoadScene(0);
+
+                //Application.Quit();
             }
         }
         else
         {
             m_quitTimer = 2.0f;
+            m_quitText.color = new Color(m_quitText.color.r, m_quitText.color.g, m_quitText.color.b, 1 - (m_quitTimer / 2));
         }
 
         HandleMouseInput();
@@ -697,30 +707,26 @@ public class PlayerController : MonoBehaviour
 
         Recipe recipe = FindRecipe(GameObject.FindGameObjectWithTag("Character").GetComponent<Character>().characterScriptableObject.favouriteRecipe);
 
-        //foreach (var item in m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients)
         foreach (var item in recipe.m_ingredients)
         {
             string quip;
             if (item.Value != 0)
             {
-                if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients.ContainsKey(item.Key) )
+                if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients.ContainsKey(item.Key) &&m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] != item.Value)
                 {
-                    if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] != item.Value)
+                    if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] > item.Value)
                     {
-                        if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] > item.Value)
-                        {
-                            // TOO MUCH of ...
-                            quip = DetermineQuip((item.Key as Ingredient).m_type);
-                            quip += "_TooMuch";
-                            quips.Add(quip);
-                        }
-                        if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] < item.Value)
-                        {
-                            // TOO LITTLE of...
-                            quip = DetermineQuip((item.Key as Ingredient).m_type);
-                            quip += "_TooLittle";
-                            quips.Add(quip);
-                        }
+                        // TOO MUCH of ...
+                        quip = DetermineQuip(((Ingredient) item.Key).m_type);
+                        quip += "_TooMuch";
+                        quips.Add(quip);
+                    }
+                    if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] < item.Value)
+                    {
+                        // TOO LITTLE of...
+                        quip = DetermineQuip(((Ingredient) item.Key).m_type);
+                        quip += "_TooLittle";
+                        quips.Add(quip);
                     }
                 }
                 else
@@ -738,7 +744,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Got the list of available discrepencies between fav recipe and tea
+        // Got the list of available discrepancies between fav recipe and tea
         // Now return the first one
 
         if (quips.Count > 0)
