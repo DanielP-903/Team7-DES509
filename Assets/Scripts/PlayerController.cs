@@ -679,6 +679,11 @@ public class PlayerController : MonoBehaviour
                 m_tooltipObject.SetActive(true);
                 m_tooltipText.text = "<size=24><b>Click to brew </b></size>";
             }
+            else if (constantHit.transform.CompareTag("RecipeBook") && !m_lookingAtBook)
+            {
+                m_tooltipObject.SetActive(true);
+                m_tooltipText.text = "<size=24><b>Click to view recipes </b></size>";
+            }
             else
             {
                 m_tooltipObject.SetActive(false);

@@ -324,7 +324,7 @@ public class TeaMaker : MonoBehaviour
                     }
                 }
             }
-            if (occurs == CalculateTotal(recipe))
+            if (occurs == CalculateTotal(recipe) && recipe.m_ingredients.Count == m_container.Count)
             {
                 m_recipeText.text = "FOUND: " + recipe.m_name;
                 m_currentlyCalculatedRecipe.m_name = recipe.m_name;
