@@ -12,7 +12,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc788fe28a1947c5906bf24c0472406, type: 3}
   m_Name: Mimi_0_Reputation Dialogue
   m_EditorClassIdentifier: 
-  Conversations: []
-  Speakers: []
-  Messages: []
+  Conversations:
+  - ID: 1
+    Name: Ordering
+    FirstMessage: 3
+  - ID: 2
+    Name: Served_Neutral
+    FirstMessage: 7
+  - ID: 4
+    Name: Served_Happy
+    FirstMessage: 9
+  Speakers:
+  - ID: 0
+    Name: Mimi
+    Icon: {fileID: 0}
+  Messages:
+  - ID: 3
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: -1
+    NextMessage: 5
+    MessageText: Hi.
+    Expression: {fileID: 0}
+  - ID: 5
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: 3
+    NextMessage: 6
+    MessageText: ...
+    Expression: {fileID: 0}
+  - ID: 6
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: 5
+    NextMessage: -1
+    MessageText: Different tea.
+    Expression: {fileID: 0}
+  - ID: 7
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: -1
+    NextMessage: 8
+    MessageText: ...
+    Expression: {fileID: 0}
+  - ID: 8
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: 7
+    NextMessage: -1
+    MessageText: Thanks.
+    Expression: {fileID: 0}
+  - ID: 9
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: -1
+    NextMessage: 10
+    MessageText: ...
+    Expression: {fileID: 0}
+  - ID: 10
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: 9
+    NextMessage: 11
+    MessageText: I like it.
+    Expression: {fileID: 0}
+  - ID: 11
+    Speaker: 0
+    SpeakerName: Mimi
+    PreviousMessage: 10
+    NextMessage: -1
+    MessageText: Thank you.
+    Expression: {fileID: 0}
   Choices: []
