@@ -3878,6 +3878,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 476262622723818109, guid: 6e33502fe65203c47bd68a8c50f98425, type: 3}
+      propertyPath: m_TagString
+      value: RecipeBook
+      objectReference: {fileID: 0}
     - target: {fileID: 746875730650559556, guid: 6e33502fe65203c47bd68a8c50f98425, type: 3}
       propertyPath: m_Name
       value: Interior
@@ -3960,6 +3964,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e33502fe65203c47bd68a8c50f98425, type: 3}
+--- !u!1 &746875732338478220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 476262622723818109, guid: 6e33502fe65203c47bd68a8c50f98425, type: 3}
+  m_PrefabInstance: {fileID: 746875732338478219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &746875732338478221
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746875732338478220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0078000026, y: 0.0065839277, z: 0.00052587583}
+  m_Center: {x: 0.000000007453542, y: 0.00029196314, z: 0.00026497006}
 --- !u!1001 &913497382486147111
 PrefabInstance:
   m_ObjectHideFlags: 0

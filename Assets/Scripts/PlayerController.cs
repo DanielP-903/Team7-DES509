@@ -168,11 +168,6 @@ public class PlayerController : MonoBehaviour
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
         HandleInput();
 
-        //if (m_gameManagerRef.currentCharacter.characterScriptableObject.characterName != CharacterName.Docorty)
-        //{
-        //    Debug.Log("HA!");
-        //}
-
         if (m_walkToLock)
         {
             Vector3 offsetPos = m_lockTalkPos;
