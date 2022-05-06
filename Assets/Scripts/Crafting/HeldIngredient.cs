@@ -1,37 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public enum IngredientType
+public class HeldIngredient : MonoBehaviour 
 {
-    Breezeleaf, GlowLime, HeartOfRose, Cindershard, PurpleCrystal, Ebonstraw  // Needs to be updated
-}
-
-public class Ingredient : MonoBehaviour
-{
-    [Header("Properties")]
-    [Tooltip("Select what ingredient this represents")]
-    public IngredientType m_type;
-    [Tooltip("Name of ingredient")]
-    public string m_name; 
-    [Tooltip("Colour of ingredient when put in tea")]
-    public Color m_colour;
-    [Tooltip("Description of ingredient")]
-    [TextArea(5, 10)]
-    public string m_description;
-    [Tooltip("Object to be held when picking this up")]
-    public GameObject m_pickupObject;
+    public GameObject linkedIngredient;
 
     [HideInInspector] public bool IsHeld = false;
     private GameObject m_heldLocationRef;
     private GameManager m_gameManagerRef;
     private TeaMaker m_teaMakerRef;
-
+    // Start is called before the first frame update
     void Start()
     {
         m_heldLocationRef = GameObject.FindGameObjectWithTag("HoldLocation");
-        if (m_name == "")
-        {
-            m_name = m_type.ToString();
-        }
         if (GameObject.FindGameObjectWithTag("GameManager"))
         {
             m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -50,15 +32,24 @@ public class Ingredient : MonoBehaviour
             Debug.LogError("ERROR: Tea Machine has no tag assigned!");
             Debug.DebugBreak();
         }
-
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (IsHeld)
         {
+            //if (linkedIngredient.GetComponent<Ingredient>().m_type == IngredientType.Cindershard)
+            //{
+            //    transform.position = m_heldLocationRef.transform.position;
+            //}
+            //else
+            //{
+            //    transform.position = m_heldLocationRef.transform.position - new Vector3(0,0,0.2f);
+            //}
             transform.position = m_heldLocationRef.transform.position;
-            transform.rotation = m_heldLocationRef.transform.rotation;
+
+            // transform.rotation = m_heldLocationRef.transform.rotation;
             transform.parent = m_heldLocationRef.transform;
         }
         else
@@ -66,14 +57,6 @@ public class Ingredient : MonoBehaviour
             transform.parent = null;
         }
 
-        if (m_teaMakerRef.hasClickedBrew)
-        {
-            GetComponent<BoxCollider>().enabled = false;
-        }
-        else
-        {
-            GetComponent<BoxCollider>().enabled = true;
-        }
+       // GetComponent<BoxCollider>().enabled = !m_teaMakerRef.hasClickedBrew;
     }
 }
-

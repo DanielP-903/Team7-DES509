@@ -498,11 +498,24 @@ public class PlayerController : MonoBehaviour
 
     public GameObject FindIngredient()
     {
-        foreach (var ingredient in m_gameManagerRef.m_ingredientList)
+        if (m_heldObject.GetComponent<Ingredient>())
         {
-            if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<Ingredient>().m_type)
+            foreach (var ingredient in m_gameManagerRef.m_ingredientList)
             {
-               return ingredient;
+                if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<Ingredient>().m_type)
+                {
+                    return ingredient;
+                }
+            }
+        }
+        else
+        {
+            foreach (var ingredient in m_gameManagerRef.m_ingredientList)
+            {
+                if (ingredient.GetComponent<Ingredient>().m_type == m_heldObject.GetComponent<HeldIngredient>().linkedIngredient.GetComponent<Ingredient>().m_type)
+                {
+                    return ingredient;
+                }
             }
         }
         return null;
@@ -541,7 +554,15 @@ public class PlayerController : MonoBehaviour
                 {
                     // Add held object to tea machine
                     m_teaMakerRef.AddIngredient(FindIngredient());
-                    m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                    if (m_heldObject.GetComponent<Ingredient>())
+                    {
+                        m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                    }
+                    else
+                    {
+                        m_heldObject.GetComponent<HeldIngredient>().IsHeld = false;
+                    }
+
                     Destroy(m_heldObject.gameObject);
                     m_heldObject = null;
                 }
@@ -552,8 +573,16 @@ public class PlayerController : MonoBehaviour
                 if (m_heldObject == null)
                 {
                     // Hold an object
-                    m_heldObject = Instantiate(hit.transform.gameObject);
-                    m_heldObject.GetComponent<Ingredient>().IsHeld = true;
+                    if (hit.transform.gameObject.GetComponent<Ingredient>().m_pickupObject == null)
+                    {
+                        m_heldObject = Instantiate(hit.transform.gameObject);
+                        m_heldObject.GetComponent<Ingredient>().IsHeld = true;
+                    }
+                    else
+                    {
+                        m_heldObject = Instantiate(hit.transform.gameObject.GetComponent<Ingredient>().m_pickupObject);
+                        m_heldObject.GetComponent<HeldIngredient>().IsHeld = true;
+                    }
                 }
                 return;
             }
@@ -628,7 +657,14 @@ public class PlayerController : MonoBehaviour
             {
                 sfx_remove.Play();
                 // Discard held object
-                m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                if (m_heldObject.GetComponent<Ingredient>())
+                {
+                    m_heldObject.GetComponent<Ingredient>().IsHeld = false;
+                }
+                else
+                {
+                    m_heldObject.GetComponent<HeldIngredient>().IsHeld = false;
+                }
                 Destroy(m_heldObject.gameObject);
                 m_heldObject = null;
             }

@@ -3939,54 +3939,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 533874054965645473, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+    - target: {fileID: 465441381272012197, guid: df90a5068d62e764296bb8e603730c47, type: 3}
+      propertyPath: m_pickupObject
       value: 
-      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
-    - target: {fileID: 814395049078001925, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      objectReference: {fileID: 7890298258815417500, guid: 810d58bc59e8f6244b16b15654ef51e4, type: 3}
+    - target: {fileID: 872662551055794638, guid: df90a5068d62e764296bb8e603730c47, type: 3}
+      propertyPath: m_pickupObject
       value: 
-      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
-    - target: {fileID: 1081572796523685182, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9c536652f35710c4e8428ae80bf6aefa, type: 2}
-    - target: {fileID: 1829450780857104314, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.891
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829450780857104314, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.517
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188245263540313060, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.5669999
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188245263540313060, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.049
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188245263540313065, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Size.x
-      value: 0.50559884
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188245263540313065, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Size.z
-      value: 0.61824274
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188245263540313065, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Center.x
-      value: -0.059288356
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188245263540313065, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Center.y
-      value: 0.44883227
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188245263540313065, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Center.z
-      value: 0.10289233
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5105641226404112136, guid: 191b4fb14923fdb4dbb28ba652aaef8a, type: 3}
     - target: {fileID: 4501938302371497416, guid: df90a5068d62e764296bb8e603730c47, type: 3}
       propertyPath: m_Name
       value: Ingredients
@@ -4035,14 +3995,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4670466438816885635, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+    - target: {fileID: 5005526211591182179, guid: df90a5068d62e764296bb8e603730c47, type: 3}
+      propertyPath: m_pickupObject
       value: 
-      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
-    - target: {fileID: 5590114632856637403, guid: df90a5068d62e764296bb8e603730c47, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
+      objectReference: {fileID: 7142322618381775097, guid: f9bdb552b20fadb479b447e05c5eff91, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df90a5068d62e764296bb8e603730c47, type: 3}
 --- !u!1001 &1884549082
