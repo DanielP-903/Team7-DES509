@@ -212,11 +212,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2817453201084841831, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.97
+      value: -0.891
       objectReference: {fileID: 0}
     - target: {fileID: 2817453201084841831, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.471
+      value: -3.517
       objectReference: {fileID: 0}
     - target: {fileID: 2817453201084841831, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3564772496340921827, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c536652f35710c4e8428ae80bf6aefa, type: 2}
     - target: {fileID: 4262978996960852449, guid: 7e77f846291ea8c4f9d16452d06f46d9, type: 3}
       propertyPath: m_Name
       value: Cindershard
@@ -322,11 +326,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1316446528056111826, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.567
+      value: -1.5669999
       objectReference: {fileID: 0}
     - target: {fileID: 1316446528056111826, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.018
+      value: -4.049
       objectReference: {fileID: 0}
     - target: {fileID: 1316446528056111826, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -368,6 +372,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Debug
       objectReference: {fileID: 0}
+    - target: {fileID: 1316446528056111839, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Size.x
+      value: 0.50559884
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316446528056111839, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Size.z
+      value: 0.61824274
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316446528056111839, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Center.x
+      value: -0.059288356
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316446528056111839, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Center.y
+      value: 0.44883227
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316446528056111839, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Center.z
+      value: 0.10289233
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834629213022943283, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
+    - target: {fileID: 4112536977301485975, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
     - target: {fileID: 4565076838685974585, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.224
@@ -376,6 +408,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.153
       objectReference: {fileID: 0}
+    - target: {fileID: 8353626095648696045, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
+    - target: {fileID: 9127333491806077621, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a584b469d182d594fb1752831027c450, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a078684503db51d4ea4f439f62f486e6, type: 3}
 --- !u!4 &3188245263540313060 stripped
@@ -466,6 +506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purple Crystal
       objectReference: {fileID: 0}
+    - target: {fileID: 6933471817585291606, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
+      propertyPath: m_pickupObject
+      value: 
+      objectReference: {fileID: 7155763657257224363, guid: 1b7b9f5ab6c56564aac9c86741de59c2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db4424c13828d4b42bcaa8b45a78c741, type: 3}
 --- !u!4 &630299317093501410 stripped

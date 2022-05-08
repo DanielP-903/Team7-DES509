@@ -12,7 +12,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc788fe28a1947c5906bf24c0472406, type: 3}
   m_Name: Mimi_1_Repuation Dialogue
   m_EditorClassIdentifier: 
-  Conversations: []
-  Speakers: []
-  Messages: []
+  Conversations:
+  - ID: 1
+    Name: Ordering
+    FirstMessage: 0
+  - ID: 4
+    Name: Served_Neutral
+    FirstMessage: 5
+  - ID: 7
+    Name: Served_Happy
+    FirstMessage: 8
+  Speakers:
+  - ID: 2
+    Name: Mimi
+    Icon: {fileID: 0}
+  Messages:
+  - ID: 0
+    Speaker: 2
+    SpeakerName: Mimi
+    PreviousMessage: -1
+    NextMessage: 3
+    MessageText: Hi.
+    Expression: {fileID: 0}
+  - ID: 3
+    Speaker: 2
+    SpeakerName: Mimi
+    PreviousMessage: 0
+    NextMessage: -1
+    MessageText: Tea please, a nice one.
+    Expression: {fileID: 0}
+  - ID: 5
+    Speaker: 2
+    SpeakerName: Mimi
+    PreviousMessage: -1
+    NextMessage: 6
+    MessageText: ...
+    Expression: {fileID: 0}
+  - ID: 6
+    Speaker: 2
+    SpeakerName: Mimi
+    PreviousMessage: 5
+    NextMessage: -1
+    MessageText: Thanks.
+    Expression: {fileID: 0}
+  - ID: 8
+    Speaker: 2
+    SpeakerName: Mimi
+    PreviousMessage: -1
+    NextMessage: 9
+    MessageText: This is good
+    Expression: {fileID: 0}
+  - ID: 9
+    Speaker: 2
+    SpeakerName: Mimi
+    PreviousMessage: 8
+    NextMessage: 10
+    MessageText: I can tell you have a creative spirit.
+    Expression: {fileID: 0}
+  - ID: 10
+    Speaker: 2
+    SpeakerName: Mimi
+    PreviousMessage: 9
+    NextMessage: -1
+    MessageText: 'See you soon.
+
+'
+    Expression: {fileID: 0}
   Choices: []

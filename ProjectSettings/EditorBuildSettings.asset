@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Beta/Beta Main Menu.unity
-    guid: fc44ca6dde71746479e06a11f938b19d
+    path: Assets/Scenes/Gold Main Menu.unity
+    guid: f054ebab76b5c194bbe83bf24cb7b84a
   - enabled: 1
-    path: Assets/Scenes/Beta/Beta Loading Screen.unity
-    guid: f961403498f127b42828678e76f3fe8f
+    path: Assets/Scenes/Gold Loading Screen 2.unity
+    guid: bc8af3f7e71c1f54aa19b43e7640f411
   - enabled: 1
-    path: Assets/Scenes/Beta/Beta Main.unity
-    guid: b0b9cc09d01fafe4c9e679f880cdf8f1
+    path: Assets/Scenes/Gold Intro.unity
+    guid: 8d71a1d35ae135344bb33f22db14bd34
+  - enabled: 1
+    path: Assets/Scenes/Gold Loading Screen.unity
+    guid: 251304bf699dfe6469c9d3574e063867
+  - enabled: 1
+    path: Assets/Scenes/Gold Main.unity
+    guid: f79bc6981445ef94c9f34e612b642ba3
   m_configObjects: {}

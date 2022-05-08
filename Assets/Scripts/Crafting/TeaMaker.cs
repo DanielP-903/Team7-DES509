@@ -160,12 +160,7 @@ public class TeaMaker : MonoBehaviour
                             m_recipeBase.GetComponent<RectTransform>().position.x + (m_discoveredRecipesNo > 3 ? (m_discoveredRecipesNo-4) * 260.0f : (m_discoveredRecipesNo-1) * 260.0f),
                             m_recipeBase.GetComponent<RectTransform>().position.y +((m_discoveredRecipesNo > 3 ? 1 : 0) * -150.0f), 
                             m_recipeBase.GetComponent<RectTransform>().position.z);
-
-                        //m_recipeBase.GetComponent<RectTransform>().position.x +((m_discoveredRecipesNo - 1 * (-maxHorizontalSpread * (int)((m_discoveredRecipesNo - 1) / maxHorizontalSpread))) * 220.0f),
-                        //m_recipeBase.GetComponent<RectTransform>().position.y +((int)((m_discoveredRecipesNo-1)/maxHorizontalSpread) * -150.0f), 
-                        //listTheRecipe.GetComponent<RectTransform>().offsetMax = new Vector2(
-                        //    m_recipeBase.GetComponent<RectTransform>().offsetMax.x + Mathf.Abs(((m_discoveredRecipesNo-1 * (-maxHorizontalSpread *(int)((m_discoveredRecipesNo-1)/maxHorizontalSpread)))) * 515.0f),
-                        //    m_recipeBase.GetComponent<RectTransform>().offsetMin.y + Mathf.Abs((int)((m_discoveredRecipesNo-1)/maxHorizontalSpread) * -420.0f));
+                        
                         listTheRecipe.SetActive(true);
                         listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Name: " + m_currentlyCalculatedRecipe.m_name + "\nDescription: " + m_currentlyCalculatedRecipe.m_description;
                         foreach (var item in m_currentlyCalculatedRecipe.m_ingredients)
@@ -217,11 +212,6 @@ public class TeaMaker : MonoBehaviour
                 m_playerRef.sfx_normal.Play();            
             }
         }
-    }
-
-    public void BrewTeaFromUI(string RecipeName)
-    {
-        // In case of need for implementation?
     }
 
     public void GiveTea()
@@ -324,7 +314,7 @@ public class TeaMaker : MonoBehaviour
                     }
                 }
             }
-            if (occurs == CalculateTotal(recipe))
+            if (occurs == CalculateTotal(recipe) && recipe.m_ingredients.Count == m_container.Count)
             {
                 m_recipeText.text = "FOUND: " + recipe.m_name;
                 m_currentlyCalculatedRecipe.m_name = recipe.m_name;

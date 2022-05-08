@@ -18,6 +18,7 @@ TagManager:
   - LockTeaMaking
   - RecipeCanvas
   - RecipeBook
+  - Gate
   layers:
   - Default
   - TransparentFX
