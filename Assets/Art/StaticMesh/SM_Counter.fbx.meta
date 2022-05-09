@@ -18,6 +18,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: ClossetTest
     second: {fileID: 2100000, guid: 3768279896bbd3b4aabfe813d7df2fcc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ClossetTest.001
+    second: {fileID: 2100000, guid: 3768279896bbd3b4aabfe813d7df2fcc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
