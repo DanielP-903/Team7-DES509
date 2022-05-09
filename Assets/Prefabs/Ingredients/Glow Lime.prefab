@@ -70,8 +70,8 @@ MonoBehaviour:
     inherit these two flavours.
 
 '
+  m_pickupObject: {fileID: 9108649607461074474, guid: a3cc8609df4155a47bdf9175037faacf, type: 3}
   IsHeld: 0
-  occurences: 0
 --- !u!1001 &5081793363779621521
 PrefabInstance:
   m_ObjectHideFlags: 0

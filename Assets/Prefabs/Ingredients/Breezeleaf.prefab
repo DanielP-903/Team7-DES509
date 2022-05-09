@@ -67,8 +67,8 @@ MonoBehaviour:
 
     A
     fragrant plant, the tea brewed with it will be full of refreshing taste.'
+  m_pickupObject: {fileID: 5422371775044253039, guid: f3359605d8d866f40a3162cde9a256db, type: 3}
   IsHeld: 0
-  occurences: 0
 --- !u!1001 &7382874786235744293
 PrefabInstance:
   m_ObjectHideFlags: 0
