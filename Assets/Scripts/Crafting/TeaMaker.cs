@@ -24,6 +24,7 @@ public class TeaMaker : MonoBehaviour
     public GameObject m_teaModel;
 
     private GameObject m_recipeBase;
+    private GameObject m_realTeaBase;
     private GameObject m_lid;
     private GameObject m_lidDestination;
 
@@ -76,7 +77,8 @@ public class TeaMaker : MonoBehaviour
         m_Text = mainCanvas.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         m_recipeText = mainCanvas.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
 
-        m_recipeBase = mainCanvas.transform.GetChild(6).transform.GetChild(2).gameObject;
+        m_recipeBase = mainCanvas.transform.GetChild(6).transform.GetChild(6).transform.GetChild(0).gameObject;
+        m_realTeaBase = mainCanvas.transform.GetChild(6).transform.GetChild(7).transform.GetChild(0).gameObject;
 
         m_recipeListRef = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
         m_recipeText.text = "";
@@ -167,6 +169,16 @@ public class TeaMaker : MonoBehaviour
                         {
                             listTheRecipe.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text += "\n" + item.Key.name + " x " + item.Value;
                         }
+
+                        GameObject listRealTea = Instantiate(m_realTeaBase, m_realTeaBase.transform.parent);
+
+                        listRealTea.GetComponent<RectTransform>().position = new Vector3(
+                            m_recipeBase.GetComponent<RectTransform>().position.x + (m_discoveredRecipesNo > 3 ? (m_discoveredRecipesNo-4) * 260.0f : (m_discoveredRecipesNo-1) * 260.0f),
+                            m_recipeBase.GetComponent<RectTransform>().position.y +((m_discoveredRecipesNo > 3 ? 1 : 0) * -150.0f),
+                            m_recipeBase.GetComponent<RectTransform>().position.z);
+
+                        listRealTea.SetActive(true);
+                        listRealTea.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "<size=8>Name: " + m_currentlyCalculatedRecipe.m_name + "\nReal Life Ingredients: " + m_currentlyCalculatedRecipe.m_realLifeIngredients + "\nHow To Make: " + m_currentlyCalculatedRecipe.m_realLifeHowTo + "</size>";
 
                         Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
                         m_foundText.text = "New Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name;
@@ -321,6 +333,8 @@ public class TeaMaker : MonoBehaviour
                 m_currentlyCalculatedRecipe.m_ingredients = recipe.m_ingredients;
                 m_currentlyCalculatedRecipe.m_colour = recipe.m_colour;
                 m_currentlyCalculatedRecipe.m_description = recipe.m_description;
+                m_currentlyCalculatedRecipe.m_realLifeIngredients = recipe.m_realLifeIngredients;
+                m_currentlyCalculatedRecipe.m_realLifeHowTo = recipe.m_realLifeHowTo;
             }
         }
     }

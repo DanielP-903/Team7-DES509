@@ -12,6 +12,8 @@ public class Recipe
     [TextArea(5, 10)]
     public string m_description;
 
+
+
     [SerializeField]
     public CustomIntDictionary m_ingredients;
     public IDictionary<UnityEngine.Object, int> CustomIntDictionary
@@ -19,6 +21,13 @@ public class Recipe
         get { return m_ingredients; }
         set { m_ingredients.CopyFrom(value); }
     }
+
+    [Tooltip("Real Life Ingredient List")] [TextArea(5, 10)]
+    public string m_realLifeIngredients;
+
+    [Tooltip("Real Life Recipe HowTo")] [TextArea(5, 10)]
+    public string m_realLifeHowTo;
+
 }
 
 public class RecipeList : MonoBehaviour
