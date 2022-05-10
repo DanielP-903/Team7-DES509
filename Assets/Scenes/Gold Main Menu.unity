@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dab150ca8bce8141accb4155da57a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volSlider: {fileID: 0}
+  volSlider: {fileID: 4880516562272196315}
   VolumeScaleMenu: {fileID: 11400000, guid: 9ff7e68ea824c984a84c09de31995031, type: 2}
   bg_menu_music: {fileID: 1534580708}
 --- !u!4 &1811002564
@@ -894,3 +894,8 @@ PrefabInstance:
       objectReference: {fileID: 1811002563}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c23bd40c95c614cbe8a4a5cd1a800b, type: 3}
+--- !u!1 &4880516562272196315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3525555638622570874, guid: 35c23bd40c95c614cbe8a4a5cd1a800b, type: 3}
+  m_PrefabInstance: {fileID: 4880516562272196314}
+  m_PrefabAsset: {fileID: 0}
