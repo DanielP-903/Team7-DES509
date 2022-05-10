@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 1
   material: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
-  backMaterial: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
+  backMaterial: {fileID: 2100000, guid: 9b60c97c94bc48c4fa9f26cf270fdb69, type: 2}
   favouriteRecipe: Apples to Oranges
   dialogues:
   - {fileID: 11400000, guid: 82ba6bf9b43047a45b7d8b8a7ae1749f, type: 2}
