@@ -198,19 +198,30 @@ public class PlayerController : MonoBehaviour
             float distance = Vector3.Distance(transform.position, offsetPos);
             if (m_goToMode == Mode.Talking)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 3.0f);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 3.0f);
+                m_lockTimer = m_lockTimer <= 0 ? 0 : m_lockTimer - Time.deltaTime;
+                if (Quaternion.Angle(transform.rotation, offsetRot) > 0.5f && m_playerLockTurn == true && m_lockTimer > 0)
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 3.0f);
+                }
+                else
+                {
+                    m_playerLockTurn = false;
+                }
                 if (distance < 0.1f)
                 {
                     dialogueBox.SetActive(true);
                 }
                 if (distance < 0.05f)
                 {
+                    m_lockTimer = 2.5f;
                     m_teaMakerRef.m_teaModel.GetComponent<Tea>().IsHeld = false;
                     StartCoroutine(m_teaMakerRef.m_teaModel.GetComponent<Tea>().PlayAnim());
                     m_mode = Mode.Talking;
                     m_walkToLock = false;
                     m_playerLockTurn = false;
                 }
+                m_tooltipObject.SetActive(false);
             }
             else if (m_goToMode == Mode.TeaMaking)
             {
@@ -618,6 +629,7 @@ public class PlayerController : MonoBehaviour
                 }
                 m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
                 m_walkToLock = true;
+                m_playerLockTurn = true;
                 m_goToMode = Mode.Talking;
                 GameManager.m_hasBrewedATea = true;
                 m_finishedTalking = false;
@@ -683,7 +695,6 @@ public class PlayerController : MonoBehaviour
             {
                 m_tooltipObject.SetActive(true);
                 Ingredient values = constantHit.transform.gameObject.GetComponent<Ingredient>();
-                //m_tooltipText.text = values.m_type.ToString() + "\n- " + values.m_description;
                 m_tooltipText.text = "<size=14><b>" + values.m_name + "</b></size>" + "\n\n " + values.m_description;
             }
             else if (constantHit.transform.CompareTag("Machine") && !m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled && !m_teaMakerRef.hasClickedBrew)
@@ -768,7 +779,6 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     // Does not contain ingredient at all so: TOO LITTLE OF ...
-                    //GameObject ing = ((GameObject)GameObject.FindObjectOfType(item.Key.GetType())).transform.parent.gameObject;
                     GameObject ing = FindIngredient(item.Key.name);
                     if (ing != null)
                     {
@@ -827,7 +837,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private Recipe FindRecipe(string name)
     {
 
@@ -848,7 +857,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         m_lookingAtBook = false;
     }
-
 
     // Taken from Quantum Dialogue START -------------------
     private void SetText()
