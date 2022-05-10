@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private GameObject m_heldObject;
     private GameManager m_gameManagerRef;
     private readonly float m_inputDelay = 0.1f;
-    private float m_quitTimer = 2.0f;
+    private float m_quitTimer = 0.5f;
     private float m_inputTimer;
     private bool m_walkToLock = false;
     private TeaMaker m_teaMakerRef;
@@ -61,23 +61,29 @@ public class PlayerController : MonoBehaviour
     private Quaternion m_lockTeaMakeRot;
     private bool m_playerLockTurn = false;
     private GameObject m_recipeBookUI;
+    private GameObject m_pauseMenuObject;
+    private GameObject m_pauseMenuBackgroundObject;
     private bool m_lookingAtBook = false;
     private float m_lockTimer = 2.5f;
     private TextMeshProUGUI m_quitText;
-    [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe;
+    private bool m_paused = false;
+    [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe, bg_music;
 
     // Start is called before the first frame update
     void Start()
     {
+
         messageList = new List<QD_Message>();
         m_inputTimer = 0.1f;
         m_camera = transform.GetChild(0).gameObject;
         handler = transform.GetChild(1).gameObject.GetComponent<QD_DialogueHandler>();
 
+        bg_music = m_camera.transform.GetChild(1).GetComponent<AudioSource>();
         sfx_pouring = m_camera.transform.GetChild(2).GetComponent<AudioSource>();
         sfx_remove = m_camera.transform.GetChild(3).GetComponent<AudioSource>();
         sfx_normal = m_camera.transform.GetChild(4).GetComponent<AudioSource>();
         sfx_newRecipe = m_camera.transform.GetChild(5).GetComponent<AudioSource>();
+
 
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
         dialogueBox = mainCanvas.transform.GetChild(3).gameObject;
@@ -91,16 +97,9 @@ public class PlayerController : MonoBehaviour
         m_tooltipText = m_tooltipObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
 
         m_quitText = mainCanvas.transform.GetChild(7).gameObject.GetComponent<TextMeshProUGUI>();
-
+        m_pauseMenuObject = mainCanvas.transform.GetChild(10).GetChild(1).gameObject;
+        m_pauseMenuBackgroundObject = mainCanvas.transform.GetChild(10).GetChild(0).gameObject;
         float defaultY = transform.position.y;
-        
-        //m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
-        //m_lockTalkRot = transform.rotation;
-
-        //m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
-        //m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
-        //m_lockTeaMakeRot = transform.rotation;
-        //m_lockTeaMakeRot.Set(m_lockTeaMakeRot.x, 0, m_lockTeaMakeRot.z,1);
 
         if (GameObject.FindGameObjectWithTag("GameManager"))
         {
@@ -136,6 +135,12 @@ public class PlayerController : MonoBehaviour
         m_teaMakerRef.m_teaModel.GetComponent<MeshCollider>().enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         TalkingStart();
+        bg_music.volume = m_gameManagerRef.VolumeScale.volume;
+        sfx_pouring.volume = m_gameManagerRef.VolumeScale.volume;
+        sfx_remove.volume = m_gameManagerRef.VolumeScale.volume;
+        sfx_normal.volume = m_gameManagerRef.VolumeScale.volume;
+        sfx_newRecipe.volume = m_gameManagerRef.VolumeScale.volume;
+
     }
 
     void OnDrawGizmos()
@@ -143,14 +148,8 @@ public class PlayerController : MonoBehaviour
         var color = Color.cyan;
         color.a = 0.5f;
         Gizmos.color = color;
-        //m_lockTalkPos = new Vector3(-5.93f, transform.position.y, 0.44f);
-        //m_lockTalkRot = transform.rotation;
-
         Gizmos.DrawSphere(m_lockTalkPos, 0.5f);
 
-        //m_lockTeaMakePos = GameObject.FindGameObjectWithTag("Machine").transform.position + new Vector3(0, 0, -1);
-        //m_lockTeaMakePos = new Vector3(m_lockTeaMakePos.x, transform.position.y, m_lockTeaMakePos.z);
-        //m_lockTeaMakeRot = transform.rotation;
         color = Color.magenta;
         color.a = 0.5f;
         Gizmos.color = color;
@@ -164,7 +163,6 @@ public class PlayerController : MonoBehaviour
         SetText();
         dialogueBox.SetActive(false);
         messageList.Add(handler.GetMessage());
-
     }
 
     // Update is called once per frame
@@ -172,6 +170,15 @@ public class PlayerController : MonoBehaviour
     {
         m_inputTimer = m_inputTimer <= 0 ? 0 : m_inputTimer - Time.deltaTime;
         HandleInput();
+
+        if (m_paused)
+        {
+            bg_music.volume = m_gameManagerRef.VolumeScale.volume;
+            sfx_pouring.volume = m_gameManagerRef.VolumeScale.volume;
+            sfx_remove.volume = m_gameManagerRef.VolumeScale.volume;
+            sfx_normal.volume = m_gameManagerRef.VolumeScale.volume;
+            sfx_newRecipe.volume = m_gameManagerRef.VolumeScale.volume;
+        }
 
         if (m_walkToLock)
         {
@@ -248,40 +255,51 @@ public class PlayerController : MonoBehaviour
     // Handle player's inputs
     private void HandleInput()
     {
-        if (m_mode == Mode.Freeroam && !m_walkToLock)
+        if (!m_paused)
         {
-            if (m_moveForward || m_moveBackward)
+            if (m_mode == Mode.Freeroam && !m_walkToLock)
             {
-                Vector3 move = m_moveForward ? (m_speed * Time.deltaTime * transform.forward) : (m_speed / 1.5f * Time.deltaTime * -transform.forward);
-                m_characterController.Move(move);
+                if (m_moveForward || m_moveBackward)
+                {
+                    Vector3 move = m_moveForward
+                        ? (m_speed * Time.deltaTime * transform.forward)
+                        : (m_speed / 1.5f * Time.deltaTime * -transform.forward);
+                    m_characterController.Move(move);
+                }
+
+                if (m_moveLeft || m_moveRight)
+                {
+                    Vector3 move = m_moveLeft
+                        ? (m_speed * Time.deltaTime * -transform.right)
+                        : (m_speed * Time.deltaTime * transform.right);
+                    m_characterController.Move(move);
+                }
             }
-            if (m_moveLeft || m_moveRight)
-            {
-                Vector3 move = m_moveLeft ? (m_speed * Time.deltaTime * -transform.right) : (m_speed * Time.deltaTime * transform.right);
-                m_characterController.Move(move);
-            }
+            HandleMouseInput();
+
         }
 
-        if (m_quit)
+        m_quitTimer = m_quitTimer <= 0 ? 0 : m_quitTimer - Time.deltaTime;
+        if (m_quit && m_quitTimer <= 0)
         {
-            m_quitTimer -= Time.deltaTime;
-            m_quitText.color = new Color(m_quitText.color.r, m_quitText.color.g, m_quitText.color.b,  1 - (m_quitTimer / 2));
-            if (m_quitTimer < 0)
-            {
-                Debug.Log("QUIT!");
-                Cursor.lockState = CursorLockMode.None;
-                SceneManager.LoadScene(0);
-
-                //Application.Quit();
-            }
-        }
-        else
-        {
-            m_quitTimer = 2.0f;
-            m_quitText.color = new Color(m_quitText.color.r, m_quitText.color.g, m_quitText.color.b, 1 - (m_quitTimer / 2));
+            m_quitTimer = 0.5f;
+            // show pause menu ui
+            AlterPauseMenuState();
         }
 
-        HandleMouseInput();
+    }
+
+    public void AlterPauseMenuState()
+    {
+        m_pauseMenuObject.SetActive(!m_pauseMenuObject.activeInHierarchy);
+        m_pauseMenuBackgroundObject.SetActive(!m_pauseMenuBackgroundObject.activeInHierarchy);
+        m_paused = !m_paused;
+        Cursor.lockState = m_paused ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void HandleMouseInput()
@@ -650,14 +668,6 @@ public class PlayerController : MonoBehaviour
         {
             m_inputTimer = m_inputDelay;
             Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out RaycastHit hit, 100.0f);
-            if (hit.transform != null && hit.transform.gameObject.GetComponent<Tea>())
-            {
-                // Scrap tea (Unused)
-                //m_teaMakerRef.m_teaModel.SetActive(false);
-                //m_teaMakerRef.m_teaModel.GetComponent<Tea>().m_name = String.Empty;
-                //m_teaMakerRef.ResetTea();
-                //return;
-            }
 
             if (m_heldObject == null && hit.transform != null && hit.transform.gameObject.GetComponent<TeaMaker>() && m_teaMakerRef.Total > 0)
             {

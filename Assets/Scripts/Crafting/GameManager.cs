@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum CharacterName
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     public GameObject doorObject;
     private Animator m_doors;
 
+    public SO_Volume VolumeScale;
+    public GameObject volSlider;
     void OnDrawGizmos()
     {
         Color color = Color.yellow;
@@ -54,6 +57,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         m_doorDelay = m_doorDelay <= 0 ? 0 : m_doorDelay - Time.deltaTime;
+
+        VolumeScale.volume = volSlider.GetComponent<Slider>().value;
+
     }
 
     public SO_Character FindCharacter()
@@ -84,4 +90,6 @@ public class GameManager : MonoBehaviour
             m_doorDelay = 0.3f;
         }
     }
+
+   
 }

@@ -12,5 +12,4 @@ public class SO_Character : ScriptableObject
     public string favouriteRecipe = "";
     public List<QD_Dialogue> dialogues;
     public QD_Dialogue quipDialogue;
-
 }
