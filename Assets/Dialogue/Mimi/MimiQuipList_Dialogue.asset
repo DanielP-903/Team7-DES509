@@ -34,6 +34,9 @@ MonoBehaviour:
   - ID: 6
     Name: Cool_TooLittle
     FirstMessage: 22
+  - ID: 24
+    Name: Sweet_TooLittle
+    FirstMessage: 25
   Speakers: []
   Messages:
   - ID: 8
@@ -137,9 +140,8 @@ MonoBehaviour:
     SpeakerName: 
     PreviousMessage: 18
     NextMessage: -1
-    MessageText: "Mimi smacks whatever lips make up her ghostly mouth at the overly
-      sweet sensation of the brew. Perhaps Ebonstraw doesn\u2019t agree well with
-      Mimi."
+    MessageText: Mimi smacks whatever lips make up her ghostly mouth at the overly
+      sweet sensation of the brew. Perhaps I'm using too much Ebonstraw.
     Expression: {fileID: 0}
   - ID: 20
     Speaker: -1
@@ -173,5 +175,22 @@ MonoBehaviour:
     NextMessage: -1
     MessageText: Mimi seems to enjoy the tea but has to blow for a good while before
       taking a drink. Maybe some Breezeleaf would suit her well?
+    Expression: {fileID: 0}
+  - ID: 25
+    Speaker: -1
+    SpeakerName: 
+    PreviousMessage: -1
+    NextMessage: 26
+    MessageText: Mimi seems to enjoy the beverage but smacks her ghastly lips sullenly
+      from time to time.
+    Expression: {fileID: 0}
+  - ID: 26
+    Speaker: -1
+    SpeakerName: 
+    PreviousMessage: 25
+    NextMessage: -1
+    MessageText: After enjoying hearty swigs of the beverage Mimi looks tentitively
+      at the bottom of the mug. Perhaps sweetening the brew a little with some Ebonstraw
+      would do the trick.
     Expression: {fileID: 0}
   Choices: []
