@@ -77,8 +77,8 @@ public class TeaMaker : MonoBehaviour
         m_Text = mainCanvas.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         m_recipeText = mainCanvas.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
 
-        m_recipeBase = mainCanvas.transform.GetChild(6).transform.GetChild(6).transform.GetChild(0).gameObject;
-        m_realTeaBase = mainCanvas.transform.GetChild(6).transform.GetChild(7).transform.GetChild(0).gameObject;
+        m_recipeBase = mainCanvas.transform.GetChild(6).transform.GetChild(7).transform.GetChild(0).gameObject;
+        m_realTeaBase = mainCanvas.transform.GetChild(6).transform.GetChild(8).transform.GetChild(0).gameObject;
 
         m_recipeListRef = GameObject.FindGameObjectWithTag("RecipeList").GetComponent<RecipeList>();
         m_recipeText.text = "";
@@ -181,7 +181,8 @@ public class TeaMaker : MonoBehaviour
                         listRealTea.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "<size=8>Name: " + m_currentlyCalculatedRecipe.m_name + "\nReal Life Ingredients: " + m_currentlyCalculatedRecipe.m_realLifeIngredients + "\nHow To Make: " + m_currentlyCalculatedRecipe.m_realLifeHowTo + "</size>";
 
                         Debug.Log("Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name);
-                        m_foundText.text = "New Recipe Discovered: " + m_currentlyCalculatedRecipe.m_name;
+                        //m_foundText.text = "New Recipe Discovered\n<size=14>" + m_currentlyCalculatedRecipe.m_name + "</size>";
+                        m_foundText.text = m_currentlyCalculatedRecipe.m_name + "\n<size=14>New Recipe Discovered</size>";
                         StartCoroutine(displayNewRecipeFoundPopup(5.0f));
                         m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
 
@@ -197,8 +198,6 @@ public class TeaMaker : MonoBehaviour
                     m_lidDestination.SetActive(true);
                     m_container.Clear();
                     AddedOrder.Clear();
-
-                    
                 }
                 else
                 {

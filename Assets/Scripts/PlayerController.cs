@@ -552,9 +552,19 @@ public class PlayerController : MonoBehaviour
 
     public GameObject FindIngredient(string name)
     {
+        string newName = "";
+        foreach (char c in name)
+        {
+            if (c != ' ')
+            {
+                newName += c;
+            }
+        }
+
+
         foreach (var ingredient in m_gameManagerRef.m_ingredientList)
         {
-            if (ingredient.GetComponent<Ingredient>().m_type.ToString() == name)
+            if (ingredient.GetComponent<Ingredient>().m_type.ToString() == newName)
             {
                 return ingredient;
             }
