@@ -33,84 +33,84 @@ MonoBehaviour:
     PreviousMessage: -1
     NextMessage: 3
     MessageText: Hello.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 65fda2c0953b02e4c8428ed7ca9001dc, type: 2}
   - ID: 3
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 2
     NextMessage: 4
     MessageText: So I've been thinking
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 4
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 3
     NextMessage: 5
     MessageText: I have a flair for theatrics, dramatics, and the playful.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 5
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 4
     NextMessage: 6
     MessageText: "So let\u2019s consider this visit a game."
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 6
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 5
     NextMessage: -1
     MessageText: "Blow me away and I\u2019ll tell you a story."
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 8
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: -1
     NextMessage: 9
     MessageText: Hmm...
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 9
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 8
     NextMessage: 10
     MessageText: "It\u2019s good."
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 65fda2c0953b02e4c8428ed7ca9001dc, type: 2}
   - ID: 10
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 9
     NextMessage: 11
     MessageText: Though it seems my story will wait for another day.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 11
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 10
     NextMessage: -1
     MessageText: Thanks.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 13
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: -1
     NextMessage: 14
     MessageText: Yes.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 6a1edf9e2b0e86e4a873f9c927d80f63, type: 2}
   - ID: 14
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 13
     NextMessage: 15
     MessageText: This will do nicely
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 3242565293c9f8c41b7c238bea2ca1d2, type: 2}
   - ID: 15
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 14
     NextMessage: 16
     MessageText: Well done, you win. I guess I owe you a story.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 65fda2c0953b02e4c8428ed7ca9001dc, type: 2}
   - ID: 16
     Speaker: 1
     SpeakerName: Mimi
@@ -118,28 +118,28 @@ MonoBehaviour:
     NextMessage: 17
     MessageText: Once upon a time, there was a visitor, who came from somewhere and
       traveled to somewhere else.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 17
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 16
     NextMessage: 18
     MessageText: This visitor visited places where visitors watch the carnival.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 18
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 17
     NextMessage: 19
     MessageText: Up go the curtains and the crowd goes wild, wild, wild...
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 19
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 18
     NextMessage: 20
     MessageText: Then they freeze in stunned captivation.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 6a1edf9e2b0e86e4a873f9c927d80f63, type: 2}
   - ID: 20
     Speaker: 1
     SpeakerName: Mimi
@@ -147,7 +147,7 @@ MonoBehaviour:
     NextMessage: 21
     MessageText: "The visitor leaves with the curtain\u2019s call, an impression
       surely made."
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 21
     Speaker: 1
     SpeakerName: Mimi
@@ -155,26 +155,26 @@ MonoBehaviour:
     NextMessage: 22
     MessageText: Then she travels back through nowhere and returns to the somewhere
       she came from.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 22
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 21
     NextMessage: 23
     MessageText: The End.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 23
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 22
     NextMessage: 24
     MessageText: Did you like it?
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 65fda2c0953b02e4c8428ed7ca9001dc, type: 2}
   - ID: 24
     Speaker: 1
     SpeakerName: Mimi
     PreviousMessage: 23
     NextMessage: -1
     MessageText: "Well anyway, I\u2019ve spoken too much. Bye-Bye."
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   Choices: []

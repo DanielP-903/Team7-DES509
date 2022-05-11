@@ -33,42 +33,42 @@ MonoBehaviour:
     PreviousMessage: -1
     NextMessage: 3
     MessageText: Hi.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 3
     Speaker: 2
     SpeakerName: Mimi
     PreviousMessage: 0
     NextMessage: -1
     MessageText: Tea please, a nice one.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 5
     Speaker: 2
     SpeakerName: Mimi
     PreviousMessage: -1
     NextMessage: 6
     MessageText: ...
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 6
     Speaker: 2
     SpeakerName: Mimi
     PreviousMessage: 5
     NextMessage: -1
     MessageText: Thanks.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 8
     Speaker: 2
     SpeakerName: Mimi
     PreviousMessage: -1
     NextMessage: 9
     MessageText: This is good
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 65fda2c0953b02e4c8428ed7ca9001dc, type: 2}
   - ID: 9
     Speaker: 2
     SpeakerName: Mimi
     PreviousMessage: 8
     NextMessage: 10
     MessageText: I can tell you have a creative spirit.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 3242565293c9f8c41b7c238bea2ca1d2, type: 2}
   - ID: 10
     Speaker: 2
     SpeakerName: Mimi
@@ -77,5 +77,5 @@ MonoBehaviour:
     MessageText: 'See you soon.
 
 '
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   Choices: []

@@ -33,54 +33,54 @@ MonoBehaviour:
     PreviousMessage: -1
     NextMessage: 5
     MessageText: Hi.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 5
     Speaker: 0
     SpeakerName: Mimi
     PreviousMessage: 3
     NextMessage: 6
     MessageText: ...
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 6
     Speaker: 0
     SpeakerName: Mimi
     PreviousMessage: 5
     NextMessage: -1
     MessageText: Different tea.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 7
     Speaker: 0
     SpeakerName: Mimi
     PreviousMessage: -1
     NextMessage: 8
     MessageText: ...
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 8
     Speaker: 0
     SpeakerName: Mimi
     PreviousMessage: 7
     NextMessage: -1
     MessageText: Thanks.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 9
     Speaker: 0
     SpeakerName: Mimi
     PreviousMessage: -1
     NextMessage: 10
     MessageText: ...
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   - ID: 10
     Speaker: 0
     SpeakerName: Mimi
     PreviousMessage: 9
     NextMessage: 11
     MessageText: I like it.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: 65fda2c0953b02e4c8428ed7ca9001dc, type: 2}
   - ID: 11
     Speaker: 0
     SpeakerName: Mimi
     PreviousMessage: 10
     NextMessage: -1
     MessageText: Thank you.
-    Expression: {fileID: 0}
+    Expression: {fileID: 2100000, guid: e83640382d50c9a4fab322ac33791c2c, type: 2}
   Choices: []
