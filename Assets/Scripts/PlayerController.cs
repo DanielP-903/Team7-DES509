@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     private float m_lockTimer = 2.5f;
     private TextMeshProUGUI m_quitText;
     private bool m_paused = false;
-    [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe, bg_music;
+    [HideInInspector] public AudioSource sfx_pouring, sfx_remove, sfx_normal, sfx_newRecipe, bg_music, sfx_add;
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
         sfx_remove = m_camera.transform.GetChild(3).GetComponent<AudioSource>();
         sfx_normal = m_camera.transform.GetChild(4).GetComponent<AudioSource>();
         sfx_newRecipe = m_camera.transform.GetChild(5).GetComponent<AudioSource>();
+        sfx_add = m_camera.transform.GetChild(6).GetComponent<AudioSource>();
 
 
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
@@ -140,6 +141,7 @@ public class PlayerController : MonoBehaviour
         sfx_remove.volume = m_gameManagerRef.VolumeScale.volume;
         sfx_normal.volume = m_gameManagerRef.VolumeScale.volume;
         sfx_newRecipe.volume = m_gameManagerRef.VolumeScale.volume;
+        sfx_add.volume = m_gameManagerRef.VolumeScale.volume;
 
     }
 
@@ -178,6 +180,7 @@ public class PlayerController : MonoBehaviour
             sfx_remove.volume = m_gameManagerRef.VolumeScale.volume;
             sfx_normal.volume = m_gameManagerRef.VolumeScale.volume;
             sfx_newRecipe.volume = m_gameManagerRef.VolumeScale.volume;
+            sfx_add.volume = m_gameManagerRef.VolumeScale.volume;
         }
 
         if (m_walkToLock)
@@ -295,6 +298,10 @@ public class PlayerController : MonoBehaviour
         m_pauseMenuBackgroundObject.SetActive(!m_pauseMenuBackgroundObject.activeInHierarchy);
         m_paused = !m_paused;
         Cursor.lockState = m_paused ? CursorLockMode.None : CursorLockMode.Locked;
+        if (m_lookingAtBook)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void QuitToMenu()
@@ -414,9 +421,6 @@ public class PlayerController : MonoBehaviour
 
                 if (handler.currentConversation.Name != "Ordering")
                 {
-                    // TODO
-                    // Set neutral convo next after a narrative response!
-                    //handler.SetConversation("Served_Neutral");
                     if (IsQuips())
                     {
                         dialogueBox.transform.GetChild(0).GetComponent<Image>().sprite = m_gameManagerRef.MessageBox;
@@ -592,6 +596,7 @@ public class PlayerController : MonoBehaviour
                 if (hit.transform != null && hit.transform.CompareTag("Machine"))
                 {
                     // Add held object to tea machine
+                    sfx_add.Play();
                     m_teaMakerRef.AddIngredient(FindIngredient());
                     if (m_heldObject.GetComponent<Ingredient>())
                     {
