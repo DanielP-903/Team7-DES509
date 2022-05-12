@@ -21,7 +21,7 @@ public class Tea : MonoBehaviour
 
     public IEnumerator PlayAnim()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         GetComponent<Animator>().Play("Inactive");
     }
 

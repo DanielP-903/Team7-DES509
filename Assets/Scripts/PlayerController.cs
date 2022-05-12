@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
     private GameObject m_recipeBookUI;
     private GameObject m_pauseMenuObject;
     private GameObject m_pauseMenuBackgroundObject;
+    private GameObject m_pauseMenuOptionsObject;
     private bool m_lookingAtBook = false;
     private float m_lockTimer = 2.5f;
     private TextMeshProUGUI m_quitText;
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
         m_quitText = mainCanvas.transform.GetChild(7).gameObject.GetComponent<TextMeshProUGUI>();
         m_pauseMenuObject = mainCanvas.transform.GetChild(10).GetChild(1).gameObject;
         m_pauseMenuBackgroundObject = mainCanvas.transform.GetChild(10).GetChild(0).gameObject;
+        m_pauseMenuOptionsObject = mainCanvas.transform.GetChild(10).GetChild(2).gameObject;
         float defaultY = transform.position.y;
 
         if (GameObject.FindGameObjectWithTag("GameManager"))
@@ -195,16 +197,17 @@ public class PlayerController : MonoBehaviour
                     break;
                 case Mode.Talking:
                     offsetPos = m_lockTalkPos;
-                    offsetRot = m_lockTalkRot;
+                    offsetRot = Quaternion.Euler(0,180,0);
                     break;
                 case Mode.TeaMaking:
                     offsetPos = m_lockTeaMakePos;
-                    offsetRot = m_lockTeaMakeRot;
+                    offsetRot = Quaternion.Euler(0, 0, 0);
                     break;
                 default:
                     break;
             }
-            transform.position = Vector3.Lerp(transform.position, offsetPos, Time.deltaTime * 3.0f);
+            transform.position = Vector3.Lerp(transform.position, offsetPos, Time.deltaTime * 2.5f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, offsetRot, Time.deltaTime * 2.5f);
             float distance = Vector3.Distance(transform.position, offsetPos);
             if (m_goToMode == Mode.Talking)
             {
@@ -295,6 +298,11 @@ public class PlayerController : MonoBehaviour
     public void AlterPauseMenuState()
     {
         m_pauseMenuObject.SetActive(!m_pauseMenuObject.activeInHierarchy);
+        if (m_pauseMenuOptionsObject.activeInHierarchy)
+        {
+            m_pauseMenuObject.SetActive(false);
+        }
+        m_pauseMenuOptionsObject.SetActive(false);
         m_pauseMenuBackgroundObject.SetActive(!m_pauseMenuBackgroundObject.activeInHierarchy);
         m_paused = !m_paused;
         Cursor.lockState = m_paused ? CursorLockMode.None : CursorLockMode.Locked;
@@ -311,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMouseInput()
     {
-        if (!m_lookingAtBook)
+        if (!m_lookingAtBook && !m_playerLockTurn)
         {
             CheckReleased();
 
@@ -454,16 +462,23 @@ public class PlayerController : MonoBehaviour
                     //handler.dialogue = m_gameManagerRef.currentCharacter.currentDialogue;
 
                     messageList.Clear();
+                    m_mode = Mode.Freeroam;
+                    m_goToMode = Mode.Freeroam;
                 }
                 else
                 {
                     m_finishedTalking = true;
                     m_teaAnimFlag = false;
                     GameManager.m_hasBrewedATea = false;
+                    m_goToMode = Mode.TeaMaking;
+                    m_walkToLock = true;
+                    m_playerLockTurn = true;
+
                 }
                 dialogueBox.SetActive(false);
-                m_mode = Mode.Freeroam;
-                m_goToMode = Mode.Freeroam;
+                //m_mode = Mode.Freeroam;
+                //m_goToMode = Mode.Freeroam;
+
             }
             else
             {
@@ -556,6 +571,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject FindIngredient(string name)
     {
+
         string newName = "";
         foreach (char c in name)
         {
@@ -564,7 +580,10 @@ public class PlayerController : MonoBehaviour
                 newName += c;
             }
         }
-
+        if (name == "Heart of Rose")
+        {
+            newName = "HeartOfRose";
+        }
 
         foreach (var ingredient in m_gameManagerRef.m_ingredientList)
         {
@@ -642,6 +661,7 @@ public class PlayerController : MonoBehaviour
                         dialogueBox.transform.GetChild(0).GetComponent<Image>().sprite = m_gameManagerRef.MessageBoxNoName;
                         messageTextbox.fontSize = 12.0f;
                         handler.dialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue;
+
                         handler.SetConversation(GetQuip());
                     }
                     else
@@ -782,21 +802,22 @@ public class PlayerController : MonoBehaviour
         foreach (var item in recipe.m_ingredients)
         {
             string quip;
-            if (item.Value != 0)
+            GameObject ing = FindIngredient(item.Key.name);
+            if (item.Value != 0 && ing != null)
             {
                 if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients.ContainsKey(item.Key) &&m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] != item.Value)
                 {
                     if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] > item.Value)
                     {
                         // TOO MUCH of ...
-                        quip = DetermineQuip(((Ingredient) item.Key).m_type);
+                        quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
                         quip += "_TooMuch";
                         quips.Add(quip);
                     }
                     if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] < item.Value)
                     {
                         // TOO LITTLE of...
-                        quip = DetermineQuip(((Ingredient) item.Key).m_type);
+                        quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
                         quip += "_TooLittle";
                         quips.Add(quip);
                     }
@@ -804,13 +825,16 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     // Does not contain ingredient at all so: TOO LITTLE OF ...
-                    GameObject ing = FindIngredient(item.Key.name);
-                    if (ing != null)
-                    {
-                        quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
-                        quip += "_TooLittle";
-                        quips.Add(quip);
-                    }
+                    quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
+                    quip += "_TooLittle";
+                    quips.Add(quip);
+                }
+            }
+            else
+            {
+                if (ing == null)
+                {
+                    Debug.Log("ing is NULL! " + item.Key.name);
                 }
             }
         }

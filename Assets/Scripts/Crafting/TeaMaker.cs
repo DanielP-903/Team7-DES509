@@ -159,7 +159,7 @@ public class TeaMaker : MonoBehaviour
                         GameObject listTheRecipe = Instantiate(m_recipeBase, m_recipeBase.transform.parent);
 
                         listTheRecipe.GetComponent<RectTransform>().position = new Vector3(
-                            m_recipeBase.GetComponent<RectTransform>().position.x + (m_discoveredRecipesNo > 3 ? (m_discoveredRecipesNo-4) * 260.0f : (m_discoveredRecipesNo-1) * 260.0f),
+                            m_recipeBase.GetComponent<RectTransform>().position.x + (m_discoveredRecipesNo > 3 ? (m_discoveredRecipesNo-4) * 450.0f : (m_discoveredRecipesNo-1) * 450.0f),
                             m_recipeBase.GetComponent<RectTransform>().position.y +((m_discoveredRecipesNo > 3 ? 1 : 0) * -150.0f), 
                             m_recipeBase.GetComponent<RectTransform>().position.z);
                         
@@ -173,7 +173,7 @@ public class TeaMaker : MonoBehaviour
                         GameObject listRealTea = Instantiate(m_realTeaBase, m_realTeaBase.transform.parent);
 
                         listRealTea.GetComponent<RectTransform>().position = new Vector3(
-                            m_recipeBase.GetComponent<RectTransform>().position.x + (m_discoveredRecipesNo > 3 ? (m_discoveredRecipesNo-4) * 260.0f : (m_discoveredRecipesNo-1) * 260.0f),
+                            m_recipeBase.GetComponent<RectTransform>().position.x + (m_discoveredRecipesNo > 3 ? (m_discoveredRecipesNo-4) * 450.0f : (m_discoveredRecipesNo-1) * 450.0f),
                             m_recipeBase.GetComponent<RectTransform>().position.y +((m_discoveredRecipesNo > 3 ? 1 : 0) * -150.0f),
                             m_recipeBase.GetComponent<RectTransform>().position.z);
 
@@ -190,6 +190,7 @@ public class TeaMaker : MonoBehaviour
                     }
                     else
                     {
+                        m_teaModel.GetComponent<Tea>().SetColour(m_currentlyCalculatedRecipe.m_colour);
                         m_playerRef.sfx_normal.Play();
                     }
 
@@ -278,6 +279,10 @@ public class TeaMaker : MonoBehaviour
                 if (m_container[toBeRemoved] > 0)
                 {
                     m_container[toBeRemoved]--;
+                    if (m_container[toBeRemoved] <= 0)
+                    {
+                        m_container.Remove(toBeRemoved);
+                    }
                 }
                 else
                 {
@@ -317,7 +322,7 @@ public class TeaMaker : MonoBehaviour
             {
                 if (recipe.m_ingredients.ContainsKey(item.Key))
                 {
-                    if (recipe.m_ingredients[item.Key] == item.Value)
+                    if (recipe.m_ingredients[item.Key] == item.Value && item.Value > 0)
                     {
                         occurs+=item.Value;
                         if (occurs == CalculateTotal(recipe))
