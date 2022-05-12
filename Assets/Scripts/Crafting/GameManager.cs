@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         {
             //m_doors.SetTrigger("Open");
             m_doors.Play("DoorOpen");
-            m_doorDelay = 0.3f;
+            m_doorDelay = 0.1f;
         }
     }
 
