@@ -26,15 +26,19 @@ public class Character : MonoBehaviour
     [HideInInspector] public bool leaving;
     [HideInInspector] public QD_Dialogue currentDialogue;
 
+
+    private bool stage1complete = false;
+    private bool stage2complete = false;
+
     private bool m_characterWait = false;
     private float m_turnTimer = 0.0f;
     private void Awake()
     {
         m_gameManagerRef = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         m_playerRef = GameObject.FindGameObjectWithTag("Player");
+        CharacterStages.Add("Mimi", 0);
         CharacterStages.Add("Shylo", 0);
         CharacterStages.Add("Docorty", 0);
-        CharacterStages.Add("Mimi", 0);
     }
 
     private void Start()
@@ -97,6 +101,20 @@ public class Character : MonoBehaviour
             characterScriptableObject = m_gameManagerRef.m_characterList[random];
         }
 
+        if (CharacterStages["Mimi"] >= 1 && CharacterStages["Shylo"] >= 1 && !stage1complete)
+        {
+            stage1complete = true;
+            newCharacterName = m_gameManagerRef.m_characterList[2].characterName;
+            characterScriptableObject = m_gameManagerRef.m_characterList[2];
+        }
+        if (CharacterStages["Mimi"] >= 2 && CharacterStages["Shylo"] >= 2 && !stage2complete)
+        {
+            stage2complete = true;
+            newCharacterName = m_gameManagerRef.m_characterList[2].characterName;
+            characterScriptableObject = m_gameManagerRef.m_characterList[2];
+        }
+
+
         m_gameManagerRef.currentCharacterName = newCharacterName;
     }
 
@@ -112,6 +130,10 @@ public class Character : MonoBehaviour
             {
                 leaving = false;
                 isAvailable = false; // Change to true/false to allow/disallow stopping after char exit
+                if (m_gameManagerRef.currentCharacterName == CharacterName.Docorty)
+                {
+                    m_gameManagerRef.docortyVisited = true;
+                }
                 RandomiseNextCharacter();
                 ChangeCharacter(m_gameManagerRef.FindCharacter());
                 currentDialogue = characterScriptableObject.dialogues[CharacterStages[m_gameManagerRef.currentCharacterName.ToString()]];

@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     public SO_Volume VolumeScale;
     public GameObject volSlider;
+
+    public bool docortyVisited = false;
     void OnDrawGizmos()
     {
         Color color = Color.yellow;

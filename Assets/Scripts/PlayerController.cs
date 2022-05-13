@@ -658,11 +658,18 @@ public class PlayerController : MonoBehaviour
                 {
                     if (m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue != null)
                     {
-                        dialogueBox.transform.GetChild(0).GetComponent<Image>().sprite = m_gameManagerRef.MessageBoxNoName;
-                        messageTextbox.fontSize = 12.0f;
-                        handler.dialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue;
-
-                        handler.SetConversation(GetQuip());
+                        string quip = GetQuip();
+                        if (quip == "")
+                        {
+                            handler.SetConversation("Served_Neutral");
+                        }
+                        else
+                        {
+                            dialogueBox.transform.GetChild(0).GetComponent<Image>().sprite = m_gameManagerRef.MessageBoxNoName;
+                            messageTextbox.fontSize = 12.0f;
+                            handler.dialogue = m_gameManagerRef.currentCharacter.characterScriptableObject.quipDialogue;
+                            handler.SetConversation(quip);
+                        }
                     }
                     else
                     {
@@ -805,7 +812,17 @@ public class PlayerController : MonoBehaviour
             GameObject ing = FindIngredient(item.Key.name);
             if (item.Value != 0 && ing != null)
             {
-                if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients.ContainsKey(item.Key) &&m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] != item.Value)
+                bool contains = m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients.ContainsKey(item.Key);
+                if (contains)
+                {
+                    Debug.Log("help");
+                    if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] != item.Value)
+                    {
+                        Debug.Log("help");
+                    }
+                }
+
+                if (contains && m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] != item.Value)
                 {
                     if (m_teaMakerRef.m_teaModel.GetComponent<Tea>().ingredients[item.Key] > item.Value)
                     {
@@ -822,7 +839,7 @@ public class PlayerController : MonoBehaviour
                         quips.Add(quip);
                     }
                 }
-                else
+                else if (!contains)
                 {
                     // Does not contain ingredient at all so: TOO LITTLE OF ...
                     quip = DetermineQuip(ing.GetComponent<Ingredient>().m_type);
@@ -841,16 +858,18 @@ public class PlayerController : MonoBehaviour
 
         // Got the list of available discrepancies between fav recipe and tea
         // Now return the first one
-
         if (quips.Count > 0)
         {
+            Debug.Log(quips[0]);
             return quips[0];
         }
         else
         {
-            Debug.LogError("No quips found");
+           // Debug.LogError("No quips found");
             return "";
         }
+
+        Debug.Log(quips);
     }
 
     private string DetermineQuip(IngredientType type)
